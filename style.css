@@ -10,7 +10,31 @@
 
 /* UTILITIES */
 
+/* tillfällig container att ha mitt i skärmen styling under tiden vi fokuserar JS */
+.container {
+  padding: 2em 0;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid purple;
+}
+
+.container > * {
+  margin: 1em;
+}
+
 button {
-  display: block;
   padding: 2em;
+}
+
+#new-doc {
+  background: green;
+}
+
+#delete-doc {
+  background: red;
 }
