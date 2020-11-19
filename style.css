@@ -9,3 +9,8 @@
 }
 
 /* UTILITIES */
+
+button {
+  display: block;
+  padding: 2em;
+}
