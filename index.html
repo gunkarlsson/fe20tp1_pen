@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Quote</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <p id="intro">
-        Quire är en multifunktionell anteckningsbok som fungerar direkt i
-        webbläsaren. Den första versionen av tjänsten sparar alla anteckningar
-        lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
-      </p>
+        <p id="intro">
+            Quire är en multifunktionell anteckningsbok som fungerar direkt i
+            webbläsaren. Den första versionen av tjänsten sparar alla anteckningar
+            lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
+        </p>
 
-      <ul id="note-menu"></ul>
+        <ul id="note-menu"></ul>
 
-      <input type="text" id="note-title" />
+        <input type="text" id="note-title" />
+        <input type="checkbox" id="favorite-tag" />
 
-      <!-- textyta: mata in text  -->
 
-      <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+        <!-- textyta: mata in text  -->
 
-      <br /><br />
+        <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
 
-      <!-- nytt dokumentknapp -->
-      <button id="new-doc">+</button>
-      <!--   -->
+        <br /><br />
 
-      <!-- delete dokumentknapp -->
-      <button id="delete-doc">-</button>
-      <!--   -->
+        <!-- nytt dokumentknapp -->
+        <button id="new-doc">+</button>
+        <!--   -->
+
+        <!-- delete dokumentknapp -->
+        <button id="delete-doc">-</button>
+        <!--   -->
     </div>
 
     <script src="./app.js"></script>
-  </body>
+</body>
+
 </html>

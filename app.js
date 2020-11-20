@@ -3,13 +3,14 @@ const textarea = document.querySelector("#textarea");
 const newDoc = document.querySelector("#new-doc");
 const deleteDocButton = document.querySelector("#delete-doc");
 const noteTitle = document.querySelector("#note-title");
+const favorite = document.querySelector("#favorite-tag")
 
 // OBJECTS
 const docDataSkeleton = {
   id: "",
   title: "",
   content: "",
-  favorite: true,
+  favorite: false,
   creationDate: "",
   lastSavedDate: "",
   tags: [],
@@ -35,11 +36,18 @@ textarea.addEventListener("input", (e) => {
   // koden som ska sparas till local storage
 });
 
+favorite.addEventListener("click", () => {
+saveDoc();
+});
+
+
 // FUNCTIONS
 function saveDoc() {
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value;
   docDataSkeleton.title = noteTitle.value;
+  docDataSkeleton.favorite = favorite.checked;
+
   // kollar om det finns ett creation date, om inte så skapar den datum)
   // genererar även ID genom date object
   // ! gör att tom stärng = false
@@ -96,4 +104,8 @@ function createNewMenuItem(docData) {
   const paragraph = document.createElement("p");
   paragraph.innerHTML = `${docData.content}`;
   noteList.appendChild(paragraph);
+}
+
+function tagFavorite(favoriteTag) {
+
 }
