@@ -37,10 +37,12 @@ textarea.addEventListener("input", (e) => {
 
 // FUNCTIONS
 function saveDoc() {
+  // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value;
   docDataSkeleton.title = noteTitle.value;
   // kollar om det finns ett creation date, om inte så skapar den datum)
-  // kollar om note finns
+  // genererar även ID genom date object
+  // ! gör att tom stärng = false
   if (!docDataSkeleton.creationDate) {
     docDataSkeleton.creationDate = new Date();
 
@@ -55,12 +57,14 @@ function saveDoc() {
 }
 
 function deleteDoc() {
+  // remove ID and remove the item
   window.localStorage.removeItem(docDataSkeleton.id);
 }
 
 function createNewDoc() {
   // töm textarea för ny yta
   textarea.value = "";
+  noteTitle.value = "";
 
   // console.log(typeof element);
   for (element in docDataSkeleton) {
@@ -84,11 +88,11 @@ for (key in storage) {
     const docData = JSON.parse(window.localStorage.getItem(key));
     console.log(docData.content);
 
-    output(docData);
+    createNewMenuItem(docData);
   }
 }
 
-function output(docData) {
+function createNewMenuItem(docData) {
   const paragraph = document.createElement("p");
   paragraph.innerHTML = `${docData.content}`;
   noteList.appendChild(paragraph);
