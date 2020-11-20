@@ -90,6 +90,6 @@ for (key in storage) {
 
 function output(docData) {
   const paragraph = document.createElement("p");
-  paragraph.innterHTML = `${docData.content}`;
+  paragraph.innerHTML = `${docData.content}`;
   noteList.appendChild(paragraph);
 }
