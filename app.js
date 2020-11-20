@@ -100,6 +100,30 @@ function createNewDoc() {
   console.log(docDataSkeleton);
 }
 
+
+
+/*
+<li class="note-container">
+                <div class="side">
+                  <p class="since-edited">4m</p>
+                  <img src="icons/star.svg" alt="">
+                </div>
+                <div class="main">
+                  <h2>inköpslista</h2>
+                  <p class="note-content">- mjöl - Nudlar - Olivolja - mozzarella - potatis - grekisk yoghurt - gnocci</p>
+                  <ul class="tags-list">
+                    <li>
+                      <p>lista</p>
+                    </li>
+                    <li>
+                      <p>mat</p>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+ */
+
+
 const noteList = document.querySelector("#note-menu");
 let storage = window.localStorage;
 
@@ -113,9 +137,50 @@ for (key in storage) {
 }
 
 function createNewMenuItem(docData) {
-  const paragraph = document.createElement("p");
-  paragraph.innerHTML = `${docData.content}`;
-  noteList.appendChild(paragraph);
+  const noteContainer = document.createElement("li");
+  noteContainer.classList.add("note-container");
+
+  const side = document.createElement("div");
+  const sinceEdited = document.createElement("p");
+  const starIcon = document.createElement("img");
+
+  side.classList.add("side");
+  sinceEdited.classList.add("since-edited");
+  starIcon.classList.add("star-icon");
+
+  sinceEdited.innerHTML = "1m";
+
+  side.appendChild(sinceEdited);
+  side.appendChild(starIcon);
+
+
+
+
+
+  const main = document.createElement("div");
+  const noteTitle = document.createElement("h2");
+  const noteContent = document.createElement("p");
+
+  main.classList.add("main");
+  noteTitle.classList.add("note-title");
+  noteContent.classList.add("note-content");
+
+  noteTitle.innerHTML = docData.title;
+  noteContent.innerHTML = docData.content;
+
+  main.appendChild(noteTitle);
+  main.appendChild(noteContent);
+
+
+
+
+  noteContainer.appendChild(side);
+
+
+
+
+  noteList.appendChild(noteContainer);
+
+  noteContainer.appendChild(main);
 }
 
-function tagFavorite(favoriteTag) {}

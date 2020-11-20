@@ -6,12 +6,67 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  font-family: 'Roboto', sans-serif;
+
+  list-style: none;
+
 }
 
 /* UTILITIES */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-weight: 200;
+}
+
+
+.note-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.note-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 600px;
+}
+
+.side {
+  width: 40px;
+}
+
+.tags-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.tags-list li {
+  background-color: indianred;
+  margin: 3px;
+  padding: 2px 30px;
+  border-radius: 25px;
+}
+
+
+
+
+
+
 
 /* tillfällig container att ha mitt i skärmen styling under tiden vi fokuserar JS */
-.container {
+.edit {
   padding: 2em 0;
   margin: 0 auto;
   width: 80%;
@@ -23,7 +78,7 @@
   border: 3px solid purple;
 }
 
-.container > * {
+.edit > * {
   margin: 1em;
 }
 
