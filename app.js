@@ -3,7 +3,9 @@ const textarea = document.querySelector("#textarea");
 const newDoc = document.querySelector("#new-doc");
 const deleteDocButton = document.querySelector("#delete-doc");
 const noteTitle = document.querySelector("#note-title");
-const favorite = document.querySelector("#favorite-tag")
+const favorite = document.querySelector("#favorite-tag");
+const tagName = document.querySelector("#tag-name");
+const tagButton = document.querySelector("#tag-button");
 
 // OBJECTS
 const docDataSkeleton = {
@@ -36,10 +38,18 @@ textarea.addEventListener("input", (e) => {
   // koden som ska sparas till local storage
 });
 
-favorite.addEventListener("click", () => {
-saveDoc();
+noteTitle.addEventListener("input", (e) => {
+  saveDoc();
 });
 
+favorite.addEventListener("click", () => {
+  saveDoc();
+});
+
+tagButton.addEventListener("click", () => {
+  saveDoc();
+  tagName.value = "";
+});
 
 // FUNCTIONS
 function saveDoc() {
@@ -47,6 +57,7 @@ function saveDoc() {
   docDataSkeleton.content = textarea.value;
   docDataSkeleton.title = noteTitle.value;
   docDataSkeleton.favorite = favorite.checked;
+  docDataSkeleton.tags.push(tagName.value);
 
   // kollar om det finns ett creation date, om inte så skapar den datum)
   // genererar även ID genom date object
@@ -73,6 +84,7 @@ function createNewDoc() {
   // töm textarea för ny yta
   textarea.value = "";
   noteTitle.value = "";
+  tagName.value = "";
 
   // console.log(typeof element);
   for (element in docDataSkeleton) {
@@ -106,6 +118,4 @@ function createNewMenuItem(docData) {
   noteList.appendChild(paragraph);
 }
 
-function tagFavorite(favoriteTag) {
-
-}
+function tagFavorite(favoriteTag) {}
