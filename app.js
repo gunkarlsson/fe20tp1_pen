@@ -149,12 +149,10 @@ function createNewMenuItem(docData) {
   starIcon.classList.add("star-icon");
 
   sinceEdited.innerHTML = "1m";
+  starIcon.setAttribute("src", "icons/star.svg");
 
   side.appendChild(sinceEdited);
   side.appendChild(starIcon);
-
-
-
 
 
   const main = document.createElement("div");
@@ -172,11 +170,7 @@ function createNewMenuItem(docData) {
   main.appendChild(noteContent);
 
 
-
-
   noteContainer.appendChild(side);
-
-
 
 
   noteList.appendChild(noteContainer);
