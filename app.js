@@ -6,6 +6,7 @@ const noteTitle = document.querySelector("#note-title");
 const favorite = document.querySelector("#favorite-tag");
 const tagName = document.querySelector("#tag-name");
 const tagButton = document.querySelector("#tag-button");
+const noteList = document.querySelector("#note-menu");
 
 // OBJECTS
 const docDataSkeleton = {
@@ -102,29 +103,8 @@ function createNewDoc() {
 
 
 
-/*
-<li class="note-container">
-                <div class="side">
-                  <p class="since-edited">4m</p>
-                  <img src="icons/star.svg" alt="">
-                </div>
-                <div class="main">
-                  <h2>inköpslista</h2>
-                  <p class="note-content">- mjöl - Nudlar - Olivolja - mozzarella - potatis - grekisk yoghurt - gnocci</p>
-                  <ul class="tags-list">
-                    <li>
-                      <p>lista</p>
-                    </li>
-                    <li>
-                      <p>mat</p>
-                    </li>
-                  </ul>
-                </div>
-            </li>
- */
 
 
-const noteList = document.querySelector("#note-menu");
 let storage = window.localStorage;
 
 for (key in storage) {
@@ -178,3 +158,15 @@ function createNewMenuItem(docData) {
   noteContainer.appendChild(main);
 }
 
+const sidebarToggle = document.querySelector(".sidebar-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+sidebarToggle.addEventListener('click', event => {
+  if(sidebar.style.width !== "250px") {
+    sidebar.style.width = "250px";
+  }
+  else {
+    sidebar.style.width = "0";
+  }
+
+});

@@ -17,131 +17,142 @@
 <body>
 
 <div class="container">
-    <div class="menu">
 
-        <header class="header">
-            <img src="icons/menu.svg" alt="">
-            <h1>notes</h1>
-            <img src="icons/search.svg" alt="">
-        </header>
-
-        <ul id="note-menu">
-            <li class="note-container">
-                <div class="side">
-                  <p class="since-edited">4m</p>
-                  <img src="icons/star.svg" alt="">
-                </div>
-                <div class="main">
-                  <h2>inköpslista</h2>
-                  <p class="note-content">- mjöl - Nudlar - Olivolja - mozzarella - potatis - grekisk yoghurt - gnocci</p>
-                  <ul class="tags-list">
-                    <li>
-                      <p>lista</p>
-                    </li>
-                    <li>
-                      <p>mat</p>
-                    </li>
-                  </ul>
-                </div>
-            </li>
-
-          <br><hr><br>
-
-          <li class="note-container">
-            <div class="side">
-              <p class="since-edited">8m</p>
-              <img src="icons/star.svg" alt="">
-            </div>
-            <div class="main">
-              <h2>lorem</h2>
-              <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <ul class="tags-list">
-              </ul>
-            </div>
-          </li>
-
-          <br><hr><br>
-
-          <li class="note-container">
-            <div class="side">
-              <p class="since-edited">23m</p>
-              <img src="icons/star.svg" alt="">
-            </div>
-            <div class="main">
-              <h2>önskelista</h2>
-              <p class="note-content">- Cykel - Lego Star Wars - Bumbibjörnarna på DVD - En knippe vindruvor - Strumpor</p>
-              <ul class="tags-list">
+        <div class="sidebar">
+            <ul class="tag-menu">
                 <li>
-                  <p>lista</p>
+                    <p class="tag">lista</p>
                 </li>
                 <li>
-                  <p>mat</p>
+                    <p class="tag">mat</p>
                 </li>
-              </ul>
-            </div>
-          </li>
+            </ul>
+        </div>
 
-          <br><hr><br>
+        <div class="menu">
+            <header class="header">
+                <img src="icons/menu.svg" alt="" class="sidebar-toggle">
+                <h1>notes</h1>
+                <img src="icons/search.svg" alt="">
+            </header>
 
-          <li class="note-container">
-            <div class="side">
-              <p class="since-edited">59m</p>
-              <img src="icons/star.svg" alt="">
-            </div>
-            <div class="main">
-              <h2>recept på kladdkaka</h2>
-              <p class="note-content">Sätt ugnen på 175°c över/undervärme och smöra samt bröa en form med löstagbar kant, 22 cm ø, låt stå. Smält ihop smör och chok...</p>
-              <ul class="tags-list">
-                <li>
-                  <p>lista</p>
+            <ul id="note-menu">
+                <li class="note-container">
+                    <div class="side">
+                        <p class="since-edited">4m</p>
+                        <img src="icons/star.svg" alt="">
+                    </div>
+                    <div class="main">
+                        <h2>inköpslista</h2>
+                        <p class="note-content">- mjöl - Nudlar - Olivolja - mozzarella - potatis - grekisk yoghurt - gnocci</p>
+                        <ul class="tags-list">
+                            <li>
+                                <p>lista</p>
+                            </li>
+                            <li>
+                                <p>mat</p>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                  <p>mat</p>
+
+                <br><hr><br>
+
+                <li class="note-container">
+                    <div class="side">
+                        <p class="since-edited">8m</p>
+                        <img src="icons/star.svg" alt="">
+                    </div>
+                    <div class="main">
+                        <h2>lorem</h2>
+                        <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <ul class="tags-list">
+                        </ul>
+                    </div>
                 </li>
-              </ul>
-            </div>
-          </li>
 
-          <br><hr><br>
-        </ul>
+                <br><hr><br>
 
-        <button class="new-doc">
-            <img src="icons/file-plus.svg" alt="">
-        </button>
-    </div>
+                <li class="note-container">
+                    <div class="side">
+                        <p class="since-edited">23m</p>
+                        <img src="icons/star.svg" alt="">
+                    </div>
+                    <div class="main">
+                        <h2>önskelista</h2>
+                        <p class="note-content">- Cykel - Lego Star Wars - Bumbibjörnarna på DVD - En knippe vindruvor - Strumpor</p>
+                        <ul class="tags-list">
+                            <li>
+                                <p>lista</p>
+                            </li>
+                            <li>
+                                <p>mat</p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <br><hr><br>
+
+                <li class="note-container">
+                    <div class="side">
+                        <p class="since-edited">59m</p>
+                        <img src="icons/star.svg" alt="">
+                    </div>
+                    <div class="main">
+                        <h2>recept på kladdkaka</h2>
+                        <p class="note-content">Sätt ugnen på 175°c över/undervärme och smöra samt bröa en form med löstagbar kant, 22 cm ø, låt stå. Smält ihop smör och chok...</p>
+                        <ul class="tags-list">
+                            <li>
+                                <p>lista</p>
+                            </li>
+                            <li>
+                                <p>mat</p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <br><hr><br>
+            </ul>
+
+            <button class="new-doc">
+                <img src="icons/file-plus.svg" alt="">
+            </button>
+        </div>
+</div>
 
 
 
-    <div class="edit">
-        <p id="intro">
-            Quire är en multifunktionell anteckningsbok som fungerar direkt i
-            webbläsaren. Den första versionen av tjänsten sparar alla anteckningar
-            lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
-        </p>
+<div class="edit">
+    <p id="intro">
+        Quire är en multifunktionell anteckningsbok som fungerar direkt i
+        webbläsaren. Den första versionen av tjänsten sparar alla anteckningar
+        lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
+    </p>
 
 
-        <input type="text" id="note-title" placeholder="title"/>
+    <input type="text" id="note-title" placeholder="title"/>
 
-        <label for="favorite-tag"
-        >favorite <input type="checkbox" id="favorite-tag"
-        /></label>
+    <label for="favorite-tag"
+    >favorite <input type="checkbox" id="favorite-tag"
+    /></label>
 
-        <input type="text" id="tag-name" placeholder="add tag"/>
-        <button id="tag-button">add tag</button>
+    <input type="text" id="tag-name" placeholder="add tag"/>
+    <button id="tag-button">add tag</button>
 
-        <!-- textyta: mata in text  -->
-        <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+    <!-- textyta: mata in text  -->
+    <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
 
-        <br/><br/>
+    <br/><br/>
 
-        <!-- nytt dokumentknapp -->
-        <button id="new-doc">+</button>
-        <!--   -->
+    <!-- nytt dokumentknapp -->
+    <button id="new-doc">+</button>
+    <!--   -->
 
-        <!-- delete dokumentknapp -->
-        <button id="delete-doc">-</button>
-        <!--   -->
-    </div>
+    <!-- delete dokumentknapp -->
+    <button id="delete-doc">-</button>
+    <!--   -->
 </div>
 
 
