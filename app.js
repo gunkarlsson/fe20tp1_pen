@@ -7,6 +7,12 @@ const favorite = document.querySelector("#favorite-tag");
 const tagName = document.querySelector("#tag-name");
 const tagButton = document.querySelector("#tag-button");
 const noteList = document.querySelector("#note-menu");
+const newDocButton = document.querySelector(".new-doc");
+const edit = document.querySelector(".edit");
+const editBackButton = document.querySelector(".edit-back-button");
+const sidebarToggle = document.querySelector(".sidebar-toggle");
+const sidebar = document.querySelector(".sidebar");
+const sidebarCloseButton = document.querySelector(".sidebar-close-button");
 
 // OBJECTS
 const docDataSkeleton = {
@@ -21,7 +27,6 @@ const docDataSkeleton = {
 
 // EVENTLISTENERS
 newDoc.addEventListener("click", () => {
-  // console.log("click");
 
   createNewDoc();
 });
@@ -36,7 +41,6 @@ deleteDocButton.addEventListener("click", () => {
 textarea.addEventListener("input", (e) => {
   // input value in textarea,
   saveDoc();
-  // koden som ska sparas till local storage
 });
 
 noteTitle.addEventListener("input", (e) => {
@@ -87,9 +91,7 @@ function createNewDoc() {
   noteTitle.value = "";
   tagName.value = "";
 
-  // console.log(typeof element);
   for (element in docDataSkeleton) {
-    // console.log(element.toString());
     if (element === "tags") {
       // töm tags array
       docDataSkeleton[element] = [];
@@ -98,7 +100,6 @@ function createNewDoc() {
       docDataSkeleton[element] = "";
     }
   }
-  console.log(docDataSkeleton);
 }
 
 
@@ -110,7 +111,6 @@ let storage = window.localStorage;
 for (key in storage) {
   if (window.localStorage.getItem(key) !== null) {
     const docData = JSON.parse(window.localStorage.getItem(key));
-    console.log(docData.content);
 
     createNewMenuItem(docData);
   }
@@ -158,15 +158,26 @@ function createNewMenuItem(docData) {
   noteContainer.appendChild(main);
 }
 
-const sidebarToggle = document.querySelector(".sidebar-toggle");
-const sidebar = document.querySelector(".sidebar");
+
 
 sidebarToggle.addEventListener('click', event => {
-  if(sidebar.style.width !== "250px") {
-    sidebar.style.width = "250px";
-  }
-  else {
-    sidebar.style.width = "0";
-  }
+    sidebar.style.width = "100%";
+});
 
+sidebarCloseButton.addEventListener('click', event => {
+  sidebar.style.width = "0%";
+});
+
+
+
+
+newDocButton.addEventListener('click', event => {
+  edit.style.width = "100%";
+});
+
+
+
+
+editBackButton.addEventListener('click', event => {
+  edit.style.width = "0%";
 });

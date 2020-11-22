@@ -14,19 +14,48 @@
 }
 
 /* UTILITIES */
+
+:root {
+  --background-color: #2A3435;
+  --accent-color: #F58A8A;
+}
+
+
+
+
+
 .container {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
-  justify-content: center;
+
 }
 
+/*------------------- sidebar ----------------*/
 .sidebar {
-  background-color: #2A3435;
+  background-color: var(--background-color);
   transition: 0.5s;
   width: 0;
 
+  max-width: 175px;
+
+  height: 100%;
+  position: fixed;
+  left: 0;
+  z-index: 10;
+
   overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-close-button {
+  color: white;
+
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .tag-menu {
@@ -42,6 +71,19 @@
   border: 2px solid indianred;
 }
 
+.settings-menu {
+  margin: 8px;
+  color: white;
+}
+
+.settings-menu li {
+  align-items: center;
+  flex-direction: row;
+}
+
+
+/*------------------- main menu ----------------*/
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -52,12 +94,22 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 30px;
+
+  background-color: white;
+
+  position: fixed;
+  width: 100%;
+  min-height: 40px;
+  z-index: 0;
+}
+
+#note-menu {
+  margin-top: 60px;
 }
 
 .header h1 {
   font-weight: 200;
 }
-
 
 .note-container {
   display: flex;
@@ -86,36 +138,85 @@
 }
 
 .new-doc {
-  position: relative;
+  position: sticky;
+  bottom: 10px;
+  right: 5px;
 
-  bottom: 0;
-  right: 0;
+  width: 0;
+  height: 0;
 
-  background-color: #F58A8A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--accent-color);
   border: none;
   border-radius: 100%;
 
   margin-left: auto;
-  margin-right: 5px;
-  margin-bottom: 10px;
 }
-
-
 
 
 
 /* tillfällig container att ha mitt i skärmen styling under tiden vi fokuserar JS */
 .edit {
-  padding: 2em 0;
-  margin: 0 auto;
-  width: 80%;
-  max-width: 1200px;
-  display: flex;
+  background-color: white;
+
+  width: 0;
+  max-width: 100%;
+  height: 100%;
+
+  position: fixed;
+  right: 0;
+
+  overflow-x: hidden;
+
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid purple;
 }
+
+.icons-menu {
+  justify-content: space-between;
+}
+
+.tags-bar, .tags-bar ul, .title-bar, .icons-menu, .edit, .settings-menu li {
+  display: flex;
+}
+
+.title-bar p, .tags-bar p {
+  opacity: 0.48;
+  font-size: 0.7em;
+}
+
+.tags-bar, .title-bar {
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#note-title {
+  border: none;
+}
+
+#textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+::-webkit-resizer {
+  display: none;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.rester {
+  visibility: hidden;
+}
+
+
+
+
 
 .edit > * {
   margin: 1em;
@@ -123,10 +224,6 @@
 
 button {
   padding: 2em;
-}
-
-#new-doc {
-  background: green;
 }
 
 #delete-doc {
