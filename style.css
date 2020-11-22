@@ -25,6 +25,7 @@
 }
 
 /*------------------- sidebar ----------------*/
+
 .sidebar {
   background-color: var(--background-color);
   transition: 0.5s;
@@ -34,7 +35,6 @@
 
   height: 100%;
   position: fixed;
-  left: 0;
   z-index: 10;
 
   overflow-x: hidden;
@@ -44,9 +44,11 @@
   justify-content: space-between;
 }
 
-.sidebar-close-button {
-  color: white;
+.menu-sidebar {
+  left: 0;
+}
 
+.sidebar-close-button {
   position: absolute;
   right: 0;
   top: 0;
@@ -84,14 +86,7 @@
 
 .header {
   display: flex;
-  /* flex-direction: row; --> redan default*/
   justify-content: space-between;
-  /* margin-bottom: 30px;
-  
-  eventuellt krockar det med min height
-  å position fixed -> gör inget i nuläget
-  
-  */
 
   background-color: white;
 
@@ -113,7 +108,6 @@
 
 .note-container {
   display: flex;
-  /* flex-direction: row; --> är redan defalult */
 }
 
 .note-content {
@@ -127,7 +121,6 @@
 
 .tags-list {
   display: flex;
-  /* flex-direction: row; --> är redan default*/
 }
 
 .tags-list li {
@@ -222,13 +215,28 @@ input:focus {
   outline: none;
 }
 
+
+/*------------------- editor sidebar ----------------*/
+.edit > * {
+  margin: 1em;
+}
+
+.editor-sidebar {
+  right: 0;
+  margin: 0;
+}
+
+.editor-sidebar-close-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .rester {
   visibility: hidden;
 }
 
-.edit > * {
-  margin: 1em;
-}
+
 
 button {
   padding: 2em;

@@ -10,9 +10,16 @@ const noteList = document.querySelector("#note-menu");
 const newDocButton = document.querySelector(".new-doc");
 const edit = document.querySelector(".edit");
 const editBackButton = document.querySelector(".edit-back-button");
+
+//MENU SIDEBAR
 const sidebarToggle = document.querySelector(".sidebar-toggle");
-const sidebar = document.querySelector(".sidebar");
+const sidebar = document.querySelector(".menu-sidebar");
 const sidebarCloseButton = document.querySelector(".sidebar-close-button");
+
+//EDITOR SIDEBAR
+const editorSidebarToggle = document.querySelector(".editor-sidebar-toggle");
+const editorSidebar = document.querySelector(".editor-sidebar");
+const editorSidebarCloseButton = document.querySelector(".editor-sidebar-close-button");
 
 // OBJECTS
 const docDataSkeleton = {
@@ -158,8 +165,6 @@ function createNewMenuItem(docData) {
   noteContainer.appendChild(main);
 }
 
-
-
 sidebarToggle.addEventListener('click', event => {
     sidebar.style.width = "100%";
 });
@@ -168,16 +173,19 @@ sidebarCloseButton.addEventListener('click', event => {
   sidebar.style.width = "0%";
 });
 
-
-
-
 newDocButton.addEventListener('click', event => {
   edit.style.width = "100%";
 });
 
-
-
-
 editBackButton.addEventListener('click', event => {
   edit.style.width = "0%";
+});
+
+
+editorSidebarToggle.addEventListener('click', event => {
+  editorSidebar.style.width = "100%";
+});
+
+editorSidebarCloseButton.addEventListener('click', event => {
+  editorSidebar.style.width = "0%";
 });
