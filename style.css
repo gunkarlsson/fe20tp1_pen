@@ -7,27 +7,21 @@
   margin: 0;
   padding: 0;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 
   list-style: none;
-
 }
 
 /* UTILITIES */
 
 :root {
-  --background-color: #2A3435;
-  --accent-color: #F58A8A;
+  --background-color: #2a3435;
+  --accent-color: #f58a8a;
 }
-
-
-
-
 
 .container {
   display: flex;
   flex-direction: row;
-
 }
 
 /*------------------- sidebar ----------------*/
@@ -81,7 +75,6 @@
   flex-direction: row;
 }
 
-
 /*------------------- main menu ----------------*/
 
 .menu {
@@ -91,14 +84,21 @@
 
 .header {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; --> redan default*/
   justify-content: space-between;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px;
+  
+  eventuellt krockar det med min height
+  å position fixed -> gör inget i nuläget
+  
+  */
 
   background-color: white;
 
   position: fixed;
   width: 100%;
+  /* min height bestämmer hela elementets höjd
+   och padding i nuläget och verkar göra margin-bottom irrelevant */
   min-height: 40px;
   z-index: 0;
 }
@@ -113,7 +113,7 @@
 
 .note-container {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; --> är redan defalult */
 }
 
 .note-content {
@@ -127,13 +127,19 @@
 
 .tags-list {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; --> är redan default*/
 }
 
 .tags-list li {
   background-color: indianred;
   margin: 3px;
   padding: 2px 30px;
+  /* om vi vill göra dem mindre/större till olika skärmstorl
+    skulle man kunna använda em som mått för padding
+    och sen ändra font-storlek i en media query
+    och då kommer alla element som har em baserad padding
+    att följa font-size i media query å responsivitet till desktop blir två flugor i en smäll
+  */
   border-radius: 25px;
 }
 
@@ -156,8 +162,6 @@
   margin-left: auto;
 }
 
-
-
 /* tillfällig container att ha mitt i skärmen styling under tiden vi fokuserar JS */
 .edit {
   background-color: white;
@@ -178,16 +182,23 @@
   justify-content: space-between;
 }
 
-.tags-bar, .tags-bar ul, .title-bar, .icons-menu, .edit, .settings-menu li {
+.tags-bar,
+.tags-bar ul,
+.title-bar,
+.icons-menu,
+.edit,
+.settings-menu li {
   display: flex;
 }
 
-.title-bar p, .tags-bar p {
+.title-bar p,
+.tags-bar p {
   opacity: 0.48;
   font-size: 0.7em;
 }
 
-.tags-bar, .title-bar {
+.tags-bar,
+.title-bar {
   align-items: center;
   margin-bottom: 8px;
 }
@@ -206,17 +217,14 @@
   display: none;
 }
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
   outline: none;
 }
 
 .rester {
   visibility: hidden;
 }
-
-
-
-
 
 .edit > * {
   margin: 1em;
