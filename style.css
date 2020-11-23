@@ -44,10 +44,6 @@
   justify-content: space-between;
 }
 
-.menu-sidebar {
-  left: 0;
-}
-
 .sidebar-close-button {
   position: absolute;
   right: 0;
@@ -79,11 +75,6 @@
 
 /*------------------- main menu ----------------*/
 
-.menu {
-  display: flex;
-  flex-direction: column;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -98,7 +89,7 @@
   z-index: 0;
 }
 
-#note-menu {
+.note-list {
   margin-top: 60px;
 }
 
@@ -156,7 +147,7 @@
 }
 
 /* tillfällig container att ha mitt i skärmen styling under tiden vi fokuserar JS */
-.edit {
+.editor {
   background-color: white;
 
   width: 0;
@@ -179,7 +170,7 @@
 .tags-bar ul,
 .title-bar,
 .icons-menu,
-.edit,
+.editor,
 .settings-menu li {
   display: flex;
 }
@@ -215,18 +206,17 @@ input:focus {
   outline: none;
 }
 
-
 /*------------------- editor sidebar ----------------*/
-.edit > * {
+.editor > * {
   margin: 1em;
 }
 
-.editor-sidebar {
+.right-sidebar {
   right: 0;
   margin: 0;
 }
 
-.editor-sidebar-close-button {
+.right-sidebar-close-button {
   position: absolute;
   left: 0;
   top: 0;
@@ -235,8 +225,6 @@ input:focus {
 .rester {
   visibility: hidden;
 }
-
-
 
 button {
   padding: 2em;

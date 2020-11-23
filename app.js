@@ -6,20 +6,24 @@ const noteTitle = document.querySelector("#note-title");
 const favorite = document.querySelector("#favorite-tag");
 const tagName = document.querySelector("#tag-name");
 const tagButton = document.querySelector("#tag-button");
-const noteList = document.querySelector("#note-menu");
+const noteList = document.querySelector(".note-list");
 const newDocButton = document.querySelector(".new-doc");
-const edit = document.querySelector(".edit");
-const editBackButton = document.querySelector(".edit-back-button");
+const editor = document.querySelector(".editor");
+const editorBackButton = document.querySelector(".editor-back-button");
 
-//MENU SIDEBAR
-const sidebarToggle = document.querySelector(".sidebar-toggle");
-const sidebar = document.querySelector(".menu-sidebar");
-const sidebarCloseButton = document.querySelector(".sidebar-close-button");
+//LEFT SIDEBAR
+const leftSidebarButton = document.querySelector(".left-sidebar-button");
+const leftSidebar = document.querySelector(".left-sidebar");
+const leftSidebarCloseButton = document.querySelector(
+  ".left-sidebar-close-button"
+);
 
-//EDITOR SIDEBAR
-const editorSidebarToggle = document.querySelector(".editor-sidebar-toggle");
-const editorSidebar = document.querySelector(".editor-sidebar");
-const editorSidebarCloseButton = document.querySelector(".editor-sidebar-close-button");
+//RIGHT SIDEBAR
+const rightSidebarButton = document.querySelector(".right-sidebar-button");
+const rightSidebar = document.querySelector(".right-sidebar");
+const rightSidebarCloseButton = document.querySelector(
+  ".right-sidebar-close-button"
+);
 
 // OBJECTS
 const docDataSkeleton = {
@@ -34,7 +38,6 @@ const docDataSkeleton = {
 
 // EVENTLISTENERS
 newDoc.addEventListener("click", () => {
-
   createNewDoc();
 });
 
@@ -109,16 +112,9 @@ function createNewDoc() {
   }
 }
 
-
-
-
-
-let storage = window.localStorage;
-
-for (key in storage) {
-  if (window.localStorage.getItem(key) !== null) {
-    const docData = JSON.parse(window.localStorage.getItem(key));
-
+for (key in localStorage) {
+  if (localStorage.getItem(key) !== null) {
+    const docData = JSON.parse(localStorage.getItem(key));
     createNewMenuItem(docData);
   }
 }
@@ -141,7 +137,6 @@ function createNewMenuItem(docData) {
   side.appendChild(sinceEdited);
   side.appendChild(starIcon);
 
-
   const main = document.createElement("div");
   const noteTitle = document.createElement("h2");
   const noteContent = document.createElement("p");
@@ -156,36 +151,33 @@ function createNewMenuItem(docData) {
   main.appendChild(noteTitle);
   main.appendChild(noteContent);
 
-
   noteContainer.appendChild(side);
-
 
   noteList.appendChild(noteContainer);
 
   noteContainer.appendChild(main);
 }
 
-sidebarToggle.addEventListener('click', event => {
-    sidebar.style.width = "100%";
+leftSidebarButton.addEventListener("click", (event) => {
+  leftSidebar.style.width = "100%";
 });
 
-sidebarCloseButton.addEventListener('click', event => {
-  sidebar.style.width = "0%";
+leftSidebarCloseButton.addEventListener("click", (event) => {
+  leftSidebar.style.width = "0%";
 });
 
-newDocButton.addEventListener('click', event => {
-  edit.style.width = "100%";
+newDocButton.addEventListener("click", (event) => {
+  editor.style.width = "100%";
 });
 
-editBackButton.addEventListener('click', event => {
-  edit.style.width = "0%";
+editorBackButton.addEventListener("click", (event) => {
+  editor.style.width = "0%";
 });
 
-
-editorSidebarToggle.addEventListener('click', event => {
-  editorSidebar.style.width = "100%";
+rightSidebarButton.addEventListener("click", (event) => {
+  rightSidebar.style.width = "100%";
 });
 
-editorSidebarCloseButton.addEventListener('click', event => {
-  editorSidebar.style.width = "0%";
+rightSidebarCloseButton.addEventListener("click", (event) => {
+  rightSidebar.style.width = "0%";
 });

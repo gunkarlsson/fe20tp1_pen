@@ -1,225 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-          rel="stylesheet">
-
-
-    <link rel="stylesheet" href="style.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Quote</title>
-</head>
+  </head>
 
-<body>
+  <body class="container">
+    <div class="left-sidebar sidebar">
+      <img src="icons/x.svg" alt="" class="left-sidebar-close-button" />
+      <ul class="tag-menu">
+        <li>
+          <p class="tag">lista</p>
+        </li>
+        <li>
+          <p class="tag">mat</p>
+        </li>
+      </ul>
 
-<div class="container">
-
-    <div class="menu-sidebar sidebar">
-        <img src="icons/x.svg" alt="" class="sidebar-close-button">
-        <ul class="tag-menu">
-            <li>
-                <p class="tag">lista</p>
-            </li>
-            <li>
-                <p class="tag">mat</p>
-            </li>
-        </ul>
-
-        <ul class="settings-menu">
-            <li class="settings">
-                <img src="icons/settings-white.svg" alt="">
-                Settings
-            </li>
-            <li class="privacy-policy">
-                <img src="icons/shield-white.svg" alt="">
-                Privacy Policy
-            </li>
-            <li class="about">
-                <img src="icons/info-white.svg" alt="">
-                 About
-            </li>
-        </ul>
+      <ul class="settings-menu">
+        <li class="settings">
+          <img src="icons/settings-white.svg" alt="" />
+          Settings
+        </li>
+        <li class="privacy-policy">
+          <img src="icons/shield-white.svg" alt="" />
+          Privacy Policy
+        </li>
+        <li class="about">
+          <img src="icons/info-white.svg" alt="" />
+          About
+        </li>
+      </ul>
     </div>
 
-    <div class="menu">
-        <header class="header">
-            <img src="icons/menu.svg" alt="" class="sidebar-toggle">
-            <h1>notes</h1>
-            <img src="icons/search.svg" alt="">
-        </header>
+    <main class="main">
+      <header class="header">
+        <img src="icons/menu.svg" alt="" class="left-sidebar-button" />
+        <h1>notes</h1>
+        <img src="icons/search.svg" alt="" />
+      </header>
 
-        <ul id="note-menu">
-            <li class="note-container" id="test">
-                <div class="side">
-                    <p class="since-edited">4m</p>
-                    <img src="icons/star.svg" alt="">
-                </div>
-                <div class="main">
-                    <h2>inköpslista</h2>
-                    <p class="note-content">- mjöl - Nudlar - Olivolja - mozzarella - potatis - grekisk yoghurt -
-                        gnocci</p>
-                    <ul class="tags-list">
-                        <li>
-                            <p>lista</p>
-                        </li>
-                        <li>
-                            <p>mat</p>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <br>
-            <hr>
-            <br>
-
-            <li class="note-container">
-                <div class="side">
-                    <p class="since-edited">8m</p>
-                    <img src="icons/star.svg" alt="">
-                </div>
-                <div class="main">
-                    <h2>lorem</h2>
-                    <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <ul class="tags-list">
-                    </ul>
-                </div>
-            </li>
-
-            <br>
-            <hr>
-            <br>
-
-            <li class="note-container">
-                <div class="side">
-                    <p class="since-edited">23m</p>
-                    <img src="icons/star.svg" alt="">
-                </div>
-                <div class="main">
-                    <h2>önskelista</h2>
-                    <p class="note-content">- Cykel - Lego Star Wars - Bumbibjörnarna på DVD - En knippe vindruvor -
-                        Strumpor</p>
-                    <ul class="tags-list">
-                        <li>
-                            <p>lista</p>
-                        </li>
-                        <li>
-                            <p>mat</p>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <br>
-            <hr>
-            <br>
-
-            <li class="note-container">
-                <div class="side">
-                    <p class="since-edited">59m</p>
-                    <img src="icons/star.svg" alt="">
-                </div>
-                <div class="main">
-                    <h2>recept på kladdkaka</h2>
-                    <p class="note-content">Sätt ugnen på 175°c över/undervärme och smöra samt bröa en form med
-                        löstagbar kant, 22 cm ø, låt stå. Smält ihop smör och chok... Sätt ugnen på 175°c över/undervärme och smöra samt bröa en form med
-                        löstagbar kant, 22 cm ø, låt stå. Smält ihop smör och chok...</p>
-                    <ul class="tags-list">
-                        <li>
-                            <p>lista</p>
-                        </li>
-                        <li>
-                            <p>mat</p>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <br>
-            <hr>
-            <br>
-        </ul>
-
-        <button class="new-doc" id="new-doc">
-            <img src="icons/file-plus.svg" alt="">
-        </button>
-    </div>
-
-
-    <div class="edit">
-        <div class="icons-menu">
-            <img class="edit-back-button" src="icons/arrow-left.svg" alt="">
-            <div>
-                <img id="favorite-tag" class="star" src="icons/star.svg" alt="">
-                <img class="editor-sidebar-toggle" src="icons/info.svg" alt="">
-            </div>
-
-        </div>
-
-        <div class="tags-bar">
-            <p>tags</p>
+      <ul class="note-list">
+        <li class="note-container">
+          <div class="side">
+            <p class="since-edited">59m</p>
+            <img src="icons/star.svg" alt="" />
+          </div>
+          <div>
+            <h2>recept på kladdkaka</h2>
+            <p class="note-content">
+              Sätt ugnen på 175°c över/undervärme och smöra samt bröa en form.
+            </p>
             <ul class="tags-list">
-                <li>
-                    lista
-                </li>
-                <li>
-                    mat
-                </li>
+              <li>
+                <p>lista</p>
+              </li>
+              <li>
+                <p>mat</p>
+              </li>
             </ul>
-        </div>
+          </div>
+        </li>
 
-        <div class="editor">
-            <div class="title-bar">
-                <p>h1</p>
-                <input type="text" id="note-title" placeholder="title"/>
-                <!--
+        <br />
+        <hr />
+        <br />
+      </ul>
+
+      <button class="new-doc" id="new-doc">
+        <img src="icons/file-plus.svg" alt="" />
+      </button>
+    </main>
+
+    <div class="editor">
+      <div class="icons-menu">
+        <img class="editor-back-button" src="icons/arrow-left.svg" alt="" />
+        <div>
+          <img id="favorite-tag" class="star" src="icons/star.svg" alt="" />
+          <img class="right-sidebar-button" src="icons/info.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="tags-bar">
+        <p>tags</p>
+        <ul class="tags-list">
+          <li>lista</li>
+          <li>mat</li>
+        </ul>
+      </div>
+
+      <div class="editor">
+        <div class="title-bar">
+          <p>h1</p>
+          <input type="text" id="note-title" placeholder="title" />
+          <!--
                 <label for="favorite-tag">
                     <input  type="checkbox" id="favorite-tag"/>
                 </label>
                 -->
-            </div>
-
-
-            <textarea name="textarea" id="textarea" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder="content"></textarea>
         </div>
 
+        <textarea
+          name="textarea"
+          id="textarea"
+          oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+          placeholder="content"
+        ></textarea>
+      </div>
 
-        <div class="editor-sidebar sidebar">
-            <img class="editor-sidebar-close-button" src="icons/x.svg" alt="">
-        </div>
-
-
+      <div class="right-sidebar sidebar">
+        <img class="right-sidebar-close-button" src="icons/x.svg" alt="" />
+      </div>
     </div>
-</div>
 
-<div class="rester">
-    <p id="intro">
+    <div class="rester">
+      <p id="intro">
         Quire är en multifunktionell anteckningsbok som fungerar direkt i
         webbläsaren. Den första versionen av tjänsten sparar alla anteckningar
         lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
-    </p>
+      </p>
 
+      <input type="text" id="tag-name" placeholder="add tag" />
+      <button id="tag-button">add tag</button>
 
+      <!-- delete dokumentknapp -->
+      <button id="delete-doc">-</button>
+      <!--   -->
+    </div>
 
-
-
-
-    <input type="text" id="tag-name" placeholder="add tag"/>
-    <button id="tag-button">add tag</button>
-
-
-
-    <!-- delete dokumentknapp -->
-    <button id="delete-doc">-</button>
-    <!--   -->
-</div>
-
-
-<script src="./app.js"></script>
-</body>
+    <script src="./app.js"></script>
+  </body>
 </html>
