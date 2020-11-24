@@ -147,43 +147,50 @@ function createNewMenuItem(docData) {
   })
 
   const side = document.createElement("div");
+
+  //SIDE
+  const sideContent = document.createElement("div");
   const sinceEdited = document.createElement("p");
   const starIcon = document.createElement("img");
 
-  side.classList.add("side");
+  sideContent.classList.add("side");
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
 
   sinceEdited.innerHTML = "1m";
   starIcon.setAttribute("src", "icons/star.svg");
 
-  side.appendChild(sinceEdited);
-  side.appendChild(starIcon);
+  sideContent.appendChild(sinceEdited);
+  sideContent.appendChild(starIcon);
 
 
-  const main = document.createElement("div");
+  //MAIN
+  const mainContent = document.createElement("div");
   const noteTitle = document.createElement("h2");
   const noteContent = document.createElement("p");
 
-  main.classList.add("main");
+  mainContent.classList.add("main");
   noteTitle.classList.add("note-title");
   noteContent.classList.add("note-content");
 
   noteTitle.innerHTML = docData.title;
   noteContent.innerHTML = docData.content;
 
-  main.appendChild(noteTitle);
-  main.appendChild(noteContent);
+  mainContent.appendChild(noteTitle);
+  mainContent.appendChild(noteContent);
 
 
-  noteContainer.appendChild(side);
+  //container för notes och info på vänstra sidan
+  //side + main = alla
+  noteContainer.appendChild(sideContent);
+  noteContainer.appendChild(mainContent);
 
 
   noteList.appendChild(noteContainer);
-
-  noteContainer.appendChild(main);
 }
 
+
+//metoder för css animationer
 sidebarToggle.addEventListener('click', event => {
     sidebar.style.width = "100%";
 });
