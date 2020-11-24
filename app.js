@@ -134,21 +134,17 @@ for (key in storage) {
 
 function createNewMenuItem(docData) {
 
+
   const noteContainer = document.createElement("li");
   noteContainer.classList.add("note-container");
 
   noteContainer.addEventListener('click', function(){
     const openItem = JSON.parse(localStorage.getItem(docData.id))
     console.log(openItem.content)
-    edit.style.width="100%"
+    editor.style.width="100%"
     loadDoc(docData)
 
-    if(!docData.content) {
-
-    }
   });
-
-  const side = document.createElement("div");
 
   //SIDE
   const sideContent = document.createElement("div");
