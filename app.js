@@ -125,13 +125,12 @@ function sortAfterEdited() {
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
       notes.push(JSON.parse(localStorage.getItem(key)));
-      createNewMenuItem(JSON.parse(localStorage.getItem(key)));
     }
   }
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
-  console.log(notes);
+  notes.forEach(note=>createNewMenuItem(note))
 }
 
 sortAfterEdited();
@@ -155,9 +154,12 @@ function createNewMenuItem(docData) {
   sideContent.classList.add("side");
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
-
-  sinceEdited.innerHTML = "1m";
+  
+//TODO: Fixa if statements som räknar på timmar.
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate)/ 60000) + 'm';
   starIcon.setAttribute("src", "icons/star.svg");
+
+
 
   sideContent.appendChild(sinceEdited);
   sideContent.appendChild(starIcon);
