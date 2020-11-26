@@ -12,16 +12,21 @@ const editor = document.querySelector(".editor");
 const editorBackButton = document.querySelector(".editor-back-button");
 // select tags-list from DOM
 const tagsList = document.querySelector(".tags-list");
+const tagsBar = document.querySelector(".tags-bar");
 
 //LEFT SIDEBAR
 const leftSidebarButton = document.querySelector(".left-sidebar-button");
 const leftSidebar = document.querySelector(".left-sidebar");
-const leftSidebarCloseButton = document.querySelector(".left-sidebar-close-button");
+const leftSidebarCloseButton = document.querySelector(
+  ".left-sidebar-close-button"
+);
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
 const rightSidebar = document.querySelector(".right-sidebar");
-const rightSidebarCloseButton = document.querySelector(".right-sidebar-close-button");
+const rightSidebarCloseButton = document.querySelector(
+  ".right-sidebar-close-button"
+);
 
 // OBJECTS
 const docDataSkeleton = {
@@ -46,12 +51,12 @@ deleteDocButton.addEventListener("click", () => {
 });
 
 // Input event
-textarea.addEventListener("input", e => {
+textarea.addEventListener("input", (e) => {
   // input value in textarea,
   saveDoc();
 });
 
-noteTitle.addEventListener("input", e => {
+noteTitle.addEventListener("input", (e) => {
   saveDoc();
 });
 
@@ -61,23 +66,6 @@ favorite.addEventListener("click", () => {
 
 tagButton.addEventListener("click", () => {
   saveDoc();
-
-  //******************************************************
-
-  /* EVENTUELLT HÄR! */
-
-  // const input = tagName.value;
-
-  // Få ut value i LI obj tag button
-  // Få ut LI obj i UL 'tags list'
-
-  // in i docDataSkeleton["tags"] el docDataSkeleton.tags
-
-  // for (key in localStorage) {
-  //   //if (JSON.parse(localStorage.getItem(key)) !== null) {
-  //     tagsList.push(JSON.parse(localStorage.getItem(key)));
-  //   // }
-  // }
 
   // ska vi sortera tags?
   // notes.tags.sort(function (a, b) {
@@ -89,13 +77,26 @@ tagButton.addEventListener("click", () => {
   //
 
   console.log(docDataSkeleton.tags);
-
-  const allTags = docDataSkeleton.tags;
-
-  allTags.forEach(function (tag) {
+  console.log(tagsList);
+  //Loopar igenom tags-arrayen och tar ut varje enskild tag
+  const allTags = docDataSkeleton.tags.forEach(function (tag) {
     console.log(tag);
+    //Skapar list-item
+    let li = document.createElement("li");
+    //Lägger li under tags-ul
+    //@TODO: Kolla om vi kan appenda mer effektivt?
+    tagsList.appendChild(li);
+    let p = document.createElement("p");
+    //Ersätt p-tag-texten med enskilda tag:en
+    p.innerHTML = tag;
+    li.appendChild(p);
+    //Appends tagslist till tagsbar
+    tagsBar.appendChild(tagsList);
   });
 
+  // const hashtag = document.createElement("li");
+  //     hashtag.classList.add("hashtagClass");
+  // tagsList.appendChild(allTags);
   // 2. varje elem i array utloopad
 
   // Hämta från LS?
@@ -115,7 +116,6 @@ tagButton.addEventListener("click", () => {
 // om redan i local storage --> return false
 if (localStorage.getItem(1) !== null) {
   // kolla om LS tomt
-  console.log("försök inte....");
 } else {
   generateWelcomeMssg();
 }
@@ -139,7 +139,10 @@ function saveDoc() {
     docDataSkeleton.id = Date.now();
   }
   docDataSkeleton.lastSavedDate = Date.now();
-  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+  window.localStorage.setItem(
+    docDataSkeleton.id,
+    JSON.stringify(docDataSkeleton)
+  );
 
   sortAfterEdited();
 }
@@ -187,7 +190,7 @@ function sortAfterEdited() {
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
-  notes.forEach(note => createNewMenuItem(note));
+  notes.forEach((note) => createNewMenuItem(note));
 }
 
 sortAfterEdited();
@@ -207,7 +210,10 @@ function generateWelcomeMssg() {
     docDataSkeleton.id = 1;
   }
   docDataSkeleton.lastSavedDate = Date.now();
-  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+  window.localStorage.setItem(
+    docDataSkeleton.id,
+    JSON.stringify(docDataSkeleton)
+  );
 }
 
 function createNewMenuItem(docData) {
@@ -231,7 +237,8 @@ function createNewMenuItem(docData) {
   starIcon.classList.add("star-icon");
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  sinceEdited.innerHTML =
+    Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
   starIcon.setAttribute("src", "icons/star.svg");
 
   sideContent.appendChild(sinceEdited);
@@ -260,26 +267,26 @@ function createNewMenuItem(docData) {
   noteList.appendChild(noteContainer);
 }
 
-leftSidebarButton.addEventListener("click", event => {
+leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
 });
 
-leftSidebarCloseButton.addEventListener("click", event => {
+leftSidebarCloseButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "0%";
 });
 
-newDocButton.addEventListener("click", event => {
+newDocButton.addEventListener("click", (event) => {
   editor.style.width = "100%";
 });
 
-editorBackButton.addEventListener("click", event => {
+editorBackButton.addEventListener("click", (event) => {
   editor.style.width = "0%";
 });
 
-rightSidebarButton.addEventListener("click", event => {
+rightSidebarButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "100%";
 });
 
-rightSidebarCloseButton.addEventListener("click", event => {
+rightSidebarCloseButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "0%";
 });
