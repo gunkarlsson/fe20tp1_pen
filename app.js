@@ -116,6 +116,7 @@ function deleteDoc() {
   window.localStorage.removeItem(docDataSkeleton.id);
 }
 
+// test comment
 function createNewDoc() {
   // töm textarea för ny yta
   textarea.value = "";
