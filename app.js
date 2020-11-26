@@ -66,6 +66,7 @@ favorite.addEventListener("click", () => {
 
 tagButton.addEventListener("click", () => {
   saveDoc();
+  //Start with cleared tag-input field
 
   // ska vi sortera tags?
   // notes.tags.sort(function (a, b) {
@@ -75,7 +76,6 @@ tagButton.addEventListener("click", () => {
   // 1. hämta taggar ls
   // ingen array utan textsträng docDataSkeleton --> array
   //
-
   console.log(docDataSkeleton.tags);
   console.log(tagsList);
   //Loopar igenom tags-arrayen och tar ut varje enskild tag
@@ -94,6 +94,14 @@ tagButton.addEventListener("click", () => {
     tagsBar.appendChild(tagsList);
   });
 
+  // if (
+  //   localStorage.getItem(docDataSkeleton.tags) ===
+  //   localStorage.getItem(docDataSkeleton.tags)
+  // ) {
+  //   // kolla om LS tomt
+  // } else {
+  //   console.log("här är else-grejen");
+  // }
   // const hashtag = document.createElement("li");
   //     hashtag.classList.add("hashtagClass");
   // tagsList.appendChild(allTags);
@@ -102,6 +110,9 @@ tagButton.addEventListener("click", () => {
   // Hämta från LS?
   // localStorage.getItem()
   // tagsList ska få LI
+
+  //CLEAR INPUT FIELD
+  tagName.value = "";
 });
 
 // FUNCTIONS
@@ -173,7 +184,8 @@ function createNewDoc() {
 function loadDoc(docData) {
   textarea.value = docData.content;
   noteTitle.value = docData.title;
-  tagName.value = docData.tags;
+  tagName.value = "";
+  tagsList.value = docData.tags;
   favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
 }
