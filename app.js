@@ -56,8 +56,14 @@ textarea.addEventListener("input", (e) => {
 noteTitle.addEventListener("input", (e) => {
   saveDoc();
 });
-
+let f = false;
 favorite.addEventListener("click", () => {
+f= !docDataSkeleton.favorite;
+  if( docDataSkeleton.favorite === false){
+   favorite.setAttribute ('src','./icons/star.svg')
+  } else {
+    favorite.setAttribute('src','./icons/star-clicked.svg')
+  }
   saveDoc();
 });
 
@@ -84,15 +90,14 @@ if(localStorage.getItem(1) !== null ) {
 }
 
 function saveDoc() {
-  
+  console.log(f)
   // automatiskt uppdatera anteckning
   
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value;
   docDataSkeleton.title = noteTitle.value;
-  docDataSkeleton.favorite = favorite.checked;
   docDataSkeleton.tags.push(tagName.value);
-
+docDataSkeleton.favorite = f;
   // kollar om det finns ett creation date, om inte så skapar den datum)
   // genererar även ID genom date object
   // ! gör att tom stärng = false
@@ -144,18 +149,30 @@ function loadDoc(docData) {
 function sortAfterEdited() {
   
   noteList.innerHTML = '';
+  const newList = [];
   
   let notes = [];
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
-      notes.push(JSON.parse(localStorage.getItem(key)));
+      if(JSON.parse(localStorage.getItem(key)).favorite){
+        newList.push(JSON.parse(localStorage.getItem(key)));
+        
+
+      }else{
+        notes.push(JSON.parse(localStorage.getItem(key)));
+      }
     }
   }
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
+  newList.sort(function (a, b) {
+    return b.lastSavedDate - a.lastSavedDate;
+  });
+  newList.concat(notes);
   notes.forEach(note=>createNewMenuItem(note))
 }
+
 
 sortAfterEdited();
 
@@ -201,8 +218,14 @@ function createNewMenuItem(docData) {
   
 //TODO: Fixa if statements som räknar på timmar.
   sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate)/ 60000) + 'm';
+if(docData.favorite === true) {
+  starIcon.setAttribute("src", "icons/star-clicked.svg");
+console.log('funkar')
+} else {
   starIcon.setAttribute("src", "icons/star.svg");
+  console.log('funkar ej')
 
+}
 
 
   sideContent.appendChild(sinceEdited);
