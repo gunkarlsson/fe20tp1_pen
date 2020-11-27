@@ -13,6 +13,7 @@ const editorBackButton = document.querySelector(".editor-back-button");
 // select tags-list from DOM
 const tagsList = document.querySelector(".tags-list");
 const tagsBar = document.querySelector(".tags-bar");
+const tagText = document.querySelectorAll(".tagClass");
 
 //LEFT SIDEBAR
 const leftSidebarButton = document.querySelector(".left-sidebar-button");
@@ -61,7 +62,6 @@ favorite.addEventListener("click", () => {
 });
 
 tagButton.addEventListener("click", () => {
-  saveDoc();
   //Start with cleared tag-input field
 
   // ska vi sortera tags?
@@ -74,61 +74,83 @@ tagButton.addEventListener("click", () => {
   //
   console.log(docDataSkeleton.tags);
   console.log(tagsList);
+  testTags();
   //Loopar igenom tags-arrayen och tar ut varje enskild tag
-  const allTags = docDataSkeleton.tags.forEach(function (tag) {
+  let allTags = docDataSkeleton.tags.forEach(function (tag) {
     console.log(tag);
-
+    if (!docDataSkeleton.tags.includes(tag)) {
     //Skapar list-item
     let li = document.createElement("li");
     //Lägger li under tags-ul
     //@TODO: Kolla om vi kan appenda mer effektivt?
     tagsList.appendChild(li);
     let p = document.createElement("p");
+    p.classList.add('tagClass');
     //Ersätt p-tag-texten med enskilda tag:en
-    p.innerHTML = filteredTag;
+    p.innerHTML = tag;
     li.appendChild(p);
     //Appends tagslist till tagsbar
     tagsBar.appendChild(tagsList);
-
-    return allTags;
-
     // filter method in loop?
+    return tag;
+    } else {
+      console.log("här gör vi något annat")
+    }
+    
   });
-
+  saveDoc();
   //CLEAR INPUT FIELD
   tagName.value = "";
+  
 });
+
+function testTags (tag) {
+  docDataSkeleton.tags.push(tag);
+}
+
+// console.log(tagText.value)
+// function hasDuplicates(array) {
+//   return new Set(array).size !== array.length;
+// }
+
+// if (
+//   localStorage.getItem(docDataSkeleton.tags) !==
+//   localStorage.getItem(docDataSkeleton.tags)
+// ) {
+//   console.log("steg ett")
+// } else {
+//   console.log("steg två")
+// }
+
+  if (localStorage.getItem(1) !== null) {
+    // Generate welcome mssg
+    // kolla om LS tomt
+  } else {
+    generateWelcomeMssg();
+  }
 
 // filter out empty values
-let filteredTag = docDataSkeleton.tags.filter(function (el) {
-  console.log(`vad är: ${filteredTag}`);
-  return el == "";
-});
+// let filteredTag = docDataSkeleton.tags.filter(function (el) {
+//   console.log(`vad är: ${filteredTag}`);
+//   return el == "";
+// });
 
-if (localStorage.getItem(1) !== null) {
-  // kolla om LS tomt
-} else {
-  generateWelcomeMssg();
-}
+// function filterTags(tagsArr) {
+//   /*
+//   [] 1. Få in tags-array för att bearbeta
+//   [] 2. Rensa (filtrera) bort tom input
+//   [] 3. Rensa bort dubletter --> toLowerCase och jämföra 
+//   [] 4. 
+//   */
 
-function filterTags(tagsArr) {
-  /*
-  
-  [] 1. Få in tags-array för att bearbeta
-  [] 2. Rensa (filtrera) bort tom input
-  [] 3. Rensa bort dubletter --> toLowerCase och jämföra 
-  [] 4. 
-  
-  */
+//   let filteredArr = tagsArr.filter(el => {
+//     return filteredArr;
+//   });
 
-  let filteredArr = tagsArr.filter(el => {
-    return filteredArr;
-  });
-
-  // MDN SYNTAX https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-  // let newArray = arr.filter(callback(currentValue[, index[, array]]) {
-  // return element for newArray, if true
-}
+//   // MDN SYNTAX https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+//   // let newArray = arr.filter(callback(currentValue[, index[, array]]) {
+//   // return element for newArray, if true
+// }
 
 function saveDoc() {
   // automatiskt uppdatera anteckning
@@ -150,7 +172,7 @@ function saveDoc() {
   }
   docDataSkeleton.lastSavedDate = Date.now();
   window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
-
+  // docDataSkeleton.tags = [];
   sortAfterEdited();
 }
 
