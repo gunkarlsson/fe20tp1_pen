@@ -13,329 +13,278 @@ const editorBackButton = document.querySelector(".editor-back-button");
 // select tags-list from DOM
 const tagsList = document.querySelector(".tags-list");
 const tagsBar = document.querySelector(".tags-bar");
-const tagText = document.querySelectorAll(".tagClass");
 
 //LEFT SIDEBAR
 const leftSidebarButton = document.querySelector(".left-sidebar-button");
 const leftSidebar = document.querySelector(".left-sidebar");
-const leftSidebarCloseButton = document.querySelector(".left-sidebar-close-button");
+const leftSidebarCloseButton = document.querySelector(
+  ".left-sidebar-close-button"
+);
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
 const rightSidebar = document.querySelector(".right-sidebar");
-const rightSidebarCloseButton = document.querySelector(".right-sidebar-close-button");
+const rightSidebarCloseButton = document.querySelector(
+  ".right-sidebar-close-button"
+);
 
 // OBJECTS
 const docDataSkeleton = {
-    id: "",
-    title: "",
-    content: "",
-    favorite: false,
-    creationDate: "",
-    lastSavedDate: "",
-    tags: [],
+  id: "",
+  title: "",
+  content: "",
+  favorite: false,
+  creationDate: "",
+  lastSavedDate: "",
+  tags: [],
 };
 
 // EVENTLISTENERS
 newDoc.addEventListener("click", () => {
-    createNewDoc();
+  createNewDoc();
 });
 
 deleteDocButton.addEventListener("click", () => {
-    textarea.value = "";
+  textarea.value = "";
 
-    deleteDoc();
+  deleteDoc();
 });
 
 // Input event
-textarea.addEventListener("input", e => {
-    // input value in textarea,
-    saveDoc();
+textarea.addEventListener("input", (e) => {
+  // input value in textarea,
+  saveDoc();
 });
 
-noteTitle.addEventListener("input", e => {
-    saveDoc();
+noteTitle.addEventListener("input", (e) => {
+  saveDoc();
 });
 
 favorite.addEventListener("click", () => {
-    saveDoc();
+  saveDoc();
 });
 
 tagButton.addEventListener("click", () => {
-    saveDoc();
-    //Start with cleared tag-input field
+  saveDoc();
+  tagsList.innerHTML = "";
+  console.log(docDataSkeleton.tags);
+  console.log(tagsList);
 
-    // ska vi sortera tags?
-    // notes.tags.sort(function (a, b) {
-    //   return b.lastSavedDate - a.lastSavedDate;
-    // });
+  createTag();
 
-    // 1. hämta taggar ls
-    // ingen array utan textsträng docDataSkeleton --> array
-    //
-    tagsList.innerHTML = "";
-    console.log(docDataSkeleton.tags);
-    console.log(tagsList);
-    //testTags();
-    //Loopar igenom tags-arrayen och tar ut varje enskild tag
-  foo();
-
-    //CLEAR INPUT FIELD
-    tagName.value = "";
+  //CLEAR INPUT FIELD
+  tagName.value = "";
 });
 
-function foo() {
+function createTag() {
   docDataSkeleton.tags.forEach(function (tag) {
-    console.log(tag);
-    if (!docDataSkeleton.tags.includes("tag")) {
-      //Skapar list-item
-      let li = document.createElement("li");
-      //Lägger li under tags-ul
-      //@TODO: Kolla om vi kan appenda mer effektivt?
-      tagsList.appendChild(li);
-      let p = document.createElement("p");
-      p.classList.add('tagClass');
-      //Ersätt p-tag-texten med enskilda tag:en
-      p.innerHTML = tag;
-      li.appendChild(p);
-      //Appends tagslist till tagsbar
-      tagsBar.appendChild(tagsList);
-      // filter method in loop?
-    } else {
-      console.log("här gör vi något annat")
-    }
-
+    //Skapar list-item
+    let li = document.createElement("li");
+    //Lägger li under tags-ul
+    tagsList.appendChild(li);
+    let p = document.createElement("p");
+    p.classList.add("tagClass");
+    //Ersätt p-tag-texten med enskilda tag:en
+    p.innerHTML = tag.toLowerCase();
+    li.appendChild(p);
+    //Appends tagslist till tagsbar
+    tagsBar.appendChild(tagsList);
+    // filter method in loop?
   });
 }
 
-
-
-function testTags(tag) {
-    docDataSkeleton.tags.push(tag);
-}
-
-// console.log(tagText.value)
-// function hasDuplicates(array) {
-//   return new Set(array).size !== array.length;
-// }
-
-// if (
-//   localStorage.getItem(docDataSkeleton.tags) !==
-//   localStorage.getItem(docDataSkeleton.tags)
-// ) {
-//   console.log("steg ett")
-// } else {
-//   console.log("steg två")
-// }
-
+// Generate welcome mssg
 if (localStorage.getItem(1) !== null) {
-    // Generate welcome mssg
-    // kolla om LS tomt
+  // kolla om LS tomt
 } else {
-    generateWelcomeMssg();
+  generateWelcomeMssg();
 }
 
-// filter out empty values
-// let filteredTag = docDataSkeleton.tags.filter(function (el) {
-//   console.log(`vad är: ${filteredTag}`);
-//   return el == "";
-// });
-
-// function filterTags(tagsArr) {
-//   /*
-//   [] 1. Få in tags-array för att bearbeta
-//   [] 2. Rensa (filtrera) bort tom input
-//   [] 3. Rensa bort dubletter --> toLowerCase och jämföra 
-//   [] 4. 
-//   */
-
-//   let filteredArr = tagsArr.filter(el => {
-//     return filteredArr;
-//   });
-
-//   // MDN SYNTAX https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-//   // let newArray = arr.filter(callback(currentValue[, index[, array]]) {
-//   // return element for newArray, if true
-// }
+//docDataSkeleton.tags = ska vara arr
+function testDuplicates(arr) {
+  //   Sortera bort duplicates
+  let uniqueSet = new Set(arr);
+  let newArr = [...uniqueSet];
+  return newArr;
+}
 
 function saveDoc() {
-    // automatiskt uppdatera anteckning
+  // automatiskt uppdatera anteckning
 
-    // börja fylla docDataSkeleton med textarea & note value
-    docDataSkeleton.content = textarea.value;
-    docDataSkeleton.title = noteTitle.value;
-    docDataSkeleton.favorite = favorite.checked;
+  // börja fylla docDataSkeleton med textarea & note value
+  docDataSkeleton.content = textarea.value;
+  docDataSkeleton.title = noteTitle.value;
+  docDataSkeleton.favorite = favorite.checked;
 
-    if(tagName.value !== "") {
-      docDataSkeleton.tags.push(tagName.value);
-    }
+  if (tagName.value !== "") {
+    docDataSkeleton.tags.push(tagName.value.toLowerCase());
+  }
+  //   if (!testDuplicates(docDataSkeleton.tags)) {
+  //     docDataSkeleton.tags.push(tagName.value.toLowerCase());
+  //     console.log("is this true");
+  //   }
+  // kollar om det finns ett creation date, om inte så skapar den datum)
+  // genererar även ID genom date object
+  // ! gör att tom stärng = false
+  if (!docDataSkeleton.id) {
+    docDataSkeleton.creationDate = new Date();
 
-    // kollar om det finns ett creation date, om inte så skapar den datum)
-    // genererar även ID genom date object
-    // ! gör att tom stärng = false
-    if (!docDataSkeleton.id) {
-        docDataSkeleton.creationDate = new Date();
-
-        // unique ID generated by timestamp
-        docDataSkeleton.id = Date.now();
-    }
-    docDataSkeleton.lastSavedDate = Date.now();
-    window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
-    // docDataSkeleton.tags = [];
-    sortAfterEdited();
+    // unique ID generated by timestamp
+    docDataSkeleton.id = Date.now();
+  }
+  docDataSkeleton.lastSavedDate = Date.now();
+  window.localStorage.setItem(
+    docDataSkeleton.id,
+    JSON.stringify(docDataSkeleton)
+  );
+  // docDataSkeleton.tags = [];
+  sortAfterEdited();
 }
 
 function deleteDoc() {
-    // remove ID and remove the item
-    window.localStorage.removeItem(docDataSkeleton.id);
+  // remove ID and remove the item
+  window.localStorage.removeItem(docDataSkeleton.id);
 }
 
 // test comment
 function createNewDoc() {
-    // töm textarea för ny yta
-    textarea.value = "";
-    noteTitle.value = "";
-    tagName.value = "";
+  // töm textarea för ny yta
+  textarea.value = "";
+  noteTitle.value = "";
+  tagName.value = "";
 
-    for (element in docDataSkeleton) {
-        if (element === "tags") {
-            // töm tags array
-            docDataSkeleton[element] = [];
-        } else {
-            // övriga blir tom sträng
-            docDataSkeleton[element] = "";
-        }
+  for (element in docDataSkeleton) {
+    if (element === "tags") {
+      // töm tags array
+      docDataSkeleton[element] = [];
+    } else {
+      // övriga blir tom sträng
+      docDataSkeleton[element] = "";
     }
+  }
 }
 
 function loadDoc(docData) {
-
   tagsList.innerHTML = "";
 
-    textarea.value = docData.content;
-    noteTitle.value = docData.title;
-    tagName.value = "";
-    favorite.value = docData.favorite;
-    docDataSkeleton.id = docData.id;
-    docDataSkeleton.tags = docData.tags;
-
-    console.log(docData.tags);
-
-
-
-
-    //Skapar list-item
-
-  foo();
-
-
+  textarea.value = docData.content;
+  noteTitle.value = docData.title;
+  tagName.value = "";
+  favorite.value = docData.favorite;
+  docDataSkeleton.id = docData.id;
+  docDataSkeleton.tags = docData.tags;
+  createTag();
 }
 
 function sortAfterEdited() {
-    noteList.innerHTML = "";
+  noteList.innerHTML = "";
 
-    let notes = [];
-    for (key in localStorage) {
-        if (JSON.parse(localStorage.getItem(key)) !== null) {
-            notes.push(JSON.parse(localStorage.getItem(key)));
-        }
+  let notes = [];
+  for (key in localStorage) {
+    if (JSON.parse(localStorage.getItem(key)) !== null) {
+      notes.push(JSON.parse(localStorage.getItem(key)));
     }
-    notes.sort(function (a, b) {
-        return b.lastSavedDate - a.lastSavedDate;
-    });
-    notes.forEach(note => createNewMenuItem(note));
+  }
+  notes.sort(function (a, b) {
+    return b.lastSavedDate - a.lastSavedDate;
+  });
+  notes.forEach((note) => createNewMenuItem(note));
 }
 
 sortAfterEdited();
 
 function generateWelcomeMssg() {
-    // börja fylla docDataSkeleton med textarea & note value
-    docDataSkeleton.content =
-        "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend";
-    docDataSkeleton.title = "Welcome to Quire, almost as good as Bear";
-    docDataSkeleton.favorite = favorite.checked;
-    docDataSkeleton.tags.push(tagName.value);
+  // börja fylla docDataSkeleton med textarea & note value
+  docDataSkeleton.content =
+    "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend";
+  docDataSkeleton.title = "Welcome to Quire, almost as good as Bear";
+  docDataSkeleton.favorite = favorite.checked;
+  docDataSkeleton.tags.push(tagName.value);
 
-    if (!docDataSkeleton.id) {
-        docDataSkeleton.creationDate = new Date();
+  if (!docDataSkeleton.id) {
+    docDataSkeleton.creationDate = new Date();
 
-        // unique ID generated by timestamp
-        docDataSkeleton.id = 1;
-    }
-    docDataSkeleton.lastSavedDate = Date.now();
-    window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+    // unique ID generated by timestamp
+    docDataSkeleton.id = 1;
+  }
+  docDataSkeleton.lastSavedDate = Date.now();
+  window.localStorage.setItem(
+    docDataSkeleton.id,
+    JSON.stringify(docDataSkeleton)
+  );
 }
 
 function createNewMenuItem(docData) {
-    const noteContainer = document.createElement("li");
-    noteContainer.classList.add("note-container");
+  const noteContainer = document.createElement("li");
+  noteContainer.classList.add("note-container");
 
-    noteContainer.addEventListener("click", function () {
-        const openItem = JSON.parse(localStorage.getItem(docData.id));
-        // console.log(openItem.content);
-        editor.style.width = "100%";
-        loadDoc(docData);
-    });
+  noteContainer.addEventListener("click", function () {
+    const openItem = JSON.parse(localStorage.getItem(docData.id));
+    // console.log(openItem.content);
+    editor.style.width = "100%";
+    loadDoc(docData);
+  });
 
-    //SIDE
-    const sideContent = document.createElement("div");
-    const sinceEdited = document.createElement("p");
-    const starIcon = document.createElement("img");
+  //SIDE
+  const sideContent = document.createElement("div");
+  const sinceEdited = document.createElement("p");
+  const starIcon = document.createElement("img");
 
-    sideContent.classList.add("side");
-    sinceEdited.classList.add("since-edited");
-    starIcon.classList.add("star-icon");
+  sideContent.classList.add("side");
+  sinceEdited.classList.add("since-edited");
+  starIcon.classList.add("star-icon");
 
-    //TODO: Fixa if statements som räknar på timmar.
-    sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
-    starIcon.setAttribute("src", "icons/star.svg");
+  //TODO: Fixa if statements som räknar på timmar.
+  sinceEdited.innerHTML =
+    Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  starIcon.setAttribute("src", "icons/star.svg");
 
-    sideContent.appendChild(sinceEdited);
-    sideContent.appendChild(starIcon);
+  sideContent.appendChild(sinceEdited);
+  sideContent.appendChild(starIcon);
 
-    //MAIN
-    const mainContent = document.createElement("div");
-    const noteTitle = document.createElement("h2");
-    const noteContent = document.createElement("p");
+  //MAIN
+  const mainContent = document.createElement("div");
+  const noteTitle = document.createElement("h2");
+  const noteContent = document.createElement("p");
 
-    mainContent.classList.add("main");
-    noteTitle.classList.add("note-title");
-    noteContent.classList.add("note-content");
+  mainContent.classList.add("main");
+  noteTitle.classList.add("note-title");
+  noteContent.classList.add("note-content");
 
-    noteTitle.innerHTML = docData.title;
-    noteContent.innerHTML = docData.content;
+  noteTitle.innerHTML = docData.title;
+  noteContent.innerHTML = docData.content;
 
-    mainContent.appendChild(noteTitle);
-    mainContent.appendChild(noteContent);
+  mainContent.appendChild(noteTitle);
+  mainContent.appendChild(noteContent);
 
-    //container för notes och info på vänstra sidan
-    //side + main = alla
-    noteContainer.appendChild(sideContent);
-    noteContainer.appendChild(mainContent);
+  //container för notes och info på vänstra sidan
+  //side + main = alla
+  noteContainer.appendChild(sideContent);
+  noteContainer.appendChild(mainContent);
 
-    noteList.appendChild(noteContainer);
+  noteList.appendChild(noteContainer);
 }
 
-leftSidebarButton.addEventListener("click", event => {
-    leftSidebar.style.width = "100%";
+leftSidebarButton.addEventListener("click", (event) => {
+  leftSidebar.style.width = "100%";
 });
 
-leftSidebarCloseButton.addEventListener("click", event => {
-    leftSidebar.style.width = "0%";
+leftSidebarCloseButton.addEventListener("click", (event) => {
+  leftSidebar.style.width = "0%";
 });
 
-newDocButton.addEventListener("click", event => {
-    editor.style.width = "100%";
+newDocButton.addEventListener("click", (event) => {
+  editor.style.width = "100%";
 });
 
-editorBackButton.addEventListener("click", event => {
-    editor.style.width = "0%";
+editorBackButton.addEventListener("click", (event) => {
+  editor.style.width = "0%";
 });
 
-rightSidebarButton.addEventListener("click", event => {
-    rightSidebar.style.width = "100%";
+rightSidebarButton.addEventListener("click", (event) => {
+  rightSidebar.style.width = "100%";
 });
 
-rightSidebarCloseButton.addEventListener("click", event => {
-    rightSidebar.style.width = "0%";
+rightSidebarCloseButton.addEventListener("click", (event) => {
+  rightSidebar.style.width = "0%";
 });
