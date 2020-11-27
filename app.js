@@ -17,16 +17,12 @@ const tagsBar = document.querySelector(".tags-bar");
 //LEFT SIDEBAR
 const leftSidebarButton = document.querySelector(".left-sidebar-button");
 const leftSidebar = document.querySelector(".left-sidebar");
-const leftSidebarCloseButton = document.querySelector(
-  ".left-sidebar-close-button"
-);
+const leftSidebarCloseButton = document.querySelector(".left-sidebar-close-button");
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
 const rightSidebar = document.querySelector(".right-sidebar");
-const rightSidebarCloseButton = document.querySelector(
-  ".right-sidebar-close-button"
-);
+const rightSidebarCloseButton = document.querySelector(".right-sidebar-close-button");
 
 // OBJECTS
 const docDataSkeleton = {
@@ -51,12 +47,12 @@ deleteDocButton.addEventListener("click", () => {
 });
 
 // Input event
-textarea.addEventListener("input", (e) => {
+textarea.addEventListener("input", e => {
   // input value in textarea,
   saveDoc();
 });
 
-noteTitle.addEventListener("input", (e) => {
+noteTitle.addEventListener("input", e => {
   saveDoc();
 });
 
@@ -81,6 +77,7 @@ tagButton.addEventListener("click", () => {
   //Loopar igenom tags-arrayen och tar ut varje enskild tag
   const allTags = docDataSkeleton.tags.forEach(function (tag) {
     console.log(tag);
+
     //Skapar list-item
     let li = document.createElement("li");
     //Lägger li under tags-ul
@@ -88,47 +85,49 @@ tagButton.addEventListener("click", () => {
     tagsList.appendChild(li);
     let p = document.createElement("p");
     //Ersätt p-tag-texten med enskilda tag:en
-    p.innerHTML = tag;
+    p.innerHTML = filteredTag;
     li.appendChild(p);
     //Appends tagslist till tagsbar
     tagsBar.appendChild(tagsList);
+
+    return allTags;
+
+    // filter method in loop?
   });
-
-  // if (
-  //   localStorage.getItem(docDataSkeleton.tags) ===
-  //   localStorage.getItem(docDataSkeleton.tags)
-  // ) {
-  //   // kolla om LS tomt
-  // } else {
-  //   console.log("här är else-grejen");
-  // }
-  // const hashtag = document.createElement("li");
-  //     hashtag.classList.add("hashtagClass");
-  // tagsList.appendChild(allTags);
-  // 2. varje elem i array utloopad
-
-  // Hämta från LS?
-  // localStorage.getItem()
-  // tagsList ska få LI
 
   //CLEAR INPUT FIELD
   tagName.value = "";
 });
 
-// FUNCTIONS
+// filter out empty values
+let filteredTag = docDataSkeleton.tags.filter(function (el) {
+  console.log(`vad är: ${filteredTag}`);
+  return el == "";
+});
 
-// om ID = 1 finns, visa inget nytt welcome mssg
-// om inte ID = 1, kör welcomeMssg
-
-// console.log(localStorage.getItem(1));
-
-// kolla om local storage redan har introtext
-// om tomt --> generate welcome mssg
-// om redan i local storage --> return false
 if (localStorage.getItem(1) !== null) {
   // kolla om LS tomt
 } else {
   generateWelcomeMssg();
+}
+
+function filterTags(tagsArr) {
+  /*
+  
+  [] 1. Få in tags-array för att bearbeta
+  [] 2. Rensa (filtrera) bort tom input
+  [] 3. Rensa bort dubletter --> toLowerCase och jämföra 
+  [] 4. 
+  
+  */
+
+  let filteredArr = tagsArr.filter(el => {
+    return filteredArr;
+  });
+
+  // MDN SYNTAX https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+  // let newArray = arr.filter(callback(currentValue[, index[, array]]) {
+  // return element for newArray, if true
 }
 
 function saveDoc() {
@@ -150,10 +149,7 @@ function saveDoc() {
     docDataSkeleton.id = Date.now();
   }
   docDataSkeleton.lastSavedDate = Date.now();
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
 
   sortAfterEdited();
 }
@@ -202,7 +198,7 @@ function sortAfterEdited() {
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
-  notes.forEach((note) => createNewMenuItem(note));
+  notes.forEach(note => createNewMenuItem(note));
 }
 
 sortAfterEdited();
@@ -222,10 +218,7 @@ function generateWelcomeMssg() {
     docDataSkeleton.id = 1;
   }
   docDataSkeleton.lastSavedDate = Date.now();
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
 }
 
 function createNewMenuItem(docData) {
@@ -249,8 +242,7 @@ function createNewMenuItem(docData) {
   starIcon.classList.add("star-icon");
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML =
-    Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
   starIcon.setAttribute("src", "icons/star.svg");
 
   sideContent.appendChild(sinceEdited);
@@ -279,26 +271,26 @@ function createNewMenuItem(docData) {
   noteList.appendChild(noteContainer);
 }
 
-leftSidebarButton.addEventListener("click", (event) => {
+leftSidebarButton.addEventListener("click", event => {
   leftSidebar.style.width = "100%";
 });
 
-leftSidebarCloseButton.addEventListener("click", (event) => {
+leftSidebarCloseButton.addEventListener("click", event => {
   leftSidebar.style.width = "0%";
 });
 
-newDocButton.addEventListener("click", (event) => {
+newDocButton.addEventListener("click", event => {
   editor.style.width = "100%";
 });
 
-editorBackButton.addEventListener("click", (event) => {
+editorBackButton.addEventListener("click", event => {
   editor.style.width = "0%";
 });
 
-rightSidebarButton.addEventListener("click", (event) => {
+rightSidebarButton.addEventListener("click", event => {
   rightSidebar.style.width = "100%";
 });
 
-rightSidebarCloseButton.addEventListener("click", (event) => {
+rightSidebarCloseButton.addEventListener("click", event => {
   rightSidebar.style.width = "0%";
 });
