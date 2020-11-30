@@ -67,10 +67,10 @@ favorite.addEventListener("click", () => {
 tagButton.addEventListener("click", () => {
   saveDoc();
   tagsList.innerHTML = "";
-  console.log(docDataSkeleton.tags);
-  console.log(tagsList);
-
-  createTag();
+  // console.log(docDataSkeleton.tags);
+  // console.log(tagsList);
+  testDuplicates();
+  // createTag();
 
   //CLEAR INPUT FIELD
   tagName.value = "";
@@ -100,12 +100,26 @@ if (localStorage.getItem(1) !== null) {
   generateWelcomeMssg();
 }
 
-//docDataSkeleton.tags = ska vara arr
 function testDuplicates(arr) {
+  arr = docDataSkeleton.tags;
   //   Sortera bort duplicates
   let uniqueSet = new Set(arr);
   let newArr = [...uniqueSet];
-  return newArr;
+  // Loopar igenom unika tags
+  newArr.forEach(function (tag) {
+    //Skapar list-item
+    let li = document.createElement("li");
+    //Lägger li under tags-ul
+    tagsList.appendChild(li);
+    let p = document.createElement("p");
+    p.classList.add("tagClass");
+    //Ersätt p-tag-texten med enskilda tag:en
+    p.innerHTML = tag.toLowerCase();
+    li.appendChild(p);
+    //Appends tagslist till tagsbar
+    tagsBar.appendChild(tagsList);
+    // filter method in loop?
+  });
 }
 
 function saveDoc() {
@@ -117,6 +131,7 @@ function saveDoc() {
   docDataSkeleton.favorite = favorite.checked;
 
   if (tagName.value !== "") {
+    testDuplicates();
     docDataSkeleton.tags.push(tagName.value.toLowerCase());
   }
   //   if (!testDuplicates(docDataSkeleton.tags)) {
@@ -166,14 +181,13 @@ function createNewDoc() {
 
 function loadDoc(docData) {
   tagsList.innerHTML = "";
-
   textarea.value = docData.content;
   noteTitle.value = docData.title;
   tagName.value = "";
   favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
-  createTag();
+  testDuplicates();
 }
 
 function sortAfterEdited() {
