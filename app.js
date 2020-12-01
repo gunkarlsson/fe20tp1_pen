@@ -22,6 +22,7 @@ const leftSidebar = document.querySelector(".left-sidebar");
 const leftSidebarCloseButton = document.querySelector(
   ".left-sidebar-close-button"
 );
+const tagMenu = document.querySelector(".tag-menu");
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
@@ -260,8 +261,53 @@ function createNewMenuItem(docData) {
   noteList.appendChild(noteContainer);
 }
 
+// function createTagsInSidebar(arr) {
+//   arr = localStorage.getItem(docData.tags);
+//   console.log("this is" + arr);
+//   //   Sortera bort duplicates
+//   let uniqueSet = new Set(arr);
+//   let newArr = [...uniqueSet];
+//   // Loopar igenom unika tags
+//   newArr.forEach(function (tag) {
+//     //Skapar list-item
+//     let li = document.createElement("li");
+//     //Lägger li under tags-ul
+//     tagsList.appendChild(li);
+//     let p = document.createElement("p");
+//     //Ersätt p-tag-texten med enskilda tag:en
+//     p.innerHTML = tag.toLowerCase();
+//     li.appendChild(p);
+//     //Appends tagslist till tagsbar
+//     tagMenu.appendChild(tagsList);
+//     // filter method in loop?
+//   });
+// }
+
+// let allTags = [];
+// for (key in localStorage) {
+//   if (JSON.parse(localStorage.getItem(key)) !== null) {
+//     allTags.push(JSON.parse(localStorage.getItem(key)));
+//   }
+// }
+
+function allTagsFilter() {
+  let allTags = [];
+  for (key in localStorage) {
+    let allNotesInLS = JSON.parse(localStorage.getItem(key));
+    if (allNotesInLS !== null) {
+      allTags.push(...allNotesInLS.tags);
+    }
+  }
+  let uniqueSet = new Set(allTags);
+  let newArr = [...uniqueSet];
+  return newArr;
+}
+
+allTagsFilter();
+
 leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
+  tagMenu.appendChild(tagsList);
 });
 
 leftSidebarCloseButton.addEventListener("click", (event) => {

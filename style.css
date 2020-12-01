@@ -44,7 +44,7 @@
   justify-content: space-between;
 }
 
-.sidebar-close-button {
+. .sidebar-close-button {
   position: absolute;
   right: 0;
   top: 0;
@@ -112,6 +112,8 @@
 
 .tags-list {
   display: flex;
+  /* Wrap makes us see all tags in left sidebar*/
+  flex-wrap: wrap;
 }
 
 .tags-list li {
