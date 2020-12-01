@@ -106,7 +106,7 @@
   text-overflow: ellipsis;
 }
 
-.side {
+.side-content {
   width: 40px;
 }
 
@@ -222,10 +222,6 @@ input:focus {
   top: 0;
 }
 
-.rester {
-  visibility: hidden;
-}
-
 button {
   padding: 2em;
 }
@@ -233,9 +229,3 @@ button {
 #delete-doc {
   background: red;
 }
-
-
-
-
-
-
