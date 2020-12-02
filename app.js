@@ -1,9 +1,5 @@
 // VARIABLES
-const textarea = new SimpleMDE({
-  element: document.getElementById("textarea"),
-  autoDownloadFontAwesome: true,
-  showIcons: ["code", "table"],
-});
+var textarea = new SimpleMDE({ element: document.getElementById("textarea") });
 
 const deleteDocButton = document.querySelector("#delete-doc");
 const noteTitle = document.querySelector("#note-title");
