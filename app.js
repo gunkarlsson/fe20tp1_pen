@@ -1,5 +1,6 @@
 // VARIABLES
-const textarea = document.querySelector("#textarea");
+const textarea = new SimpleMDE({ element: document.getElementById("textarea"), autoDownloadFontAwesome: true, showIcons: ["code", "table"]});
+
 const deleteDocButton = document.querySelector("#delete-doc");
 const noteTitle = document.querySelector("#note-title");
 const favorite = document.querySelector("#favorite-tag");
@@ -38,6 +39,8 @@ const docDataSkeleton = {
   tags: [],
 };
 
+
+
 // EVENTLISTENERS
 newDocButton.addEventListener("click", () => {
   createNewDoc();
@@ -45,14 +48,13 @@ newDocButton.addEventListener("click", () => {
 
 //Vi har en delete function i editorn
 deleteDocButton.addEventListener("click", () => {
-  textarea.value = "";
+  textarea.value("");
   deleteDoc();
 });
 
 // Input event
 //TODO: lägg till en class på alla saveDoc -textarea,noteTitle,favorite
-textarea.addEventListener("input", e => {
-  // input value in textarea,
+textarea.codemirror.on("change", e => {
   saveDoc();
 });
 
@@ -108,7 +110,7 @@ function createNewTag(arr) {
 
 function saveDoc() {
   // börja fylla docDataSkeleton med textarea & note value
-  docDataSkeleton.content = textarea.value;
+  docDataSkeleton.content = textarea.value();
   docDataSkeleton.title = noteTitle.value;
   docDataSkeleton.favorite = favorite.checked;
 
@@ -135,7 +137,7 @@ function deleteDoc() {
 
 function createNewDoc() {
   // töm textarea för ny yta
-  textarea.value = "";
+  textarea.value("");
   noteTitle.value = "";
   tagName.value = "";
   tagsList.innerHTML = "";
@@ -153,7 +155,7 @@ function createNewDoc() {
 
 function loadDoc(docData) {
   tagsList.innerHTML = "";
-  textarea.value = docData.content;
+  textarea.value(docData.content);
   noteTitle.value = docData.title;
   tagName.value = "";
   favorite.value = docData.favorite;
