@@ -1,5 +1,9 @@
 // VARIABLES
-const textarea = new SimpleMDE({ element: document.getElementById("textarea"), autoDownloadFontAwesome: true, showIcons: ["code", "table"]});
+const textarea = new SimpleMDE({
+  element: document.getElementById("textarea"),
+  autoDownloadFontAwesome: true,
+  showIcons: ["code", "table"],
+});
 
 const deleteDocButton = document.querySelector("#delete-doc");
 const noteTitle = document.querySelector("#note-title");
@@ -44,8 +48,6 @@ const docDataSkeleton = {
   tags: [],
 };
 
-
-
 // EVENTLISTENERS
 newDocButton.addEventListener("click", () => {
   createNewDoc();
@@ -60,8 +62,7 @@ deleteDocButton.addEventListener("click", () => {
 // Input event
 //TODO: lägg till en class på alla saveDoc -textarea,noteTitle,favorite
 
-
-textarea.codemirror.on("change", e => {
+textarea.codemirror.on("change", (e) => {
   saveDoc();
 });
 
