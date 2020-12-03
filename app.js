@@ -295,7 +295,6 @@ tagsInSidebar();
 
 leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
-  tagMenu.appendChild(tagsList);
 });
 
 leftSidebarCloseButton.addEventListener("click", (event) => {
