@@ -219,8 +219,15 @@ function createNewMenuItem(docData) {
   /*----------------TIMESTAMP!---------------------*/
   // https://date-fns.org/v1.30.1/docs/distanceInWords
 
-  //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  //TODO: Göra om till funktion
+  const now = docData.lastSavedDate;
+  const before = Date.now();
+
+  const formatedTime = dateFns.distanceInWords(before, now, { addSuffix: true });
+
+  /*------------------------------------------------*/
+
+  sinceEdited.innerHTML = formatedTime;
   starIcon.setAttribute("src", "icons/star.svg");
 
   sideContent.appendChild(sinceEdited);
