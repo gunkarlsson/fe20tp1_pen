@@ -89,6 +89,7 @@
    och padding i nuläget och verkar göra margin-bottom irrelevant */
   min-height: 40px;
   z-index: 0;
+  padding: 0px 10px;
 }
 
 .note-list {
@@ -110,6 +111,7 @@
 
 .side-content {
   width: 40px;
+  padding: 0px 10px;
 }
 
 .tags-list {

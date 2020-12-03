@@ -1,5 +1,5 @@
 // VARIABLES
-var textarea = new SimpleMDE({ element: document.getElementById("textarea") });
+var textarea = new SimpleMDE();
 
 const deleteDocButton = document.querySelector("#delete-doc");
 const noteTitle = document.querySelector("#note-title");
@@ -20,13 +20,17 @@ const tagsBar = document.querySelector(".tags-bar");
 //LEFT SIDEBAR
 const leftSidebarButton = document.querySelector(".left-sidebar-button");
 const leftSidebar = document.querySelector(".left-sidebar");
-const leftSidebarCloseButton = document.querySelector(".left-sidebar-close-button");
+const leftSidebarCloseButton = document.querySelector(
+  ".left-sidebar-close-button"
+);
 const tagMenu = document.querySelector(".tag-menu");
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
 const rightSidebar = document.querySelector(".right-sidebar");
-const rightSidebarCloseButton = document.querySelector(".right-sidebar-close-button");
+const rightSidebarCloseButton = document.querySelector(
+  ".right-sidebar-close-button"
+);
 const createdAt = document.querySelector(".creation-date");
 
 // OBJECTS
@@ -53,16 +57,12 @@ deleteDocButton.addEventListener("click", () => {
 
 // Input event
 //TODO: lägg till en class på alla saveDoc -textarea,noteTitle,favorite
-<<<<<<< HEAD
 
-textarea.codemirror.on("change", (e) => {
-=======
-textarea.codemirror.on("change", e => {
->>>>>>> 9b436b303a48f600276ea45409c972b5fbac0c3a
+textarea.codemirror.on("inputRead", (e) => {
   saveDoc();
 });
 
-noteTitle.addEventListener("input", e => {
+noteTitle.addEventListener("input", (e) => {
   saveDoc();
 });
 
@@ -134,8 +134,12 @@ function saveDoc() {
   docDataSkeleton.tags = newArr;
 
   //Spara anteckning i local storage
-  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+  window.localStorage.setItem(
+    docDataSkeleton.id,
+    JSON.stringify(docDataSkeleton)
+  );
   displayNotesList();
+  tagsInSidebar();
 }
 
 function deleteDoc() {
@@ -186,7 +190,7 @@ function displayNotesList() {
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
-  notes.forEach(note => createNewMenuItem(note));
+  notes.forEach((note) => createNewMenuItem(note));
 }
 
 displayNotesList();
@@ -194,7 +198,7 @@ displayNotesList();
 function generateWelcomeMssg() {
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content =
-    "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend";
+    "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.";
   docDataSkeleton.title = "Welcome to Quire, almost as good as Bear";
 
   docDataSkeleton.creationDate = new Date();
@@ -204,7 +208,10 @@ function generateWelcomeMssg() {
 
   docDataSkeleton.lastSavedDate = Date.now();
 
-  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+  window.localStorage.setItem(
+    docDataSkeleton.id,
+    JSON.stringify(docDataSkeleton)
+  );
 }
 
 function createNewMenuItem(docData) {
@@ -227,7 +234,8 @@ function createNewMenuItem(docData) {
   starIcon.classList.add("star-icon");
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  sinceEdited.innerHTML =
+    Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
   starIcon.setAttribute("src", "icons/star.svg");
 
   sideContent.appendChild(sinceEdited);
@@ -255,35 +263,6 @@ function createNewMenuItem(docData) {
   noteList.appendChild(noteContainer);
 }
 
-// function createTagsInSidebar(arr) {
-//   arr = localStorage.getItem(docData.tags);
-//   console.log("this is" + arr);
-//   //   Sortera bort duplicates
-//   let uniqueSet = new Set(arr);
-//   let newArr = [...uniqueSet];
-//   // Loopar igenom unika tags
-//   newArr.forEach(function (tag) {
-//     //Skapar list-item
-//     let li = document.createElement("li");
-//     //Lägger li under tags-ul
-//     tagsList.appendChild(li);
-//     let p = document.createElement("p");
-//     //Ersätt p-tag-texten med enskilda tag:en
-//     p.innerHTML = tag.toLowerCase();
-//     li.appendChild(p);
-//     //Appends tagslist till tagsbar
-//     tagMenu.appendChild(tagsList);
-//     // filter method in loop?
-//   });
-// }
-
-// let allTags = [];
-// for (key in localStorage) {
-//   if (JSON.parse(localStorage.getItem(key)) !== null) {
-//     allTags.push(JSON.parse(localStorage.getItem(key)));
-//   }
-// }
-
 function allTagsFilter() {
   let allTags = [];
   for (key in localStorage) {
@@ -299,30 +278,45 @@ function allTagsFilter() {
 
 allTagsFilter();
 
-leftSidebarButton.addEventListener("click", event => {
+function tagsInSidebar() {
+  /// loopa värdena från funktionen (newArr värdet)/
+  tagMenu.innerHTML = "";
+  allTagsFilter().forEach((tag) => {
+    let li = document.createElement("li");
+    tagMenu.appendChild(li);
+    let p = document.createElement("p");
+    p.classList.add("tag");
+    p.innerHTML = tag;
+    li.appendChild(p);
+  });
+}
+
+tagsInSidebar();
+
+leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
   tagMenu.appendChild(tagsList);
 });
 
-leftSidebarCloseButton.addEventListener("click", event => {
+leftSidebarCloseButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "0%";
 });
 
-newDocButton.addEventListener("click", event => {
+newDocButton.addEventListener("click", (event) => {
   editor.style.width = "100%";
 });
 
-editorBackButton.addEventListener("click", event => {
+editorBackButton.addEventListener("click", (event) => {
   editor.style.width = "0%";
 });
 
-rightSidebarButton.addEventListener("click", event => {
+rightSidebarButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "100%";
 
   // fulstyling
   createdAt.style.color = "white";
 });
 
-rightSidebarCloseButton.addEventListener("click", event => {
+rightSidebarCloseButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "0%";
 });
