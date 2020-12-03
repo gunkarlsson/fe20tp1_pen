@@ -216,6 +216,9 @@ function createNewMenuItem(docData) {
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
 
+  /*----------------TIMESTAMP!---------------------*/
+  // https://date-fns.org/v1.30.1/docs/distanceInWords
+
   //TODO: Fixa if statements som räknar på timmar.
   sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
   starIcon.setAttribute("src", "icons/star.svg");
