@@ -220,10 +220,14 @@ function createNewMenuItem(docData) {
   // https://date-fns.org/v1.30.1/docs/distanceInWords
 
   //TODO: Göra om till funktion
-  const now = docData.lastSavedDate;
-  const before = Date.now();
+  // now timestamp = now, before
+  const now = Date.now();
+  const before = docData.lastSavedDate;
 
-  const formatedTime = dateFns.distanceInWords(before, now, { addSuffix: true });
+  // skillnad mellan now och before visas
+  // @TODO går det att ändra prefix?
+  // är det distanceInWords som är bäst?
+  const formatedTime = dateFns.distanceInWords(now, before, { addSuffix: true });
 
   /*------------------------------------------------*/
 
