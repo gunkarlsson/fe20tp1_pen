@@ -293,6 +293,32 @@ function tagsInSidebar() {
 
 tagsInSidebar();
 
+const sidebarTags = document.querySelectorAll(".tag").forEach((tag) => {
+  tag.addEventListener("click", (e) => {
+    tag.classList.toggle("active-tag");
+
+    let allTags = [];
+    for (key in localStorage) {
+      let allNotesInLS = JSON.parse(localStorage.getItem(key));
+      if (allNotesInLS !== null) {
+        allTags.push(allNotesInLS.tags);
+      }
+    }
+
+    console.log();
+
+    // if (allTags.includes(tag.innerHTML)) {
+    //   console.log("WOW");
+    // }
+
+    // console.log(tag.innerHTML);
+  });
+});
+
+// sidebarTags.addEventListener("click", (e) => {
+//   console.log("clicked a tag");
+// });
+
 leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
 });

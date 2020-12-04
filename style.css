@@ -65,6 +65,10 @@
   border: 2px solid indianred;
 }
 
+.active-tag {
+  border: 2px solid yellow;
+}
+
 .settings-menu {
   margin: 8px;
   color: white;
