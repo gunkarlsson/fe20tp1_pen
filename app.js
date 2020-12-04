@@ -24,6 +24,7 @@ const leftSidebarCloseButton = document.querySelector(
   ".left-sidebar-close-button"
 );
 const tagMenu = document.querySelector(".tag-menu");
+let currentTagFilter;
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
@@ -190,6 +191,11 @@ function displayNotesList() {
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
+
+  if (currentTagFilter) {
+    notes = notes.filter((note) => note.tags.includes(currentTagFilter));
+  }
+
   notes.forEach((note) => createNewMenuItem(note));
 }
 
@@ -295,29 +301,21 @@ tagsInSidebar();
 
 const sidebarTags = document.querySelectorAll(".tag").forEach((tag) => {
   tag.addEventListener("click", (e) => {
-    tag.classList.toggle("active-tag");
+    currentTagFilter = tag.innerHTML;
 
-    let allTags = [];
-    for (key in localStorage) {
-      let allNotesInLS = JSON.parse(localStorage.getItem(key));
-      if (allNotesInLS !== null) {
-        allTags.push(allNotesInLS.tags);
-      }
+    if (tag.classList.contains("active-tag")) {
+      currentTagFilter = "";
+      tag.classList.remove("active-tag");
+    } else {
+      document
+        .querySelectorAll(".tag")
+        .forEach((tag) => tag.classList.remove("active-tag"));
+      tag.classList.add("active-tag");
     }
 
-    console.log();
-
-    // if (allTags.includes(tag.innerHTML)) {
-    //   console.log("WOW");
-    // }
-
-    // console.log(tag.innerHTML);
+    displayNotesList();
   });
 });
-
-// sidebarTags.addEventListener("click", (e) => {
-//   console.log("clicked a tag");
-// });
 
 leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
