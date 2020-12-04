@@ -55,16 +55,19 @@ textarea.addEventListener("input", (e) => {
 
 noteTitle.addEventListener("input", (e) => {
   saveDoc();
+
 });
-let f = false;
-favorite.addEventListener("click", () => {
-f= !docDataSkeleton.favorite;
-  if( docDataSkeleton.favorite === false){
-   favorite.setAttribute ('src','./icons/star.svg')
-  } else {
-    favorite.setAttribute('src','./icons/star-clicked.svg')
-  }
+
+favorite.addEventListener("click", (e) => {
+if(docDataSkeleton.favorite === true) {
+  favorite.setAttribute('src', './icons/star.svg')
+  docDataSkeleton.favorite = false;
+}else{
+  favorite.setAttribute('src','./icons/star-clicked.svg')
+  docDataSkeleton.favorite = true;
+}
   saveDoc();
+
 });
 
 tagButton.addEventListener("click", () => {
@@ -90,14 +93,12 @@ if(localStorage.getItem(1) !== null ) {
 }
 
 function saveDoc() {
-  console.log(f)
   // automatiskt uppdatera anteckning
   
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value;
   docDataSkeleton.title = noteTitle.value;
   docDataSkeleton.tags.push(tagName.value);
-docDataSkeleton.favorite = f;
   // kollar om det finns ett creation date, om inte så skapar den datum)
   // genererar även ID genom date object
   // ! gör att tom stärng = false
@@ -142,8 +143,13 @@ function loadDoc(docData) {
   textarea.value = docData.content;
   noteTitle.value = docData.title;
   tagName.value = docData.tags;
-  favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
+  if(docData.favorite === true) {
+    favorite.setAttribute('src', 'icons/star-clicked.svg')
+  }
+  else{
+    favorite.setAttribute('src', 'icons/star.svg')
+  }
 }
 
 function sortAfterEdited() {
@@ -169,8 +175,8 @@ function sortAfterEdited() {
   newList.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
-  newList.concat(notes);
-  notes.forEach(note=>createNewMenuItem(note))
+  newList.push(...notes);
+  newList.forEach(note=>createNewMenuItem(note))
 }
 
 
