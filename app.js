@@ -99,6 +99,7 @@ function saveDoc() {
   docDataSkeleton.content = textarea.value;
   docDataSkeleton.title = noteTitle.value;
   docDataSkeleton.tags.push(tagName.value);
+
   // kollar om det finns ett creation date, om inte så skapar den datum)
   // genererar även ID genom date object
   // ! gör att tom stärng = false
@@ -127,6 +128,8 @@ function createNewDoc() {
   textarea.value = "";
   noteTitle.value = "";
   tagName.value = "";
+  favorite.setAttribute('src', './icons/star.svg')
+
 
   for (element in docDataSkeleton) {
     if (element === "tags") {
