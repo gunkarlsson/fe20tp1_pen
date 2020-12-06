@@ -126,7 +126,6 @@ function saveDoc() {
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value();
   docDataSkeleton.title = noteTitle.value;
-  docDataSkeleton.tags.push(tagName.value);
 
   //Kolla om id finns annars skapa ny anteckning
   if (!docDataSkeleton.id) {
@@ -150,6 +149,12 @@ function saveDoc() {
   );
   displayNotesList();
   tagsInSidebar();
+  if(docDataSkeleton.favorite === true) {
+    favorite.setAttribute('src', 'icons/star-clicked.svg')
+  }
+  else{
+    favorite.setAttribute('src', 'icons/star.svg')
+  }
 }
 
 function deleteDoc() {
@@ -184,7 +189,6 @@ function loadDoc(docData) {
   favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
-
 
   if(docData.favorite === true) {
     favorite.setAttribute('src', 'icons/star-clicked.svg')
@@ -271,17 +275,19 @@ function createNewMenuItem(docData) {
   
 //TODO: Fixa if statements som räknar på timmar.
   sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate)/ 60000) + 'm';
+
 if(docData.favorite === true) {
   starIcon.setAttribute("src", "icons/star-clicked.svg");
+  console.log("fav true")
 }
 else {
   starIcon.setAttribute("src", "icons/star.svg");
+  console.log("fav false")
 }
 
   //TODO: Fixa if statements som räknar på timmar.
   sinceEdited.innerHTML =
     Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
-  starIcon.setAttribute("src", "icons/star.svg");
 
   sideContent.appendChild(sinceEdited);
   sideContent.appendChild(starIcon);
