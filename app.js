@@ -1,87 +1,90 @@
 // VARIABLES
 var textarea = new SimpleMDE();
 
-const deleteDocButton = document.querySelector("#delete-doc");
-const noteTitle = document.querySelector("#note-title");
-const favorite = document.querySelector("#favorite-tag");
+const deleteDocButton = document.querySelector('#delete-doc');
+const noteTitle = document.querySelector('#note-title');
+const favorite = document.querySelector('#favorite-tag');
 //TODO: Bytt namn på tagName till tagInputFile
-const tagName = document.querySelector("#tag-name");
+const tagName = document.querySelector('#tag-name');
 //TODO: Bytt namn på tagButton till addTagButton
-const tagButton = document.querySelector("#tag-button");
-const noteList = document.querySelector(".note-list");
-const newDocButton = document.querySelector(".new-doc");
-const editor = document.querySelector(".editor");
-const editorBackButton = document.querySelector(".editor-back-button");
+const tagButton = document.querySelector('#tag-button');
+const noteList = document.querySelector('.note-list');
+const newDocButton = document.querySelector('.new-doc');
+const editor = document.querySelector('.editor');
+const editorBackButton = document.querySelector('.editor-back-button');
 //tagsList är en lista för alla tags i editorn
-const tagsList = document.querySelector(".tags-list");
+const tagsList = document.querySelector('.tags-list');
 //tagsBar container som håller tagsList
-const tagsBar = document.querySelector(".tags-bar");
+const tagsBar = document.querySelector('.tags-bar');
 
 //LEFT SIDEBAR
-const leftSidebarButton = document.querySelector(".left-sidebar-button");
-const leftSidebar = document.querySelector(".left-sidebar");
-const leftSidebarCloseButton = document.querySelector(
-  ".left-sidebar-close-button"
-);
-const tagMenu = document.querySelector(".tag-menu");
+const leftSidebarButton = document.querySelector('.left-sidebar-button');
+const leftSidebar = document.querySelector('.left-sidebar');
+const leftSidebarCloseButton = document.querySelector('.left-sidebar-close-button');
+const tagMenu = document.querySelector('.tag-menu');
 let currentTagFilter;
 
 //RIGHT SIDEBAR
-const rightSidebarButton = document.querySelector(".right-sidebar-button");
-const rightSidebar = document.querySelector(".right-sidebar");
-const rightSidebarCloseButton = document.querySelector(
-  ".right-sidebar-close-button"
-);
-const createdAt = document.querySelector(".creation-date");
+const rightSidebarButton = document.querySelector('.right-sidebar-button');
+const rightSidebar = document.querySelector('.right-sidebar');
+const rightSidebarCloseButton = document.querySelector('.right-sidebar-close-button');
+const createdAt = document.querySelector('.creation-date');
 
 // OBJECTS
 const docDataSkeleton = {
-  id: "",
-  title: "",
-  content: "",
+  id: '',
+  title: '',
+  content: '',
   favorite: false,
-  creationDate: "",
-  lastSavedDate: "",
+  creationDate: '',
+  lastSavedDate: '',
   tags: [],
 };
 
 // EVENTLISTENERS
-newDocButton.addEventListener("click", () => {
+newDocButton.addEventListener('click', () => {
   createNewDoc();
 });
 
 //Vi har en delete function i editorn
-deleteDocButton.addEventListener("click", () => {
-  textarea.value("");
+deleteDocButton.addEventListener('click', () => {
+  textarea.value('');
   deleteDoc();
 });
 
 // Input event
 //TODO: lägg till en class på alla saveDoc -textarea,noteTitle,favorite
 
-textarea.codemirror.on("inputRead", (e) => {
+textarea.codemirror.on('inputRead', () => {
   saveDoc();
 });
 
-noteTitle.addEventListener("input", (e) => {
+noteTitle.addEventListener('input', (e) => {
   saveDoc();
 });
 
-favorite.addEventListener("click", () => {
+favorite.addEventListener('click', (e) => {
+  if (docDataSkeleton.favorite === true) {
+    favorite.setAttribute('src', './icons/star.svg');
+    docDataSkeleton.favorite = false;
+  } else {
+    favorite.setAttribute('src', './icons/star-clicked.svg');
+    docDataSkeleton.favorite = true;
+  }
   saveDoc();
 });
 
-tagButton.addEventListener("click", () => {
-  if (tagName.value !== "") {
+tagButton.addEventListener('click', () => {
+  if (tagName.value !== '') {
     docDataSkeleton.tags.push(tagName.value.toLowerCase());
   }
   //Denna rad är viktigt, då den förhindrar dubbletter.
-  tagsList.innerHTML = "";
+  tagsList.innerHTML = '';
 
   createNewTag();
 
   //CLEAR INPUT FIELD
-  tagName.value = "";
+  tagName.value = '';
   saveDoc();
 });
 
@@ -100,10 +103,10 @@ function createNewTag(arr) {
   // Loopar igenom unika tags
   newArr.forEach(function (tag) {
     //Skapar list-item
-    let li = document.createElement("li");
+    let li = document.createElement('li');
     //Lägger li under tags-ul
     tagsList.appendChild(li);
-    let p = document.createElement("p");
+    let p = document.createElement('p');
     //Ersätt p-tag-texten med enskilda tag:en
     p.innerHTML = tag.toLowerCase();
     li.appendChild(p);
@@ -117,7 +120,6 @@ function saveDoc() {
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value();
   docDataSkeleton.title = noteTitle.value;
-  docDataSkeleton.favorite = favorite.checked;
 
   //Kolla om id finns annars skapa ny anteckning
   if (!docDataSkeleton.id) {
@@ -135,12 +137,14 @@ function saveDoc() {
   docDataSkeleton.tags = newArr;
 
   //Spara anteckning i local storage
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
   displayNotesList();
   tagsInSidebar();
+  if (docDataSkeleton.favorite === true) {
+    favorite.setAttribute('src', 'icons/star-clicked.svg');
+  } else {
+    favorite.setAttribute('src', 'icons/star.svg');
+  }
 }
 
 function deleteDoc() {
@@ -150,53 +154,69 @@ function deleteDoc() {
 
 function createNewDoc() {
   // töm textarea för ny yta
-  textarea.value("");
-  noteTitle.value = "";
-  tagName.value = "";
-  tagsList.innerHTML = "";
+  textarea.value('');
+  noteTitle.value = '';
+  tagName.value = '';
+  favorite.setAttribute('src', './icons/star.svg');
+  tagsList.innerHTML = '';
 
   for (element in docDataSkeleton) {
-    if (element === "tags") {
+    if (element === 'tags') {
       // töm tags array
       docDataSkeleton[element] = [];
     } else {
       // övriga blir tom sträng
-      docDataSkeleton[element] = "";
+      docDataSkeleton[element] = '';
     }
   }
 }
 
 function loadDoc(docData) {
-  tagsList.innerHTML = "";
+  tagsList.innerHTML = '';
   textarea.value(docData.content);
   noteTitle.value = docData.title;
-  tagName.value = "";
+  tagName.value = '';
   favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
+
+  if (docData.favorite === true) {
+    favorite.setAttribute('src', 'icons/star-clicked.svg');
+  } else {
+    favorite.setAttribute('src', 'icons/star.svg');
+  }
+
   // formatera tiden och styling
   createdAt.innerHTML = docData.creationDate;
   createNewTag();
 }
 
 function displayNotesList() {
-  noteList.innerHTML = "";
+  noteList.innerHTML = '';
+  let newList = [];
 
   let notes = [];
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
-      notes.push(JSON.parse(localStorage.getItem(key)));
+      if (JSON.parse(localStorage.getItem(key)).favorite) {
+        newList.push(JSON.parse(localStorage.getItem(key)));
+      } else {
+        notes.push(JSON.parse(localStorage.getItem(key)));
+      }
     }
   }
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
+  newList.sort(function (a, b) {
+    return b.lastSavedDate - a.lastSavedDate;
+  });
+  newList.push(...notes);
 
   if (currentTagFilter) {
-    notes = notes.filter((note) => note.tags.includes(currentTagFilter));
+    newList = newList.filter((note) => note.tags.includes(currentTagFilter));
   }
-
-  notes.forEach((note) => createNewMenuItem(note));
+  newList.forEach((note) => createNewMenuItem(note));
 }
 
 displayNotesList();
@@ -204,8 +224,8 @@ displayNotesList();
 function generateWelcomeMssg() {
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content =
-    "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.";
-  docDataSkeleton.title = "Welcome to Quire, almost as good as Bear";
+    'Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.';
+  docDataSkeleton.title = 'Welcome to Quire, almost as good as Bear';
 
   docDataSkeleton.creationDate = new Date();
 
@@ -214,30 +234,38 @@ function generateWelcomeMssg() {
 
   docDataSkeleton.lastSavedDate = Date.now();
 
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
 }
 
 function createNewMenuItem(docData) {
-  const noteContainer = document.createElement("li");
-  noteContainer.classList.add("note-container");
+  const noteContainer = document.createElement('li');
+  noteContainer.classList.add('note-container');
 
-  noteContainer.addEventListener("click", function () {
-    editor.style.width = "100%";
+  noteContainer.addEventListener('click', function () {
+    editor.style.width = '100%';
     loadDoc(docData);
   });
 
   //SIDE
-  const sideContent = document.createElement("div");
-  const sinceEdited = document.createElement("p");
-  const starIcon = document.createElement("img");
+  const sideContent = document.createElement('div');
+  const sinceEdited = document.createElement('p');
+  const starIcon = document.createElement('img');
 
   //TODO: Ändra side till sideContent
-  sideContent.classList.add("side-content");
-  sinceEdited.classList.add("since-edited");
-  starIcon.classList.add("star-icon");
+  sideContent.classList.add('side-content');
+  sinceEdited.classList.add('since-edited');
+  starIcon.classList.add('star-icon');
+
+  //TODO: Fixa if statements som räknar på timmar.
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + 'm';
+
+  if (docData.favorite === true) {
+    starIcon.setAttribute('src', 'icons/star-clicked.svg');
+    console.log('fav true');
+  } else {
+    starIcon.setAttribute('src', 'icons/star.svg');
+    console.log('fav false');
+  }
 
   /*----------------TIMESTAMP!---------------------*/
   // https://date-fns.org/v1.30.1/docs/distanceInWords
@@ -258,19 +286,19 @@ function createNewMenuItem(docData) {
   //TODO: Fixa if statements som räknar på timmar.
   // sinceEdited.innerHTML =
   //   Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
-  starIcon.setAttribute("src", "icons/star.svg");
+  starIcon.setAttribute('src', 'icons/star.svg');
 
   sideContent.appendChild(sinceEdited);
   sideContent.appendChild(starIcon);
 
   //MAIN
-  const mainContent = document.createElement("div");
-  const noteTitle = document.createElement("h2");
-  const noteContent = document.createElement("p");
+  const mainContent = document.createElement('div');
+  const noteTitle = document.createElement('h2');
+  const noteContent = document.createElement('p');
 
-  mainContent.classList.add("main");
-  noteTitle.classList.add("note-title");
-  noteContent.classList.add("note-content");
+  mainContent.classList.add('main');
+  noteTitle.classList.add('note-title');
+  noteContent.classList.add('note-content');
 
   noteTitle.innerHTML = docData.title;
   noteContent.innerHTML = docData.content;
@@ -302,12 +330,12 @@ allTagsFilter();
 
 function tagsInSidebar() {
   /// loopa värdena från funktionen (newArr värdet)/
-  tagMenu.innerHTML = "";
+  tagMenu.innerHTML = '';
   allTagsFilter().forEach((tag) => {
-    let li = document.createElement("li");
+    let li = document.createElement('li');
     tagMenu.appendChild(li);
-    let p = document.createElement("p");
-    p.classList.add("tag");
+    let p = document.createElement('p');
+    p.classList.add('tag');
     p.innerHTML = tag;
     li.appendChild(p);
   });
@@ -315,47 +343,45 @@ function tagsInSidebar() {
 
 tagsInSidebar();
 
-const sidebarTags = document.querySelectorAll(".tag").forEach((tag) => {
-  tag.addEventListener("click", (e) => {
+const sidebarTags = document.querySelectorAll('.tag').forEach((tag) => {
+  tag.addEventListener('click', (e) => {
     currentTagFilter = tag.innerHTML;
 
-    if (tag.classList.contains("active-tag")) {
-      currentTagFilter = "";
-      tag.classList.remove("active-tag");
+    if (tag.classList.contains('active-tag')) {
+      currentTagFilter = '';
+      tag.classList.remove('active-tag');
     } else {
-      document
-        .querySelectorAll(".tag")
-        .forEach((tag) => tag.classList.remove("active-tag"));
-      tag.classList.add("active-tag");
+      document.querySelectorAll('.tag').forEach((tag) => tag.classList.remove('active-tag'));
+      tag.classList.add('active-tag');
     }
 
     displayNotesList();
   });
 });
 
-leftSidebarButton.addEventListener("click", (event) => {
-  leftSidebar.style.width = "100%";
+leftSidebarButton.addEventListener('click', (event) => {
+  leftSidebar.style.width = '100%';
 });
 
-leftSidebarCloseButton.addEventListener("click", (event) => {
-  leftSidebar.style.width = "0%";
+leftSidebarCloseButton.addEventListener('click', (event) => {
+  leftSidebar.style.width = '0%';
 });
 
-newDocButton.addEventListener("click", (event) => {
-  editor.style.width = "100%";
+newDocButton.addEventListener('click', (event) => {
+  editor.style.width = '100%';
 });
 
-editorBackButton.addEventListener("click", (event) => {
-  editor.style.width = "0%";
+editorBackButton.addEventListener('click', (event) => {
+  editor.style.width = '0%';
 });
 
-rightSidebarButton.addEventListener("click", (event) => {
-  rightSidebar.style.width = "100%";
+rightSidebarButton.addEventListener('click', (event) => {
+  rightSidebar.style.width = '100%';
 
   // fulstyling
-  createdAt.style.color = "white";
+  createdAt.style.color = 'white';
 });
 
-rightSidebarCloseButton.addEventListener("click", (event) => {
-  rightSidebar.style.width = "0%";
+rightSidebarCloseButton.addEventListener('click', (event) => {
+  rightSidebar.style.width = '0%';
 });
