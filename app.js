@@ -59,7 +59,7 @@ deleteDocButton.addEventListener("click", () => {
 // Input event
 //TODO: lägg till en class på alla saveDoc -textarea,noteTitle,favorite
 
-textarea.codemirror.on("inputRead", (e) => {
+textarea.codemirror.on("inputRead", () => {
   saveDoc();
 });
 
