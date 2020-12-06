@@ -65,10 +65,19 @@ textarea.codemirror.on("inputRead", () => {
 
 noteTitle.addEventListener("input", (e) => {
   saveDoc();
+
 });
 
-favorite.addEventListener("click", () => {
+favorite.addEventListener("click", (e) => {
+if(docDataSkeleton.favorite === true) {
+  favorite.setAttribute('src', './icons/star.svg')
+  docDataSkeleton.favorite = false;
+}else{
+  favorite.setAttribute('src','./icons/star-clicked.svg')
+  docDataSkeleton.favorite = true;
+}
   saveDoc();
+
 });
 
 tagButton.addEventListener("click", () => {
@@ -117,7 +126,7 @@ function saveDoc() {
   // börja fylla docDataSkeleton med textarea & note value
   docDataSkeleton.content = textarea.value();
   docDataSkeleton.title = noteTitle.value;
-  docDataSkeleton.favorite = favorite.checked;
+  docDataSkeleton.tags.push(tagName.value);
 
   //Kolla om id finns annars skapa ny anteckning
   if (!docDataSkeleton.id) {
@@ -153,6 +162,7 @@ function createNewDoc() {
   textarea.value("");
   noteTitle.value = "";
   tagName.value = "";
+  favorite.setAttribute('src', './icons/star.svg')
   tagsList.innerHTML = "";
 
   for (element in docDataSkeleton) {
@@ -174,6 +184,16 @@ function loadDoc(docData) {
   favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
+
+
+  if(docData.favorite === true) {
+    favorite.setAttribute('src', 'icons/star-clicked.svg')
+  }
+  else{
+    favorite.setAttribute('src', 'icons/star.svg')
+  }
+
+
   // formatera tiden och styling
   createdAt.innerHTML = docData.creationDate;
   createNewTag();
@@ -181,22 +201,32 @@ function loadDoc(docData) {
 
 function displayNotesList() {
   noteList.innerHTML = "";
+  let newList = [];
 
   let notes = [];
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
-      notes.push(JSON.parse(localStorage.getItem(key)));
+      if(JSON.parse(localStorage.getItem(key)).favorite){
+        newList.push(JSON.parse(localStorage.getItem(key)));
+        
+
+      }else{
+        notes.push(JSON.parse(localStorage.getItem(key)));
+      }
     }
   }
   notes.sort(function (a, b) {
     return b.lastSavedDate - a.lastSavedDate;
   });
+  newList.sort(function (a, b) {
+    return b.lastSavedDate - a.lastSavedDate;
+  });
+  newList.push(...notes);
 
   if (currentTagFilter) {
-    notes = notes.filter((note) => note.tags.includes(currentTagFilter));
+    newList = newList.filter((note) => note.tags.includes(currentTagFilter));
   }
-
-  notes.forEach((note) => createNewMenuItem(note));
+  newList.forEach((note) => createNewMenuItem(note));
 }
 
 displayNotesList();
@@ -238,6 +268,15 @@ function createNewMenuItem(docData) {
   sideContent.classList.add("side-content");
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
+  
+//TODO: Fixa if statements som räknar på timmar.
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate)/ 60000) + 'm';
+if(docData.favorite === true) {
+  starIcon.setAttribute("src", "icons/star-clicked.svg");
+}
+else {
+  starIcon.setAttribute("src", "icons/star.svg");
+}
 
   //TODO: Fixa if statements som räknar på timmar.
   sinceEdited.innerHTML =

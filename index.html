@@ -1,110 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"/>
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+  <title>Quote</title>
+</head>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<body class="container">
+<div class="left-sidebar sidebar">
+  <img src="icons/x-white.svg" alt="" class="left-sidebar-close-button" />
+  <ul class="tag-menu">
+    <li>
+      <p class="tag">lista</p>
+    </li>
+  </ul>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
+  <ul class="settings-menu">
+    <li class="settings">
+      <img src="icons/settings-white.svg" alt="" />
+      Settings
+    </li>
+    <li class="privacy-policy">
+      <img src="icons/shield-white.svg" alt="" />
+      Privacy Policy
+    </li>
+    <li class="about">
+      <img src="icons/info-white.svg" alt="" />
+      About
+    </li>
+  </ul>
+</div>
 
-    <title>Quote</title>
-  </head>
+<main class="main">
+  <header class="header">
+    <img src="icons/menu.svg" alt="" class="left-sidebar-button" />
+    <h1>notes</h1>
+    <img src="icons/search.svg" alt="" />
+  </header>
 
-  <body class="container">
-    <div class="left-sidebar sidebar">
-      <img src="icons/x-white.svg" alt="" class="left-sidebar-close-button" />
-      <ul class="tag-menu">
-        <li>
-          <p class="tag">lista</p>
-        </li>
-      </ul>
+  <ul class="note-list"></ul>
 
-      <ul class="settings-menu">
-        <li class="settings">
-          <img src="icons/settings-white.svg" alt="" />
-          Settings
-        </li>
-        <li class="privacy-policy">
-          <img src="icons/shield-white.svg" alt="" />
-          Privacy Policy
-        </li>
-        <li class="about">
-          <img src="icons/info-white.svg" alt="" />
-          About
-        </li>
-      </ul>
+  <button class="new-doc">
+    <img src="icons/file-plus.svg" alt="" />
+  </button>
+</main>
+
+<div class="editor">
+  <div class="icons-menu">
+    <img class="editor-back-button" src="icons/arrow-left.svg" alt="" />
+    <div>
+      <img id="favorite-tag" class="star" src="icons/star.svg" alt="" />
+      <img class="right-sidebar-button" src="icons/info.svg" alt="" />
+    </div>
+  </div>
+
+  <div class="tags-bar">
+    <p>tags</p>
+    <ul class="tags-list"></ul>
+  </div>
+
+  <div class="editor-input-fields">
+    <input type="text" id="tag-name" placeholder="add tag" />
+    <br />
+    <button id="tag-button">add tag</button>
+    <br /><br />
+    <div class="title-bar">
+      <p>h1</p>
+      <input type="text" id="note-title" placeholder="title" />
     </div>
 
-    <main class="main">
-      <header class="header">
-        <img src="icons/menu.svg" alt="" class="left-sidebar-button" />
-        <h1>notes</h1>
-        <img src="icons/search.svg" alt="" />
-      </header>
+    <textarea
+            name="textarea"
+            id="textarea"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+            placeholder="content"
+    ></textarea>
+    <button id="delete-doc">-</button>
+  </div>
 
-      <ul class="note-list"></ul>
+  <div class="right-sidebar sidebar">
+    <img
+            class="right-sidebar-close-button"
+            src="icons/x-white.svg"
+            alt=""
+    />
+    <br />
+    <br />
+    <br />
+    <br />
+    <p class="creation-date"></p>
+  </div>
+</div>
 
-      <button class="new-doc">
-        <img src="icons/file-plus.svg" alt="" />
-      </button>
-    </main>
-
-    <div class="editor">
-      <div class="icons-menu">
-        <img class="editor-back-button" src="icons/arrow-left.svg" alt="" />
-        <div>
-          <img id="favorite-tag" class="star" src="icons/star.svg" alt="" />
-          <img class="right-sidebar-button" src="icons/info.svg" alt="" />
-        </div>
-      </div>
-
-      <div class="tags-bar">
-        <p>tags</p>
-        <ul class="tags-list"></ul>
-      </div>
-
-      <div class="editor-input-fields">
-        <input type="text" id="tag-name" placeholder="add tag" />
-        <br />
-        <button id="tag-button">add tag</button>
-        <br /><br />
-        <div class="title-bar">
-          <p>h1</p>
-          <input type="text" id="note-title" placeholder="title" />
-        </div>
-
-        <textarea
-          name="textarea"
-          id="textarea"
-          oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-          placeholder="content"
-        ></textarea>
-        <button id="delete-doc">-</button>
-      </div>
-
-      <div class="right-sidebar sidebar">
-        <img
-          class="right-sidebar-close-button"
-          src="icons/x-white.svg"
-          alt=""
-        />
-        <br />
-        <br />
-        <br />
-        <br />
-        <p class="creation-date"></p>
-      </div>
-    </div>
-
-    <script src="./app.js"></script>
-  </body>
+<script src="./app.js"></script>
+</body>
 </html>
