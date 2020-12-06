@@ -3,12 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="style.css" />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+
     <title>Quote</title>
   </head>
 
@@ -18,9 +25,6 @@
       <ul class="tag-menu">
         <li>
           <p class="tag">lista</p>
-        </li>
-        <li>
-          <p class="tag">mat</p>
         </li>
       </ul>
 
@@ -47,32 +51,7 @@
         <img src="icons/search.svg" alt="" />
       </header>
 
-      <ul class="note-list">
-        <li class="note-container">
-          <div class="side">
-            <p class="since-edited">59m</p>
-            <img src="icons/star.svg" alt="" />
-          </div>
-          <div>
-            <h2>recept på kladdkaka</h2>
-            <p class="note-content">
-              Sätt ugnen på 175°c över/undervärme och smöra samt bröa en form.
-            </p>
-            <ul class="tags-list">
-              <li>
-                <p>lista</p>
-              </li>
-              <li>
-                <p>mat</p>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <br />
-        <hr />
-        <br />
-      </ul>
+      <ul class="note-list"></ul>
 
       <button class="new-doc">
         <img src="icons/file-plus.svg" alt="" />
@@ -113,7 +92,11 @@
       </div>
 
       <div class="right-sidebar sidebar">
-        <img class="right-sidebar-close-button" src="icons/x-white.svg" alt="" />
+        <img
+          class="right-sidebar-close-button"
+          src="icons/x-white.svg"
+          alt=""
+        />
         <br />
         <br />
         <br />
