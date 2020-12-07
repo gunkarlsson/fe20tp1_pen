@@ -20,21 +20,17 @@ const tagsBar = document.querySelector(".tags-bar");
 //LEFT SIDEBAR
 const leftSidebarButton = document.querySelector(".left-sidebar-button");
 const leftSidebar = document.querySelector(".left-sidebar");
-const leftSidebarCloseButton = document.querySelector(
-  ".left-sidebar-close-button"
-);
+const leftSidebarCloseButton = document.querySelector(".left-sidebar-close-button");
 const tagMenu = document.querySelector(".tag-menu");
 let currentTagFilter;
 
 //RIGHT SIDEBAR
 const rightSidebarButton = document.querySelector(".right-sidebar-button");
 const rightSidebar = document.querySelector(".right-sidebar");
-const rightSidebarCloseButton = document.querySelector(
-  ".right-sidebar-close-button"
-);
+const rightSidebarCloseButton = document.querySelector(".right-sidebar-close-button");
 const createdAt = document.querySelector(".creation-date");
-const searchButton = document.querySelector("#search-button")
-const searchBar = document.querySelector("#search-input")
+const searchButton = document.querySelector("#search-button");
+const searchBar = document.querySelector("#search-input");
 
 // OBJECTS
 const docDataSkeleton = {
@@ -67,19 +63,17 @@ textarea.codemirror.on("inputRead", () => {
 
 noteTitle.addEventListener("input", (e) => {
   saveDoc();
-
 });
 
 favorite.addEventListener("click", (e) => {
-if(docDataSkeleton.favorite === true) {
-  favorite.setAttribute('src', './icons/star.svg')
-  docDataSkeleton.favorite = false;
-}else{
-  favorite.setAttribute('src','./icons/star-clicked.svg')
-  docDataSkeleton.favorite = true;
-}
+  if (docDataSkeleton.favorite === true) {
+    favorite.setAttribute("src", "./icons/star.svg");
+    docDataSkeleton.favorite = false;
+  } else {
+    favorite.setAttribute("src", "./icons/star-clicked.svg");
+    docDataSkeleton.favorite = true;
+  }
   saveDoc();
-
 });
 
 tagButton.addEventListener("click", () => {
@@ -145,19 +139,15 @@ function saveDoc() {
   docDataSkeleton.tags = newArr;
 
   //Spara anteckning i local storage
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
   displayNotesList();
   tagsInSidebar();
-  if(docDataSkeleton.favorite === true) {
-    favorite.setAttribute('src', 'icons/star-clicked.svg')
+  if (docDataSkeleton.favorite === true) {
+    favorite.setAttribute("src", "icons/star-clicked.svg");
+  } else {
+    favorite.setAttribute("src", "icons/star.svg");
   }
-  else{
-    favorite.setAttribute('src', 'icons/star.svg')
-  }
-  tagsEventListener()
+  tagsEventListener();
 }
 
 function deleteDoc() {
@@ -170,7 +160,7 @@ function createNewDoc() {
   textarea.value("");
   noteTitle.value = "";
   tagName.value = "";
-  favorite.setAttribute('src', './icons/star.svg')
+  favorite.setAttribute("src", "./icons/star.svg");
   tagsList.innerHTML = "";
 
   for (element in docDataSkeleton) {
@@ -182,7 +172,6 @@ function createNewDoc() {
       docDataSkeleton[element] = "";
     }
   }
-
 }
 
 function loadDoc(docData) {
@@ -194,13 +183,11 @@ function loadDoc(docData) {
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
 
-  if(docData.favorite === true) {
-    favorite.setAttribute('src', 'icons/star-clicked.svg')
+  if (docData.favorite === true) {
+    favorite.setAttribute("src", "icons/star-clicked.svg");
+  } else {
+    favorite.setAttribute("src", "icons/star.svg");
   }
-  else{
-    favorite.setAttribute('src', 'icons/star.svg')
-  }
-
 
   // formatera tiden och styling
   createdAt.innerHTML = docData.creationDate;
@@ -214,11 +201,9 @@ function displayNotesList() {
   let notes = [];
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
-      if(JSON.parse(localStorage.getItem(key)).favorite){
+      if (JSON.parse(localStorage.getItem(key)).favorite) {
         newList.push(JSON.parse(localStorage.getItem(key)));
-        
-
-      }else{
+      } else {
         notes.push(JSON.parse(localStorage.getItem(key)));
       }
     }
@@ -252,10 +237,7 @@ function generateWelcomeMssg() {
 
   docDataSkeleton.lastSavedDate = Date.now();
 
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
 }
 
 function createNewMenuItem(docData) {
@@ -276,20 +258,18 @@ function createNewMenuItem(docData) {
   sideContent.classList.add("side-content");
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
-  
-//TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate)/ 60000) + 'm';
-
-if(docData.favorite === true) {
-  starIcon.setAttribute("src", "icons/star-clicked.svg");
-}
-else {
-  starIcon.setAttribute("src", "icons/star.svg");
-}
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML =
-    Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+
+  if (docData.favorite === true) {
+    starIcon.setAttribute("src", "icons/star-clicked.svg");
+  } else {
+    starIcon.setAttribute("src", "icons/star.svg");
+  }
+
+  //TODO: Fixa if statements som räknar på timmar.
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
 
   sideContent.appendChild(sinceEdited);
   sideContent.appendChild(starIcon);
@@ -355,9 +335,7 @@ function tagsEventListener() {
         currentTagFilter = "";
         tag.classList.remove("active-tag");
       } else {
-        document
-            .querySelectorAll(".tag")
-            .forEach((tag) => tag.classList.remove("active-tag"));
+        document.querySelectorAll(".tag").forEach((tag) => tag.classList.remove("active-tag"));
         tag.classList.add("active-tag");
       }
 
@@ -365,7 +343,7 @@ function tagsEventListener() {
     });
   });
 }
-tagsEventListener()
+tagsEventListener();
 
 leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
@@ -394,24 +372,18 @@ rightSidebarCloseButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "0%";
 });
 
-
-// <<<<<<< HEAD
-// document.querySelector(".darkmodeEnabler").addEventListener("click", event => {
-//   document
-// })
-// =======
-
 /**
  * SEARCH FUNCTION START HERE!
- * 
- * [1] 'click' event listener for search icon
- * [2] 'keyup' event listener for input field
+ *
+ * [X1] 'click' event listener for search icon
+ * [X2] 'keyup' event listener for input field
+ *      BUG -- tömma inputfält!
  * [3] search for Titles in LS
  * [4] filter non-matching events in console to only show matches (console)
  * [5] search bar animation and input (notes page)
  * [6] filter non-matching events to only show matches (notes page)
- *  
- *  */ 
+ *
+ *  */
 
 /* search.addEventListener('input', function (evt) {
         evt.preventDefault();
@@ -427,21 +399,36 @@ rightSidebarCloseButton.addEventListener("click", (event) => {
         }
     }) */
 
-    searchButton.addEventListener('click', () =>{
-      // console.log('click')
-      searchNotes()
-      
-       })    
+searchButton.addEventListener("click", () => {
+  // tömma på ngt vis!
+  // load all titels from LS?
+  // let newList = [];
 
-searchBar.addEventListener('keyup', (text) => {
-let searchStr= text.target.value;
-console.log(searchStr)
-searchNotes(str)
-})
+  let title = [];
+  for (key in localStorage) {
+    if (JSON.parse(localStorage.getItem(key)) !== null) {
+      // ngn form av ifsats för att slippa dubletter
+      // loopar 7 ggr för att få ut hela objektet
+      // key.title length?
+      title.push(JSON.parse(localStorage.getItem(key)).title);
+    }
+    console.log(title);
+  }
+  // searchNotes();
+});
 
+searchBar.addEventListener("keyup", (text) => {
+  // searchStr lagrar textvärdet
+  let searchStr = text.target.value;
+  // console.log(searchStr);
+  console.log(searchNotes(searchStr));
+});
 
-function searchNotes (){
-
-console.log(text)
-
+function searchNotes(str) {
+  return str;
 }
+
+// function testTitle() {
+//   let title = docDataSkeleton.title;
+//   console.log("text???" + docDataSkeleton.title);
+// }
