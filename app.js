@@ -33,6 +33,8 @@ const rightSidebarCloseButton = document.querySelector(
   ".right-sidebar-close-button"
 );
 const createdAt = document.querySelector(".creation-date");
+const searchButton = document.querySelector("#search-button")
+const searchBar = document.querySelector("#search-input")
 
 // OBJECTS
 const docDataSkeleton = {
@@ -393,6 +395,53 @@ rightSidebarCloseButton.addEventListener("click", (event) => {
 });
 
 
-document.querySelector(".darkmodeEnabler").addEventListener("click", event => {
-  document
+// <<<<<<< HEAD
+// document.querySelector(".darkmodeEnabler").addEventListener("click", event => {
+//   document
+// })
+// =======
+
+/**
+ * SEARCH FUNCTION START HERE!
+ * 
+ * [1] 'click' event listener for search icon
+ * [2] 'keyup' event listener for input field
+ * [3] search for Titles in LS
+ * [4] filter non-matching events in console to only show matches (console)
+ * [5] search bar animation and input (notes page)
+ * [6] filter non-matching events to only show matches (notes page)
+ *  
+ *  */ 
+
+/* search.addEventListener('input', function (evt) {
+        evt.preventDefault();
+        let searchStr = evt.target.value;
+        console.log(searchStr);
+        if (searchStr.length >= 1) {
+            // anävndare har sökt något
+            let foundNotes = searchNotes(searchStr);
+            renderNotesList(foundNotes);
+        } else {
+            // anv har tömt sökrutan
+            renderNotesList(notesArr)
+        }
+    }) */
+
+    searchButton.addEventListener('click', () =>{
+      // console.log('click')
+      searchNotes()
+      
+       })    
+
+searchBar.addEventListener('keyup', (text) => {
+let searchStr= text.target.value;
+console.log(searchStr)
+searchNotes(str)
 })
+
+
+function searchNotes (){
+
+console.log(text)
+
+}
