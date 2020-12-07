@@ -388,3 +388,19 @@ rightSidebarButton.addEventListener("click", (event) => {
 rightSidebarCloseButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "0%";
 });
+
+
+
+/**
+ * SEARCH FUNCTION START HERE!
+ * 
+ * [1] 'click' event listener for search bar
+ * [2] 'keyup' event listener for input field
+ * [3] search for Titles in LS
+ * [4] filter non-matching events in console to only show matches (console)
+ * [5] search bar animation and input (notes page)
+ * [6] filter non-matching events to only show matches (notes page)
+ *  
+ *  */ 
+
+ 
