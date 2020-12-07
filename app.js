@@ -155,6 +155,7 @@ function saveDoc() {
   else{
     favorite.setAttribute('src', 'icons/star.svg')
   }
+  tagsEventListener()
 }
 
 function deleteDoc() {
@@ -179,6 +180,7 @@ function createNewDoc() {
       docDataSkeleton[element] = "";
     }
   }
+
 }
 
 function loadDoc(docData) {
@@ -278,11 +280,9 @@ function createNewMenuItem(docData) {
 
 if(docData.favorite === true) {
   starIcon.setAttribute("src", "icons/star-clicked.svg");
-  console.log("fav true")
 }
 else {
   starIcon.setAttribute("src", "icons/star.svg");
-  console.log("fav false")
 }
 
   //TODO: Fixa if statements som räknar på timmar.
@@ -344,23 +344,26 @@ function tagsInSidebar() {
 
 tagsInSidebar();
 
-const sidebarTags = document.querySelectorAll(".tag").forEach((tag) => {
-  tag.addEventListener("click", (e) => {
-    currentTagFilter = tag.innerHTML;
+function tagsEventListener() {
+  document.querySelectorAll(".tag").forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      currentTagFilter = tag.innerHTML;
 
-    if (tag.classList.contains("active-tag")) {
-      currentTagFilter = "";
-      tag.classList.remove("active-tag");
-    } else {
-      document
-        .querySelectorAll(".tag")
-        .forEach((tag) => tag.classList.remove("active-tag"));
-      tag.classList.add("active-tag");
-    }
+      if (tag.classList.contains("active-tag")) {
+        currentTagFilter = "";
+        tag.classList.remove("active-tag");
+      } else {
+        document
+            .querySelectorAll(".tag")
+            .forEach((tag) => tag.classList.remove("active-tag"));
+        tag.classList.add("active-tag");
+      }
 
-    displayNotesList();
+      displayNotesList();
+    });
   });
-});
+}
+tagsEventListener()
 
 leftSidebarButton.addEventListener("click", (event) => {
   leftSidebar.style.width = "100%";
@@ -388,3 +391,8 @@ rightSidebarButton.addEventListener("click", (event) => {
 rightSidebarCloseButton.addEventListener("click", (event) => {
   rightSidebar.style.width = "0%";
 });
+
+
+document.querySelector(".darkmodeEnabler").addEventListener("click", event => {
+  document
+})
