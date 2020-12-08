@@ -319,7 +319,9 @@ if (localStorage.getItem(1) === null) {
  *
  *  */
 
-/* search.addEventListener('input', function (evt) {
+/* KRILLES LÖSNING
+
+search.addEventListener('input', function (evt) {
         evt.preventDefault();
         let searchStr = evt.target.value;
         console.log(searchStr);
@@ -334,24 +336,23 @@ if (localStorage.getItem(1) === null) {
     }) */
 
 searchButton.addEventListener("click", () => {
-  // tömma på ngt vis!
-  // load all titels from LS?
-  // let newList = [];
+  // tömma inputfält!
 
+  // fylla med titlar från notes
   let title = [];
+  // let test123 = [];
 
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
+      //if (key === key.length) {
       // ngn form av ifsats för att slippa dubletter
       // loopar 7 ggr för att få ut hela objektet
       // key.title length?
-      title.push(JSON.parse(localStorage.getItem(key)).title);
-    }
-    console.log(title);
-    let uniqueTags = new Set(title);
-    console.log([...uniqueTags]);
-  }
+      // title.push(JSON.parse(localStorage.getItem(key)).title);
 
+      console.log(title);
+    }
+  }
   // searchNotes();
 });
 
