@@ -95,7 +95,6 @@ function saveDoc() {
     } else {
       favorite.setAttribute("src", "icons/star.svg");
     }
-
     if (!noteTitle.value) {
       docDataSkeleton.title = textarea.value().split("\n")[0];
     } else {
@@ -332,3 +331,6 @@ if (localStorage.getItem(1) === null) {
 displayNotesList();
 tagsInSidebar();
 tagsEventListener();
+
+document.querySelector(".CodeMirror").style.border = "none";
+document.querySelector(".editor-toolbar").style.border = "none";
