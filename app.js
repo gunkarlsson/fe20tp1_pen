@@ -339,6 +339,7 @@ searchButton.addEventListener("click", () => {
   // let newList = [];
 
   let title = [];
+
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
       // ngn form av ifsats för att slippa dubletter
@@ -347,7 +348,10 @@ searchButton.addEventListener("click", () => {
       title.push(JSON.parse(localStorage.getItem(key)).title);
     }
     console.log(title);
+    let uniqueTags = new Set(title);
+    console.log([...uniqueTags]);
   }
+
   // searchNotes();
 });
 
