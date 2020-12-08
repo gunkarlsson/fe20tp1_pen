@@ -1,32 +1,34 @@
-/* RESET */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
 
+:root {
+  --background-color: #2a3435;
+  --accent-color: #f58a8a;
+
+  --text-color: #fff;
+  --foo: #000;
+}
+
+/* RESET */
 *,
 ::after,
 ::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
   list-style: none;
 }
 
 *:not(i) {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* UTILITIES */
-
-:root {
-  --background-color: #2a3435;
-  --accent-color: #f58a8a;
-}
-
 .container {
   display: flex;
   flex-direction: row;
 }
 
-/*------------------- sidebar ----------------*/
+/*------------------- Sidebars ----------------*/
 
 .sidebar {
   background-color: var(--background-color);
@@ -79,7 +81,7 @@
   flex-direction: row;
 }
 
-/*------------------- main menu ----------------*/
+/*--------------- NOTE LIST -------------*/
 
 .header {
   display: flex;
@@ -118,25 +120,6 @@
   padding: 0px 10px;
 }
 
-.tags-list {
-  display: flex;
-  /* Wrap makes us see all tags in left sidebar*/
-  flex-wrap: wrap;
-}
-
-.tags-list li {
-  background-color: indianred;
-  margin: 3px;
-  padding: 2px 30px;
-  /* om vi vill göra dem mindre/större till olika skärmstorl
-    skulle man kunna använda em som mått för padding
-    och sen ändra font-storlek i en media query
-    och då kommer alla element som har em baserad padding
-    att följa font-size i media query å responsivitet till desktop blir två flugor i en smäll
-  */
-  border-radius: 25px;
-}
-
 .new-doc {
   position: sticky;
   bottom: 10px;
@@ -154,6 +137,27 @@
   border-radius: 100%;
 
   margin-left: auto;
+}
+
+/* ------------------- EDITOR ----------------- */
+
+.tags-list {
+  display: flex;
+  /* Wrap makes us see all tags in left sidebar*/
+  flex-wrap: wrap;
+}
+
+.tags-list li {
+  background-color: indianred;
+  margin: 3px;
+  padding: 2px 30px;
+  /* om vi vill göra dem mindre/större till olika skärmstorl
+    skulle man kunna använda em som mått för padding
+    och sen ändra font-storlek i en media query
+    och då kommer alla element som har em baserad padding
+    att följa font-size i media query å responsivitet till desktop blir två flugor i en smäll
+  */
+  border-radius: 25px;
 }
 
 /* tillfällig container att ha mitt i skärmen styling under tiden vi fokuserar JS */
@@ -197,8 +201,10 @@
   margin-bottom: 8px;
 }
 
-#note-title {
+.note-title {
   border: none;
+  width: 100%;
+  margin-left: 0.5rem;
 }
 
 #textarea {
@@ -240,4 +246,23 @@ button {
 
 #delete-doc {
   background: red;
+}
+
+.ttpo {
+  visibility: hidden;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .ttpo,
+  .ttpo * {
+    visibility: visible;
+  }
+  .ttpo {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }

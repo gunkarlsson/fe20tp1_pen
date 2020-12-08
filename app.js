@@ -1,100 +1,71 @@
 // VARIABLES
-var textarea = new SimpleMDE();
+const textarea = new SimpleMDE({ spellChecker: false });
+const noteTitle = document.querySelector(".note-title");
+const favorite = document.querySelector(".favorite-tag");
+const tagInputField = document.querySelector(".tag-input-field");
+const noteList = document.querySelector(".note-list");
+const newDocButton = document.querySelector(".new-doc");
+const editor = document.querySelector(".editor");
+const tagsList = document.querySelector(".tags-list");
 
-const deleteDocButton = document.querySelector('#delete-doc');
-const noteTitle = document.querySelector('#note-title');
-const favorite = document.querySelector('#favorite-tag');
-//TODO: Bytt namn på tagName till tagInputFile
-const tagName = document.querySelector('#tag-name');
-//TODO: Bytt namn på tagButton till addTagButton
-const tagButton = document.querySelector('#tag-button');
-const noteList = document.querySelector('.note-list');
-const newDocButton = document.querySelector('.new-doc');
-const editor = document.querySelector('.editor');
-const editorBackButton = document.querySelector('.editor-back-button');
-//tagsList är en lista för alla tags i editorn
-const tagsList = document.querySelector('.tags-list');
-//tagsBar container som håller tagsList
-const tagsBar = document.querySelector('.tags-bar');
-
-//LEFT SIDEBAR
-const leftSidebarButton = document.querySelector('.left-sidebar-button');
-const leftSidebar = document.querySelector('.left-sidebar');
-const leftSidebarCloseButton = document.querySelector('.left-sidebar-close-button');
-const tagMenu = document.querySelector('.tag-menu');
+const leftSidebar = document.querySelector(".left-sidebar");
+const tagMenu = document.querySelector(".tag-menu");
 let currentTagFilter;
+const rightSidebar = document.querySelector(".right-sidebar");
+const searchButton = document.querySelector("#search-button");
+const searchBar = document.querySelector("#search-input");
 
-//RIGHT SIDEBAR
-const rightSidebarButton = document.querySelector('.right-sidebar-button');
-const rightSidebar = document.querySelector('.right-sidebar');
-const rightSidebarCloseButton = document.querySelector('.right-sidebar-close-button');
-const createdAt = document.querySelector('.creation-date');
-
-// OBJECTS
 const docDataSkeleton = {
-  id: '',
-  title: '',
-  content: '',
+  id: "",
+  title: "",
+  content: "",
   favorite: false,
-  creationDate: '',
-  lastSavedDate: '',
+  creationDate: "",
+  lastSavedDate: "",
   tags: [],
 };
 
 // EVENTLISTENERS
-newDocButton.addEventListener('click', () => {
+newDocButton.addEventListener("click", () => {
   createNewDoc();
 });
 
-//Vi har en delete function i editorn
-deleteDocButton.addEventListener('click', () => {
-  textarea.value('');
-  deleteDoc();
+document.querySelector(".delete-doc").addEventListener("click", () => {
+  window.localStorage.removeItem(docDataSkeleton.id);
+  editor.style.width = "0%";
+  displayNotesList();
 });
 
-// Input event
-//TODO: lägg till en class på alla saveDoc -textarea,noteTitle,favorite
-
-textarea.codemirror.on('inputRead', () => {
+textarea.codemirror.on("inputRead", () => {
   saveDoc();
 });
 
-noteTitle.addEventListener('input', (e) => {
+noteTitle.addEventListener("input", (e) => {
   saveDoc();
 });
 
-favorite.addEventListener('click', (e) => {
+favorite.addEventListener("click", (e) => {
   if (docDataSkeleton.favorite === true) {
-    favorite.setAttribute('src', './icons/star.svg');
+    favorite.setAttribute("src", "./icons/star.svg");
     docDataSkeleton.favorite = false;
   } else {
-    favorite.setAttribute('src', './icons/star-clicked.svg');
+    favorite.setAttribute("src", "./icons/star-clicked.svg");
     docDataSkeleton.favorite = true;
   }
   saveDoc();
 });
 
-tagButton.addEventListener('click', () => {
-  if (tagName.value !== '') {
-    docDataSkeleton.tags.push(tagName.value.toLowerCase());
+document.querySelector(".add-tag-button").addEventListener("click", () => {
+  if (tagInputField.value !== "") {
+    docDataSkeleton.tags.push(tagInputField.value.toLowerCase());
   }
-  //Denna rad är viktigt, då den förhindrar dubbletter.
-  tagsList.innerHTML = '';
-
+  tagsList.innerHTML = "";
+  tagInputField.value = "";
   createNewTag();
-
-  //CLEAR INPUT FIELD
-  tagName.value = '';
   saveDoc();
 });
 
-// Generate welcome mssg
-
-//TODO: Skriv if-sats: om användaren har raderat wellcome msg, ska det ej komma tillbaka.
-if (localStorage.getItem(1) === null) {
-  generateWelcomeMssg();
-}
-//TODO: radera dubbletter i local storage
+//FUNCTIONS
 function createNewTag(arr) {
   arr = docDataSkeleton.tags;
   //   Sortera bort duplicates
@@ -103,206 +74,161 @@ function createNewTag(arr) {
   // Loopar igenom unika tags
   newArr.forEach(function (tag) {
     //Skapar list-item
-    let li = document.createElement('li');
+    let li = document.createElement("li");
     //Lägger li under tags-ul
     tagsList.appendChild(li);
-    let p = document.createElement('p');
+    let p = document.createElement("p");
     //Ersätt p-tag-texten med enskilda tag:en
     p.innerHTML = tag.toLowerCase();
     li.appendChild(p);
     //Appends tagslist till tagsbar
-    tagsBar.appendChild(tagsList);
-    // filter method in loop?
+    document.querySelector(".tags-bar").appendChild(tagsList);
   });
 }
 
 function saveDoc() {
-  // börja fylla docDataSkeleton med textarea & note value
-  docDataSkeleton.content = textarea.value();
-  docDataSkeleton.title = noteTitle.value;
+  if (textarea.value().length > 0 || noteTitle.value.length > 0) {
+    if (!docDataSkeleton.id) {
+      docDataSkeleton.creationDate = new Date();
+      // unique ID generated by timestamp
+      docDataSkeleton.id = Date.now();
+    }
+    if (docDataSkeleton.favorite === true) {
+      favorite.setAttribute("src", "icons/star-clicked.svg");
+    } else {
+      favorite.setAttribute("src", "icons/star.svg");
+    }
+    if (!noteTitle.value) {
+      docDataSkeleton.title = textarea.value().split("\n")[0];
+    } else {
+      docDataSkeleton.title = noteTitle.value;
+    }
 
-  //Kolla om id finns annars skapa ny anteckning
-  if (!docDataSkeleton.id) {
-    docDataSkeleton.creationDate = new Date();
-    // unique ID generated by timestamp
-    docDataSkeleton.id = Date.now();
+    docDataSkeleton.content = textarea.value();
+    docDataSkeleton.lastSavedDate = Date.now();
+
+    //Filtrerar tags i LS
+    let arr = docDataSkeleton.tags;
+    let uniqueSet = new Set(arr);
+    let newArr = [...uniqueSet];
+    docDataSkeleton.tags = newArr;
+
+    //Spara anteckning i local storage
+    window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+    displayNotesList();
+    tagsInSidebar();
+    tagsEventListener();
   }
-
-  docDataSkeleton.lastSavedDate = Date.now();
-
-  //Filtrerar tags i LS
-  let arr = docDataSkeleton.tags;
-  let uniqueSet = new Set(arr);
-  let newArr = [...uniqueSet];
-  docDataSkeleton.tags = newArr;
-
-  //Spara anteckning i local storage
-  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
-  displayNotesList();
-  tagsInSidebar();
-  if (docDataSkeleton.favorite === true) {
-    favorite.setAttribute('src', 'icons/star-clicked.svg');
-  } else {
-    favorite.setAttribute('src', 'icons/star.svg');
-  }
-}
-
-function deleteDoc() {
-  // remove ID and remove the item
-  window.localStorage.removeItem(docDataSkeleton.id);
 }
 
 function createNewDoc() {
-  // töm textarea för ny yta
-  textarea.value('');
-  noteTitle.value = '';
-  tagName.value = '';
-  favorite.setAttribute('src', './icons/star.svg');
-  tagsList.innerHTML = '';
+  textarea.value("");
+  noteTitle.value = "";
+  tagInputField.value = "";
+  tagsList.innerHTML = "";
+  favorite.setAttribute("src", "./icons/star.svg");
 
   for (element in docDataSkeleton) {
-    if (element === 'tags') {
-      // töm tags array
+    if (element === "tags") {
       docDataSkeleton[element] = [];
     } else {
-      // övriga blir tom sträng
-      docDataSkeleton[element] = '';
+      docDataSkeleton[element] = "";
     }
   }
 }
 
 function loadDoc(docData) {
-  tagsList.innerHTML = '';
+  tagsList.innerHTML = "";
+  tagInputField.value = "";
   textarea.value(docData.content);
   noteTitle.value = docData.title;
-  tagName.value = '';
   favorite.value = docData.favorite;
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
 
   if (docData.favorite === true) {
-    favorite.setAttribute('src', 'icons/star-clicked.svg');
+    favorite.setAttribute("src", "icons/star-clicked.svg");
   } else {
-    favorite.setAttribute('src', 'icons/star.svg');
+    favorite.setAttribute("src", "icons/star.svg");
   }
 
-  // formatera tiden och styling
-  createdAt.innerHTML = docData.creationDate;
+  // TODO: formatera tiden och styling
+  document.querySelector(".creation-date").innerHTML = docData.creationDate;
   createNewTag();
 }
 
-function displayNotesList() {
-  noteList.innerHTML = '';
-  let newList = [];
+function displayNotesList(searchList) {
+  noteList.innerHTML = "";
+  if (!searchList) {
+    let notes = [];
+    let tempNotesArr = [];
 
-  let notes = [];
-  for (key in localStorage) {
-    if (JSON.parse(localStorage.getItem(key)) !== null) {
-      if (JSON.parse(localStorage.getItem(key)).favorite) {
-        newList.push(JSON.parse(localStorage.getItem(key)));
-      } else {
-        notes.push(JSON.parse(localStorage.getItem(key)));
+    for (key in localStorage) {
+      if (JSON.parse(localStorage.getItem(key)) !== null) {
+        if (JSON.parse(localStorage.getItem(key)).favorite) {
+          notes.push(JSON.parse(localStorage.getItem(key)));
+        } else {
+          tempNotesArr.push(JSON.parse(localStorage.getItem(key)));
+        }
       }
     }
-  }
-  notes.sort(function (a, b) {
-    return b.lastSavedDate - a.lastSavedDate;
-  });
-  newList.sort(function (a, b) {
-    return b.lastSavedDate - a.lastSavedDate;
-  });
-  newList.push(...notes);
+    tempNotesArr.sort(function (a, b) {
+      return b.lastSavedDate - a.lastSavedDate;
+    });
+    notes.sort(function (a, b) {
+      return b.lastSavedDate - a.lastSavedDate;
+    });
+    notes.push(...tempNotesArr);
 
-  if (currentTagFilter) {
-    newList = newList.filter((note) => note.tags.includes(currentTagFilter));
-  }
-  newList.forEach((note) => createNewMenuItem(note));
+    if (currentTagFilter) {
+      notes = notes.filter((note) => {
+        return note.tags.includes(currentTagFilter);
+      });
+    }
+    notes.forEach((note) => createNoteListItem(note));
+  } else searchList.forEach((note) => createNoteListItem(note));
 }
 
-displayNotesList();
-
-function generateWelcomeMssg() {
-  // börja fylla docDataSkeleton med textarea & note value
-  docDataSkeleton.content =
-    'Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.';
-  docDataSkeleton.title = 'Welcome to Quire, almost as good as Bear';
-
-  docDataSkeleton.creationDate = new Date();
-
-  // unique ID generated by timestamp
-  docDataSkeleton.id = 1;
-
-  docDataSkeleton.lastSavedDate = Date.now();
-
-  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
-}
-
-function createNewMenuItem(docData) {
-  const noteContainer = document.createElement('li');
-  noteContainer.classList.add('note-container');
-
-  noteContainer.addEventListener('click', function () {
-    editor.style.width = '100%';
+function createNoteListItem(docData) {
+  const noteContainer = document.createElement("li");
+  noteContainer.classList.add("note-container");
+  noteContainer.addEventListener("click", function () {
+    editor.style.width = "100%";
     loadDoc(docData);
   });
 
   //SIDE
-  const sideContent = document.createElement('div');
-  const sinceEdited = document.createElement('p');
-  const starIcon = document.createElement('img');
+  const sideContent = document.createElement("div");
+  const sinceEdited = document.createElement("p");
+  const starIcon = document.createElement("img");
 
-  //TODO: Ändra side till sideContent
-  sideContent.classList.add('side-content');
-  sinceEdited.classList.add('since-edited');
-  starIcon.classList.add('star-icon');
+  sideContent.classList.add("side-content");
+  sinceEdited.classList.add("since-edited");
+  starIcon.classList.add("star-icon");
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + 'm';
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
 
   if (docData.favorite === true) {
-    starIcon.setAttribute('src', 'icons/star-clicked.svg');
-    console.log('fav true');
+    starIcon.setAttribute("src", "icons/star-clicked.svg");
   } else {
-    starIcon.setAttribute('src', 'icons/star.svg');
-    console.log('fav false');
+    starIcon.setAttribute("src", "icons/star.svg");
   }
-
-  /*----------------TIMESTAMP!---------------------*/
-  // https://date-fns.org/v1.30.1/docs/distanceInWords
-
-  //TODO: Göra om till funktion
-  // now timestamp = now, before
-  const now = Date.now();
-  const before = docData.lastSavedDate;
-
-  // skillnad mellan now och before visas
-  // @TODO går det att ändra prefix?
-  // är det distanceInWords som är bäst?
-  const formatedTime = dateFns.distanceInWords(now, before, { addSuffix: true });
-
-  /*------------------------------------------------*/
-
-  sinceEdited.innerHTML = formatedTime;
-  //TODO: Fixa if statements som räknar på timmar.
-  // sinceEdited.innerHTML =
-  //   Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
-  starIcon.setAttribute('src', 'icons/star.svg');
 
   sideContent.appendChild(sinceEdited);
   sideContent.appendChild(starIcon);
 
   //MAIN
-  const mainContent = document.createElement('div');
-  const noteTitle = document.createElement('h2');
-  const noteContent = document.createElement('p');
+  const mainContent = document.createElement("div");
+  const noteTitle = document.createElement("h2");
+  const noteContent = document.createElement("p");
 
-  mainContent.classList.add('main');
-  noteTitle.classList.add('note-title');
-  noteContent.classList.add('note-content');
+  mainContent.classList.add("main");
+  noteTitle.classList.add("note-title");
+  noteContent.classList.add("note-content");
 
   noteTitle.innerHTML = docData.title;
   noteContent.innerHTML = docData.content;
-
   mainContent.appendChild(noteTitle);
   mainContent.appendChild(noteContent);
 
@@ -313,7 +239,9 @@ function createNewMenuItem(docData) {
   noteList.appendChild(noteContainer);
 }
 
-function allTagsFilter() {
+function tagsInSidebar() {
+  tagMenu.innerHTML = "";
+
   let allTags = [];
   for (key in localStorage) {
     let allNotesInLS = JSON.parse(localStorage.getItem(key));
@@ -321,67 +249,111 @@ function allTagsFilter() {
       allTags.push(...allNotesInLS.tags);
     }
   }
-  let uniqueSet = new Set(allTags);
-  let newArr = [...uniqueSet];
-  return newArr;
-}
 
-allTagsFilter();
-
-function tagsInSidebar() {
-  /// loopa värdena från funktionen (newArr värdet)/
-  tagMenu.innerHTML = '';
-  allTagsFilter().forEach((tag) => {
-    let li = document.createElement('li');
+  let uniqueTags = new Set(allTags);
+  [...uniqueTags].forEach((tag) => {
+    let li = document.createElement("li");
     tagMenu.appendChild(li);
-    let p = document.createElement('p');
-    p.classList.add('tag');
+    let p = document.createElement("p");
+    p.classList.add("tag");
     p.innerHTML = tag;
     li.appendChild(p);
   });
 }
 
-tagsInSidebar();
+function tagsEventListener() {
+  document.querySelectorAll(".tag").forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      currentTagFilter = tag.innerHTML;
 
-const sidebarTags = document.querySelectorAll('.tag').forEach((tag) => {
-  tag.addEventListener('click', (e) => {
-    currentTagFilter = tag.innerHTML;
+      if (tag.classList.contains("active-tag")) {
+        currentTagFilter = "";
+        tag.classList.remove("active-tag");
+      } else {
+        document.querySelectorAll(".tag").forEach((tag) => tag.classList.remove("active-tag"));
+        tag.classList.add("active-tag");
+      }
 
-    if (tag.classList.contains('active-tag')) {
-      currentTagFilter = '';
-      tag.classList.remove('active-tag');
-    } else {
-      document.querySelectorAll('.tag').forEach((tag) => tag.classList.remove('active-tag'));
-      tag.classList.add('active-tag');
-    }
-
-    displayNotesList();
+      displayNotesList();
+    });
   });
+}
+
+document.querySelector(".left-sidebar-button").addEventListener("click", (event) => {
+  leftSidebar.style.width = "100%";
 });
 
-leftSidebarButton.addEventListener('click', (event) => {
-  leftSidebar.style.width = '100%';
+document.querySelector(".left-sidebar-close-button").addEventListener("click", (event) => {
+  leftSidebar.style.width = "0%";
 });
 
-leftSidebarCloseButton.addEventListener('click', (event) => {
-  leftSidebar.style.width = '0%';
+newDocButton.addEventListener("click", (event) => {
+  editor.style.width = "100%";
 });
 
-newDocButton.addEventListener('click', (event) => {
-  editor.style.width = '100%';
+document.querySelector(".editor-back-button").addEventListener("click", (event) => {
+  editor.style.width = "0%";
 });
 
-editorBackButton.addEventListener('click', (event) => {
-  editor.style.width = '0%';
+document.querySelector(".right-sidebar-button").addEventListener("click", (event) => {
+  rightSidebar.style.width = "100%";
 });
 
-rightSidebarButton.addEventListener('click', (event) => {
-  rightSidebar.style.width = '100%';
-
-  // fulstyling
-  createdAt.style.color = 'white';
+document.querySelector(".right-sidebar-close-button").addEventListener("click", (event) => {
+  rightSidebar.style.width = "0%";
 });
 
-rightSidebarCloseButton.addEventListener('click', (event) => {
-  rightSidebar.style.width = '0%';
+//TODO: Skriv if-sats: om användaren har raderat welcome msg, ska det ej komma tillbaka.
+if (localStorage.getItem(1) === null) {
+  docDataSkeleton.content =
+    "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.";
+  docDataSkeleton.title = "Welcome to Quire, almost as good as Bear";
+  docDataSkeleton.creationDate = new Date();
+  docDataSkeleton.id = 1;
+  docDataSkeleton.lastSavedDate = Date.now();
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+}
+
+searchButton.addEventListener("click", () => {
+  console.log("click");
+});
+
+searchBar.addEventListener("keyup", (text) => {
+  let titles = [];
+
+  for (key in localStorage) {
+    if (JSON.parse(localStorage.getItem(key)) !== null) {
+      const lsObject = JSON.parse(localStorage.getItem(key));
+      let searchStr = text.target.value.toLowerCase();
+
+      if (lsObject.title.toLowerCase().includes(searchStr)) {
+        titles.push(lsObject);
+      }
+    }
+    displayNotesList(titles);
+  }
+});
+
+function searchNotes(str) {
+  return str;
+}
+
+displayNotesList();
+tagsInSidebar();
+tagsEventListener();
+
+document.querySelector(".CodeMirror").style.border = "none";
+document.querySelector(".editor-toolbar").style.border = "none";
+
+document.querySelector(".print").addEventListener("click", () => {
+  const cm = textarea.codemirror;
+  const wrapper = cm.getWrapperElement();
+  const preview = wrapper.lastChild;
+
+  document.querySelector(".ttpo").innerHTML = noteTitle.value;
+  document.querySelector(".ttpo").innerHTML += textarea.options.previewRender(
+    textarea.value(),
+    preview
+  );
+  window.print();
 });
