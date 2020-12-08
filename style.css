@@ -247,3 +247,22 @@ button {
 #delete-doc {
   background: red;
 }
+
+.ttpo {
+  visibility: hidden;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .ttpo,
+  .ttpo * {
+    visibility: visible;
+  }
+  .ttpo {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

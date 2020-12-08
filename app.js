@@ -334,3 +334,16 @@ tagsEventListener();
 
 document.querySelector(".CodeMirror").style.border = "none";
 document.querySelector(".editor-toolbar").style.border = "none";
+
+document.querySelector(".print").addEventListener("click", () => {
+  const cm = textarea.codemirror;
+  const wrapper = cm.getWrapperElement();
+  const preview = wrapper.lastChild;
+
+  document.querySelector(".ttpo").innerHTML = noteTitle.value;
+  document.querySelector(".ttpo").innerHTML += textarea.options.previewRender(
+    textarea.value(),
+    preview
+  );
+  window.print();
+});
