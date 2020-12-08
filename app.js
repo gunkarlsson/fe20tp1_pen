@@ -1,5 +1,5 @@
 // VARIABLES
-const textarea = new SimpleMDE();
+const textarea = new SimpleMDE({ spellChecker: false });
 const noteTitle = document.querySelector(".note-title");
 const favorite = document.querySelector(".favorite-tag");
 const tagInputField = document.querySelector(".tag-input-field");
