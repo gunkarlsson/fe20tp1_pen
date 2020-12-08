@@ -157,8 +157,11 @@ function loadDoc(docData) {
   createNewTag();
 }
 
-function displayNotesList() {
+function displayNotesList(searchList) {
   noteList.innerHTML = "";
+if(!searchList){
+
+
   let notes = [];
   let tempNotesArr = [];
 
@@ -185,6 +188,7 @@ function displayNotesList() {
     });
   }
   notes.forEach((note) => createNoteListItem(note));
+}else searchList.forEach((note) => createNoteListItem(note));
 }
 
 function createNoteListItem(docData) {
@@ -312,35 +316,6 @@ if (localStorage.getItem(1) === null) {
   window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
 }
 
-/**
- * SEARCH FUNCTION START HERE!
- *
- * [X1] 'click' event listener for search icon
- * [X2] 'keyup' event listener for input field
- *      BUG -- tömma inputfält!
- * [X3] search for Titles in LS
- * [4] filter non-matching events in console to only show matches (console)
- * [5] search bar animation and input (notes page)
- * [6] filter non-matching events to only show matches (notes page)
- *
- *  */
-
-/* KRILLES LÖSNING
-
-search.addEventListener('input', function (evt) {
-        evt.preventDefault();
-        let searchStr = evt.target.value;
-        console.log(searchStr);
-        if (searchStr.length >= 1) {
-            // anävndare har sökt något
-            let foundNotes = searchNotes(searchStr);
-            renderNotesList(foundNotes);
-        } else {
-            // anv har tömt sökrutan
-            renderNotesList(notesArr)
-        }
-    }) */
-
 searchButton.addEventListener("click", () => {
   console.log("click");
 });
@@ -349,20 +324,15 @@ searchBar.addEventListener("keyup", (text) => {
   let titles = [];
 
   for (key in localStorage) {
-    // töm title array
     if (JSON.parse(localStorage.getItem(key)) !== null) {
       const lsObject = JSON.parse(localStorage.getItem(key));
-      let searchStr = text.target.value;
+      let searchStr = text.target.value.toLowerCase();
 
-      // kolla om keyevent & title matcher
-      if (lsObject.title.includes(searchStr)) {
-        // om passar push,
+      if (lsObject.title.toLowerCase().includes(searchStr)) {
         titles.push(lsObject);
-      } else {
-        // matchar inte
-      }
-      console.log(titles);
+      }  
     }
+    displayNotesList(titles);
   }
 });
 
