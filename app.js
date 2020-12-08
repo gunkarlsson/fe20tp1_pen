@@ -312,7 +312,7 @@ if (localStorage.getItem(1) === null) {
  * [X1] 'click' event listener for search icon
  * [X2] 'keyup' event listener for input field
  *      BUG -- tömma inputfält!
- * [3] search for Titles in LS
+ * [X3] search for Titles in LS
  * [4] filter non-matching events in console to only show matches (console)
  * [5] search bar animation and input (notes page)
  * [6] filter non-matching events to only show matches (notes page)
@@ -336,41 +336,33 @@ search.addEventListener('input', function (evt) {
     }) */
 
 searchButton.addEventListener("click", () => {
-  // tömma inputfält!
-
-  // fylla med titlar från notes
-  let title = [];
-  // let test123 = [];
-
-  for (key in localStorage) {
-    if (JSON.parse(localStorage.getItem(key)) !== null) {
-      //if (key === key.length) {
-      // ngn form av ifsats för att slippa dubletter
-      // loopar 7 ggr för att få ut hela objektet
-      // key.title length?
-      // title.push(JSON.parse(localStorage.getItem(key)).title);
-
-      console.log(title);
-    }
-  }
-  // searchNotes();
+  console.log("click");
 });
 
 searchBar.addEventListener("keyup", (text) => {
-  // searchStr lagrar textvärdet
-  let searchStr = text.target.value;
-  // console.log(searchStr);
-  console.log(searchNotes(searchStr));
+  let titles = [];
+
+  for (key in localStorage) {
+    // töm title array
+    if (JSON.parse(localStorage.getItem(key)) !== null) {
+      const lsObject = JSON.parse(localStorage.getItem(key));
+      let searchStr = text.target.value;
+
+      // kolla om keyevent & title matcher
+      if (lsObject.title.includes(searchStr)) {
+        // om passar push,
+        titles.push(lsObject);
+      } else {
+        // matchar inte
+      }
+      console.log(titles);
+    }
+  }
 });
 
 function searchNotes(str) {
   return str;
 }
-
-// function testTitle() {
-//   let title = docDataSkeleton.title;
-//   console.log("text???" + docDataSkeleton.title);
-// }
 
 displayNotesList();
 tagsInSidebar();
