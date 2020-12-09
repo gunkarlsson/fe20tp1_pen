@@ -390,3 +390,10 @@ document.querySelector(".dark-mode").addEventListener("click", () => {
   }
   darkMode = !darkMode;
 });
+
+document.querySelector(".search-button").addEventListener("click", event => {
+  const input = document.querySelector(".search-input");
+  input.classList.toggle("active");
+  input.focus();
+  input.innerHTML = "";
+})

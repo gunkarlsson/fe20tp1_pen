@@ -255,3 +255,13 @@ input:focus {
   height: 50px;
   width: 50px;
 }
+
+.search-input {
+  visibility: hidden;
+  border: none;
+}
+
+.active {
+  visibility: visible;
+  border-bottom: 2px solid black;
+}
