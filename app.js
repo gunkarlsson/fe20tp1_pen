@@ -12,6 +12,9 @@ const leftSidebar = document.querySelector(".left-sidebar");
 const tagMenu = document.querySelector(".tag-menu");
 let currentTagFilter;
 const rightSidebar = document.querySelector(".right-sidebar");
+const searchButton = document.querySelector("#search-button");
+const searchBar = document.querySelector("#search-input");
+
 const docDataSkeleton = {
   id: "",
   title: "",
@@ -111,10 +114,7 @@ function saveDoc() {
     docDataSkeleton.tags = newArr;
 
     //Spara anteckning i local storage
-    window.localStorage.setItem(
-      docDataSkeleton.id,
-      JSON.stringify(docDataSkeleton)
-    );
+    window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
     displayNotesList();
     tagsInSidebar();
     tagsEventListener();
@@ -157,8 +157,11 @@ function loadDoc(docData) {
   createNewTag();
 }
 
-function displayNotesList() {
+function displayNotesList(searchList) {
   noteList.innerHTML = "";
+if(!searchList){
+
+
   let notes = [];
   let tempNotesArr = [];
 
@@ -185,6 +188,7 @@ function displayNotesList() {
     });
   }
   notes.forEach((note) => createNoteListItem(note));
+}else searchList.forEach((note) => createNoteListItem(note));
 }
 
 function createNoteListItem(docData) {
@@ -205,8 +209,7 @@ function createNoteListItem(docData) {
   starIcon.classList.add("star-icon");
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML =
-    Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
 
   if (docData.favorite === true) {
     starIcon.setAttribute("src", "icons/star-clicked.svg");
@@ -269,9 +272,7 @@ function tagsEventListener() {
         currentTagFilter = "";
         tag.classList.remove("active-tag");
       } else {
-        document
-          .querySelectorAll(".tag")
-          .forEach((tag) => tag.classList.remove("active-tag"));
+        document.querySelectorAll(".tag").forEach((tag) => tag.classList.remove("active-tag"));
         tag.classList.add("active-tag");
       }
 
@@ -280,39 +281,29 @@ function tagsEventListener() {
   });
 }
 
-document
-  .querySelector(".left-sidebar-button")
-  .addEventListener("click", (event) => {
-    leftSidebar.style.width = "100%";
-  });
+document.querySelector(".left-sidebar-button").addEventListener("click", (event) => {
+  leftSidebar.style.width = "100%";
+});
 
-document
-  .querySelector(".left-sidebar-close-button")
-  .addEventListener("click", (event) => {
-    leftSidebar.style.width = "0%";
-  });
+document.querySelector(".left-sidebar-close-button").addEventListener("click", (event) => {
+  leftSidebar.style.width = "0%";
+});
 
 newDocButton.addEventListener("click", (event) => {
   editor.style.width = "100%";
 });
 
-document
-  .querySelector(".editor-back-button")
-  .addEventListener("click", (event) => {
-    editor.style.width = "0%";
-  });
+document.querySelector(".editor-back-button").addEventListener("click", (event) => {
+  editor.style.width = "0%";
+});
 
-document
-  .querySelector(".right-sidebar-button")
-  .addEventListener("click", (event) => {
-    rightSidebar.style.width = "100%";
-  });
+document.querySelector(".right-sidebar-button").addEventListener("click", (event) => {
+  rightSidebar.style.width = "100%";
+});
 
-document
-  .querySelector(".right-sidebar-close-button")
-  .addEventListener("click", (event) => {
-    rightSidebar.style.width = "0%";
-  });
+document.querySelector(".right-sidebar-close-button").addEventListener("click", (event) => {
+  rightSidebar.style.width = "0%";
+});
 
 //TODO: Skriv if-sats: om användaren har raderat welcome msg, ska det ej komma tillbaka.
 if (localStorage.getItem(1) === null) {
@@ -322,10 +313,31 @@ if (localStorage.getItem(1) === null) {
   docDataSkeleton.creationDate = new Date();
   docDataSkeleton.id = 1;
   docDataSkeleton.lastSavedDate = Date.now();
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
+}
+
+searchButton.addEventListener("click", () => {
+  console.log("click");
+});
+
+searchBar.addEventListener("keyup", (text) => {
+  let titles = [];
+
+  for (key in localStorage) {
+    if (JSON.parse(localStorage.getItem(key)) !== null) {
+      const lsObject = JSON.parse(localStorage.getItem(key));
+      let searchStr = text.target.value.toLowerCase();
+
+      if (lsObject.title.toLowerCase().includes(searchStr)) {
+        titles.push(lsObject);
+      }  
+    }
+    displayNotesList(titles);
+  }
+});
+
+function searchNotes(str) {
+  return str;
 }
 
 displayNotesList();

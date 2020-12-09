@@ -6,21 +6,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <title>Quote</title>
   </head>
 
   <body class="container">
     <div class="left-sidebar sidebar">
-      <img
-        src="icons/x-white.svg"
-        alt="close button icon"
-        class="left-sidebar-close-button"
-      />
+      <img src="icons/x-white.svg" alt="close button icon" class="left-sidebar-close-button" />
       <ul class="tag-menu"></ul>
 
       <ul class="settings-menu">
@@ -41,13 +34,10 @@
 
     <main class="main">
       <header class="header">
-        <img
-          src="icons/menu.svg"
-          alt="hamburger menu icon"
-          class="left-sidebar-button"
-        />
+        <img src="icons/menu.svg" alt="hamburger menu icon" class="left-sidebar-button" />
         <h1>notes</h1>
-        <img src="icons/search.svg" alt="search icon" />
+        <img id="search-button" src="icons/search.svg" alt="" />
+        <input type="text" class="search-input" id="search-input" />
       </header>
 
       <ul class="note-list"></ul>
@@ -59,23 +49,10 @@
 
     <div class="editor">
       <div class="icons-menu">
-        <img
-          class="editor-back-button"
-          src="icons/arrow-left.svg"
-          alt="back arrow icon"
-        />
+        <img class="editor-back-button" src="icons/arrow-left.svg" alt="back arrow icon" />
         <div>
-          <img
-            class="favorite-tag"
-            class="star"
-            src="icons/star.svg"
-            alt="favorite star icon"
-          />
-          <img
-            class="right-sidebar-button"
-            src="icons/info.svg"
-            alt="information icon"
-          />
+          <img class="favorite-tag" class="star" src="icons/star.svg" alt="favorite star icon" />
+          <img class="right-sidebar-button" src="icons/info.svg" alt="information icon" />
         </div>
       </div>
 
@@ -107,11 +84,7 @@
       <div class="ttpo"></div>
 
       <div class="right-sidebar sidebar">
-        <img
-          class="right-sidebar-close-button"
-          src="icons/x-white.svg"
-          alt="close button icon"
-        />
+        <img class="right-sidebar-close-button" src="icons/x-white.svg" alt="close button icon" />
         <p class="creation-date"></p>
       </div>
     </div>
