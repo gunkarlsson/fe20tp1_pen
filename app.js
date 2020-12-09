@@ -1,5 +1,7 @@
 // VARIABLES
 
+// @TODO add variable for LSkeys
+
 const textarea = new SimpleMDE({ spellChecker: false });
 const noteTitle = document.querySelector(".note-title");
 const favorite = document.querySelector(".favorite-tag");
@@ -211,8 +213,8 @@ function createNoteListItem(docData) {
 
   console.log(timeChecker);
 
-  let minutes = Math.floor(timeChecker /60);
-  let hours = Math.floor(minutes / 60 );
+  let minutes = Math.floor(timeChecker / 60);
+  let hours = Math.floor(minutes / 60);
   let days = Math.floor(hours / 24);
   let weeks = Math.floor(days / 7);
   console.log(minutes, hours);
