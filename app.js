@@ -10,10 +10,9 @@ const tagsList = document.querySelector(".tags-list");
 
 const leftSidebar = document.querySelector(".left-sidebar");
 const tagMenu = document.querySelector(".tag-menu");
-let currentTagFilter;
 const rightSidebar = document.querySelector(".right-sidebar");
-const searchButton = document.querySelector("#search-button");
 const searchBar = document.querySelector("#search-input");
+let currentTagFilter;
 
 const docDataSkeleton = {
   id: "",
@@ -335,9 +334,6 @@ if (localStorage.getItem(1) === null) {
   );
 }
 
-searchButton.addEventListener("click", () => {
-  console.log("click");
-});
 
 searchBar.addEventListener("keyup", (text) => {
   let titles = [];
@@ -354,10 +350,6 @@ searchBar.addEventListener("keyup", (text) => {
     displayNotesList(titles);
   }
 });
-
-function searchNotes(str) {
-  return str;
-}
 
 displayNotesList();
 tagsInSidebar();
