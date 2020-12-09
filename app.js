@@ -1,4 +1,5 @@
 // VARIABLES
+
 const textarea = new SimpleMDE({ spellChecker: false });
 const noteTitle = document.querySelector(".note-title");
 const favorite = document.querySelector(".favorite-tag");
@@ -207,7 +208,34 @@ function createNoteListItem(docData) {
   starIcon.classList.add("star-icon");
 
   //TODO: Fixa if statements som räknar på timmar.
-  sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+  // sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
+
+  // sinceEdited;
+  // timeChecker = minuter
+  // [1] testa function
+  // [2] testa loop
+
+  let timeChecker = Math.floor((Date.now() - docData.lastSavedDate) / 600000);
+
+  console.log(timeChecker);
+
+  let minutes = Math.floor(timeChecker);
+  let hours = Math.floor(minutes * 60);
+  let days = Math.floor(hours * 24);
+  let weeks = Math.floor(days * 7);
+  console.log(minutes);
+
+  if (timeChecker < minutes) {
+    sinceEdited.innerHTML = `${minutes} m`;
+  } else if (timeChecker < hours) {
+    sinceEdited.innerHTML = `${hours} h`;
+  } else if (timeChecker < days) {
+    sinceEdited.innerHTML = `${days} d`;
+  } else if (timeChecker < weeks) {
+    sinceEdited.innerHTML = `${weeks} w`;
+  } else {
+    sinceEdited.innerHTML = "ujujuj";
+  }
 
   if (docData.favorite === true) {
     starIcon.setAttribute("src", "icons/star-clicked.svg");
@@ -333,7 +361,6 @@ searchBar.addEventListener("keyup", (text) => {
     displayNotesList(titles);
   }
 });
-
 function searchNotes(str) {
   return str;
 }
