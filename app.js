@@ -374,11 +374,11 @@ document.querySelector(".print").addEventListener("click", () => {
 let darkMode = false;
 document.querySelector(".dark-mode").addEventListener("click", () => {
   if (!darkMode) {
-    document.documentElement.style.setProperty("--background-color", "red");
-    document.documentElement.style.setProperty("--text-color", "blue");
+    document.documentElement.style.setProperty("--main-background-color", "red");
+    document.documentElement.style.setProperty("--main-text-color", "blue");
   } else {
-    document.documentElement.style.setProperty("--background-color", "grey");
-    document.documentElement.style.setProperty("--text-color", "black");
+    document.documentElement.style.setProperty("--main-background-color", "white");
+    document.documentElement.style.setProperty("--main-text-color", "black");
   }
   darkMode = !darkMode;
 });
