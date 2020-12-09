@@ -207,31 +207,23 @@ function createNoteListItem(docData) {
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
 
-  //TODO: Fixa if statements som räknar på timmar.
-  // sinceEdited.innerHTML = Math.floor((Date.now() - docData.lastSavedDate) / 60000) + "m";
-
-  // sinceEdited;
-  // timeChecker = minuter
-  // [1] testa function
-  // [2] testa loop
-
-  let timeChecker = Math.floor((Date.now() - docData.lastSavedDate) / 600000);
+  let timeChecker = Math.floor((Date.now() - docData.lastSavedDate) / 100000);
 
   console.log(timeChecker);
 
-  let minutes = Math.floor(timeChecker);
-  let hours = Math.floor(minutes * 60);
-  let days = Math.floor(hours * 24);
-  let weeks = Math.floor(days * 7);
-  console.log(minutes);
+  let minutes = Math.floor(timeChecker /60);
+  let hours = Math.floor(minutes / 60 );
+  let days = Math.floor(hours / 24);
+  let weeks = Math.floor(days / 7);
+  console.log(minutes, hours);
 
-  if (timeChecker < minutes) {
+  if (timeChecker > minutes) {
     sinceEdited.innerHTML = `${minutes} m`;
-  } else if (timeChecker < hours) {
+  } else if (timeChecker > hours) {
     sinceEdited.innerHTML = `${hours} h`;
-  } else if (timeChecker < days) {
+  } else if (timeChecker > days) {
     sinceEdited.innerHTML = `${days} d`;
-  } else if (timeChecker < weeks) {
+  } else if (timeChecker > weeks) {
     sinceEdited.innerHTML = `${weeks} w`;
   } else {
     sinceEdited.innerHTML = "ujujuj";
