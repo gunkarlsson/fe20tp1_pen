@@ -33,6 +33,14 @@ input:focus {
   margin: 1em;
 }
 
+h1, h2, p, input, span {
+  color: var(--main-text-color);
+}
+
+.CodeMirror-lines {
+  color: var(--main-text-color) !important;
+}
+
 /*----------------- UTILITIES --------------- */
 
 .ttpo {
@@ -233,6 +241,7 @@ input:focus {
 }
 
 .tag-input-field {
+  background-color: var(--main-background-color);
   border-radius: 15px;
   border: 2px solid var(--tags-color);
   outline: none;
@@ -252,6 +261,7 @@ input:focus {
 }
 
 .title-input-field {
+  background-color: var(--main-background-color);
   border: none;
   width: 100%;
   font-size: 1.2rem;
@@ -278,4 +288,8 @@ input:focus {
 .active {
   visibility: visible;
   border-bottom: 2px solid black;
+}
+
+.CodeMirror {
+  background-color: var(--main-background-color) !important;
 }

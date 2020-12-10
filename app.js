@@ -374,8 +374,8 @@ document.querySelector(".print").addEventListener("click", () => {
 let darkMode = false;
 document.querySelector(".dark-mode").addEventListener("click", () => {
   if (!darkMode) {
-    document.documentElement.style.setProperty("--main-background-color", "black");
-    document.documentElement.style.setProperty("--main-text-color", "blue");
+    document.documentElement.style.setProperty("--main-background-color", "#131921");
+    document.documentElement.style.setProperty("--main-text-color", "#d7d5c5");
   } else {
     document.documentElement.style.setProperty("--main-background-color", "white");
     document.documentElement.style.setProperty("--main-text-color", "black");
