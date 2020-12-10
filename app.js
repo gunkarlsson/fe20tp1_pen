@@ -414,3 +414,13 @@ document.querySelector(".search-button").addEventListener("click", (event) => {
   input.focus();
   input.innerHTML = "";
 });
+
+document.querySelector(".export").addEventListener("click", () => {
+  const json_string = JSON.stringify(textarea.value());
+
+  const link = document.createElement('a');
+  link.download = 'data.md';
+  const blob = new Blob([textarea.value()], {type: 'text/plain'});
+  link.href = window.URL.createObjectURL(blob);
+  link.click();
+})
