@@ -302,6 +302,7 @@ span {
 }
 .CodeMirror {
   background-color: var(--main-background-color) !important;
+  height: 50vh !important;
 }
 .CodeMirror img {
   max-width: 50vw;
