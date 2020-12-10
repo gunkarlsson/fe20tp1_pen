@@ -306,3 +306,6 @@ span {
 .CodeMirror img {
   max-width: 50vw;
 }
+.star-icon {
+  max-width: 24px;
+}
