@@ -213,29 +213,23 @@ function createNoteListItem(docData) {
   sinceEdited.classList.add("since-edited");
   starIcon.classList.add("star-icon");
 
-
   let minutes = Math.floor((Date.now() - docData.lastSavedDate) / 60000);
 
   let hours = Math.floor(minutes / 60);
-  let days = Math.floor(minutes / 60 * 24);
-  let weeks = Math.floor(minutes / 60 * 24 * 7);
+  let days = Math.floor(minutes / 60 / 24);
+  let weeks = Math.floor(minutes / 60 / 24 / 7);
 
   if (minutes < 60) {
     sinceEdited.innerHTML = `${minutes} m`;
-  }
-  else if (minutes < 60 * 24) {
+  } else if (minutes < 60 * 24) {
     sinceEdited.innerHTML = `${hours} h`;
-  }
-  else if (minutes < 60 * 24 * 7) {
+  } else if (minutes < 60 * 24 * 7) {
     sinceEdited.innerHTML = `${days} d`;
-  }
-  else if (minutes < 60 * 24 * 7 * 4) {
+  } else if (minutes < 60 * 24 * 7 * 4) {
     sinceEdited.innerHTML = `${weeks} w`;
-  }
-  else {
+  } else {
     sinceEdited.innerHTML = `long time ago`;
   }
-
 
   if (docData.favorite === true) {
     starIcon.setAttribute("src", "icons/star-clicked.svg");
@@ -357,20 +351,22 @@ if (localStorage.getItem(1) === null) {
   );
 }
 
-
 searchBar.addEventListener("keyup", (text) => {
-  let titles = [];
+  let notes = [];
 
   for (key in localStorage) {
     if (JSON.parse(localStorage.getItem(key)) !== null) {
       const lsObject = JSON.parse(localStorage.getItem(key));
       let searchStr = text.target.value.toLowerCase();
 
-      if (lsObject.title.toLowerCase().includes(searchStr)) {
-        titles.push(lsObject);
+      if (
+        lsObject.title.toLowerCase().includes(searchStr) ||
+        lsObject.content.toLowerCase().includes(searchStr)
+      ) {
+        notes.push(lsObject);
       }
+      displayNotesList(notes);
     }
-    displayNotesList(titles);
   }
 });
 
@@ -397,18 +393,24 @@ document.querySelector(".print").addEventListener("click", () => {
 let darkMode = false;
 document.querySelector(".dark-mode").addEventListener("click", () => {
   if (!darkMode) {
-    document.documentElement.style.setProperty("--main-background-color", "#131921");
+    document.documentElement.style.setProperty(
+      "--main-background-color",
+      "#131921"
+    );
     document.documentElement.style.setProperty("--main-text-color", "#d7d5c5");
   } else {
-    document.documentElement.style.setProperty("--main-background-color", "white");
+    document.documentElement.style.setProperty(
+      "--main-background-color",
+      "white"
+    );
     document.documentElement.style.setProperty("--main-text-color", "black");
   }
   darkMode = !darkMode;
 });
 
-document.querySelector(".search-button").addEventListener("click", event => {
+document.querySelector(".search-button").addEventListener("click", (event) => {
   const input = document.querySelector(".search-input");
   input.classList.toggle("active");
   input.focus();
   input.innerHTML = "";
-})
+});

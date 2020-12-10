@@ -33,7 +33,11 @@ input:focus {
   margin: 1em;
 }
 
-h1, h2, p, input, span {
+h1,
+h2,
+p,
+input,
+span {
   color: var(--main-text-color);
 }
 
@@ -159,15 +163,14 @@ h1, h2, p, input, span {
   flex-direction: column;
 }
 
-
-
 .note-container {
   display: flex;
+  align-items: center;
 }
 
 .side-content {
-  width: 40px;
-  padding: 0px 10px;
+  min-width: 7vw;
+  padding: 0 10px;
 }
 
 .new-doc {
@@ -195,7 +198,6 @@ h1, h2, p, input, span {
   display: flex;
   justify-content: space-between;
 }
-
 
 .editor {
   background: var(--main-background-color);
