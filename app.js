@@ -214,26 +214,26 @@ function createNoteListItem(docData) {
   starIcon.classList.add("star-icon");
 
 
-  let timeChecker = Math.floor((Date.now() - docData.lastSavedDate) / 100000);
+  let minutes = Math.floor((Date.now() - docData.lastSavedDate) / 60000);
 
-  console.log(timeChecker);
-
-  let minutes = Math.floor(timeChecker / 60);
   let hours = Math.floor(minutes / 60);
-  let days = Math.floor(hours / 24);
-  let weeks = Math.floor(days / 7);
-  console.log(minutes, hours);
+  let days = Math.floor(minutes / 60 * 24);
+  let weeks = Math.floor(minutes / 60 * 24 * 7);
 
-  if (timeChecker > minutes) {
+  if (minutes < 60) {
     sinceEdited.innerHTML = `${minutes} m`;
-  } else if (timeChecker > hours) {
+  }
+  else if (minutes < 60 * 24) {
     sinceEdited.innerHTML = `${hours} h`;
-  } else if (timeChecker > days) {
+  }
+  else if (minutes < 60 * 24 * 7) {
     sinceEdited.innerHTML = `${days} d`;
-  } else if (timeChecker > weeks) {
+  }
+  else if (minutes < 60 * 24 * 7 * 4) {
     sinceEdited.innerHTML = `${weeks} w`;
-  } else {
-    sinceEdited.innerHTML = "ujujuj";
+  }
+  else {
+    sinceEdited.innerHTML = `long time ago`;
   }
 
 
