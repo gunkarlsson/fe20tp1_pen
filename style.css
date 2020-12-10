@@ -282,6 +282,10 @@ span {
   width: 50px;
 }
 
+.search {
+  display: flex;
+  align-items: center;
+}
 .search-input {
   visibility: hidden;
   border: none;
@@ -292,6 +296,13 @@ span {
   border-bottom: 2px solid black;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
 .CodeMirror {
   background-color: var(--main-background-color) !important;
+}
+.CodeMirror img {
+  max-width: 50vw;
 }
