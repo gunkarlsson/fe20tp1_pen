@@ -24,13 +24,13 @@
 *:not(i) {
   font-family: "Poppins", sans-serif;
 }
-.container {
-  display: flex;
-  flex-direction: row;
-}
 
 input:focus {
   outline: none;
+}
+
+.editor > * {
+  margin: 1em;
 }
 
 /*----------------- UTILITIES --------------- */
@@ -53,6 +53,12 @@ input:focus {
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+}
+
 /*------------------- SIDEBARS ----------------*/
 
 .sidebar {
@@ -63,7 +69,6 @@ input:focus {
   max-width: 175px;
 
   height: 100vh;
-  z-index: 10;
 
   overflow-x: hidden;
 
@@ -73,12 +78,13 @@ input:focus {
 }
 
 .sidebar-close-button {
-  position: absolute;
   right: 0;
   top: 0;
 }
 
 .right-sidebar {
+  position: absolute;
+  z-index: 3;
   right: 0;
   margin: 0;
 }
@@ -114,6 +120,12 @@ input:focus {
 
 /*--------------- NOTE LIST -------------*/
 
+.main {
+  overflow-y: auto;
+  height: 100vh;
+  background-color: var(--main-background-color);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -135,7 +147,11 @@ input:focus {
 
 .note-list {
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
 }
+
+
 
 .note-container {
   display: flex;
@@ -172,9 +188,7 @@ input:focus {
   justify-content: space-between;
 }
 
-.editor > * {
-  margin: 1em;
-}
+
 .editor {
   background: var(--main-background-color);
 
@@ -188,6 +202,7 @@ input:focus {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
 }
 
 .tags-bar {

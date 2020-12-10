@@ -228,7 +228,7 @@ function createNoteListItem(docData) {
   const noteTitle = document.createElement("h2");
   const noteContent = document.createElement("p");
 
-  mainContent.classList.add("main");
+  mainContent.classList.add("main-content");
   noteTitle.classList.add("note-title");
   noteContent.classList.add("note-content");
 
@@ -374,7 +374,7 @@ document.querySelector(".print").addEventListener("click", () => {
 let darkMode = false;
 document.querySelector(".dark-mode").addEventListener("click", () => {
   if (!darkMode) {
-    document.documentElement.style.setProperty("--main-background-color", "red");
+    document.documentElement.style.setProperty("--main-background-color", "black");
     document.documentElement.style.setProperty("--main-text-color", "blue");
   } else {
     document.documentElement.style.setProperty("--main-background-color", "white");
