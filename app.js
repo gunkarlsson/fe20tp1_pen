@@ -406,19 +406,14 @@ document.querySelector(".dark-mode").addEventListener("click", () => {
         document.documentElement.style.setProperty("--main-text-color", "#d7d5c5");
 
         document.querySelectorAll("svg").forEach(svg => {
-            if(!svg.classList.contains("star-icon")) {
                 svg.style.stroke = "white";
-            }
         })
     } else {
         document.documentElement.style.setProperty("--main-background-color", "white");
         document.documentElement.style.setProperty("--main-text-color", "black");
 
         document.querySelectorAll("svg").forEach(svg => {
-            console.log(svg.classList)
-            if(!svg.classList.contains("non")) {
                 svg.style.stroke = "black";
-            }
         })
     }
     darkMode = !darkMode;

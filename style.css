@@ -69,6 +69,7 @@ span {
   display: flex;
   flex-direction: row;
   position: sticky;
+  background-color: var(--main-background-color);
 }
 
 /*------------------- SIDEBARS ----------------*/
@@ -289,11 +290,13 @@ span {
 .search-input {
   visibility: hidden;
   border: none;
+  background-color: var(--main-background-color);;
 }
 
 .active {
   visibility: visible;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--main-text-color);
+
 }
 
 ::-webkit-scrollbar {
@@ -309,4 +312,13 @@ span {
 }
 .star-icon {
   max-width: 24px;
+  stroke: var(--tags-color) !important;
+}
+
+.feather-file-plus {
+  stroke: black !important;
+}
+
+.feather-shield, .feather-settings, li .feather-info {
+  stroke: white !important;
 }
