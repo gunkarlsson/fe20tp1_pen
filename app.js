@@ -16,7 +16,7 @@ const textarea = new SimpleMDE({
     },
     {
       name: "heading",
-      action: SimpleMDE.toggleHeader,
+      action: SimpleMDE.toggleHeadingSmaller,
       className: "fa fa-header",
       title: "Heading",
     },
@@ -75,13 +75,11 @@ const textarea = new SimpleMDE({
     {
       name: "downloadNote",
       action: function downloadNote() {
-        document.querySelector(".fa-download").addEventListener("click", () => {
-          const link = document.createElement("a");
-          link.download = "data.md";
-          const blob = new Blob([textarea.value()], { type: "text/plain" });
-          link.href = window.URL.createObjectURL(blob);
-          link.click();
-        });
+        const link = document.createElement("a");
+        link.download = "data.md";
+        const blob = new Blob([textarea.value()], { type: "text/plain" });
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
       },
       className: "fa fa-download",
       title: "Download Note",
@@ -92,20 +90,16 @@ const textarea = new SimpleMDE({
         document.querySelector(".CodeMirror").style.border = "none";
         document.querySelector(".editor-toolbar").style.border = "none";
 
-        document.querySelector(".fa-print").addEventListener("click", () => {
-          const cm = textarea.codemirror;
-          const wrapper = cm.getWrapperElement();
-          const preview = wrapper.lastChild;
+        const cm = textarea.codemirror;
+        const wrapper = cm.getWrapperElement();
+        const preview = wrapper.lastChild;
 
-          document.querySelector(".ttpo").innerHTML = noteTitle.value;
-          document.querySelector(
-            ".ttpo"
-          ).innerHTML += textarea.options.previewRender(
-            textarea.value(),
-            preview
-          );
-          window.print();
-        });
+        document.querySelector(".ttpo").innerHTML = noteTitle.value;
+        document.querySelector(".ttpo").innerHTML += textarea.options.previewRender(
+          textarea.value(),
+          preview
+        );
+        window.print();
       },
       className: "fa fa-print",
       title: "Print Note",
@@ -113,12 +107,9 @@ const textarea = new SimpleMDE({
     {
       name: "trash",
       action: function deleteDoc() {
-        document.querySelector(".fa-trash").addEventListener("click", () => {
-          console.log("click");
-          window.localStorage.removeItem(docDataSkeleton.id);
-          editor.style.width = "0%";
-          displayNotesList();
-        });
+        window.localStorage.removeItem(docDataSkeleton.id);
+        editor.style.width = "0%";
+        displayNotesList();
       },
       className: "fa fa-trash",
       title: "Trash Button",
@@ -126,11 +117,9 @@ const textarea = new SimpleMDE({
     {
       name: "guide",
       action: function redirectToGuide() {
-        document
-          .querySelector(".fa-question-circle")
-          .addEventListener("click", () => {
-            window.open("https://simplemde.com/markdown-guide", "_blank");
-          });
+        document.querySelector(".fa-question-circle").addEventListener("click", () => {
+          window.open("https://simplemde.com/markdown-guide", "_blank");
+        });
       },
       className: "fa fa-question-circle",
       title: "Markdown Guide",
@@ -256,10 +245,7 @@ function saveDoc() {
     docDataSkeleton.tags = newArr;
 
     //Spara anteckning i local storage
-    window.localStorage.setItem(
-      docDataSkeleton.id,
-      JSON.stringify(docDataSkeleton)
-    );
+    window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
     displayNotesList();
     tagsInSidebar();
     tagsEventListener();
@@ -436,9 +422,7 @@ function tagsEventListener() {
         currentTagFilter = "";
         tag.classList.remove("active-tag");
       } else {
-        document
-          .querySelectorAll(".tag")
-          .forEach((tag) => tag.classList.remove("active-tag"));
+        document.querySelectorAll(".tag").forEach((tag) => tag.classList.remove("active-tag"));
         tag.classList.add("active-tag");
       }
       displayNotesList();
@@ -446,35 +430,27 @@ function tagsEventListener() {
   });
 }
 
-document
-  .querySelector(".left-sidebar-button")
-  .addEventListener("click", (event) => {
-    if (leftSidebar.style.width === "100%") {
-      leftSidebar.style.width = "0%";
-    } else leftSidebar.style.width = "100%";
-  });
+document.querySelector(".left-sidebar-button").addEventListener("click", (event) => {
+  if (leftSidebar.style.width === "100%") {
+    leftSidebar.style.width = "0%";
+  } else leftSidebar.style.width = "100%";
+});
 
 newDocButton.addEventListener("click", (event) => {
   editor.style.width = "100%";
 });
 
-document
-  .querySelector(".editor-back-button")
-  .addEventListener("click", (event) => {
-    editor.style.width = "0%";
-  });
+document.querySelector(".editor-back-button").addEventListener("click", (event) => {
+  editor.style.width = "0%";
+});
 
-document
-  .querySelector(".right-sidebar-button")
-  .addEventListener("click", (event) => {
-    rightSidebar.style.width = "100%";
-  });
+document.querySelector(".right-sidebar-button").addEventListener("click", (event) => {
+  rightSidebar.style.width = "100%";
+});
 
-document
-  .querySelector(".right-sidebar-close-button")
-  .addEventListener("click", (event) => {
-    rightSidebar.style.width = "0%";
-  });
+document.querySelector(".right-sidebar-close-button").addEventListener("click", (event) => {
+  rightSidebar.style.width = "0%";
+});
 
 //TODO: Skriv if-sats: om användaren har raderat welcome msg, ska det ej komma tillbaka.
 if (localStorage.getItem(1) === null) {
@@ -484,10 +460,7 @@ if (localStorage.getItem(1) === null) {
   docDataSkeleton.creationDate = new Date();
   docDataSkeleton.id = 1;
   docDataSkeleton.lastSavedDate = Date.now();
-  window.localStorage.setItem(
-    docDataSkeleton.id,
-    JSON.stringify(docDataSkeleton)
-  );
+  window.localStorage.setItem(docDataSkeleton.id, JSON.stringify(docDataSkeleton));
 }
 
 searchBar.addEventListener("keyup", (text) => {
@@ -513,11 +486,11 @@ function noteStats() {
   let lineCount = document.querySelector(".lines");
   let wordCount = document.querySelector(".words");
 
-  let lines = lineCount.innerHTML;
-  let words = wordCount.innerHTML;
+  const spanWords = document.querySelector(".numOfWords");
+  const spanLines = document.querySelector(".numOfLines");
 
-  // const noteContent = document.createElement("p");
-  // mainContent.classList.add("main-content");
+  spanLines.appendChild(lineCount);
+  spanWords.appendChild(wordCount);
 }
 
 displayNotesList();
@@ -527,20 +500,14 @@ setDarkMode();
 
 function setDarkMode(save) {
   if (config.darkMode) {
-    document.documentElement.style.setProperty(
-      "--main-background-color",
-      "#131921"
-    );
+    document.documentElement.style.setProperty("--main-background-color", "#131921");
     document.documentElement.style.setProperty("--main-text-color", "#d7d5c5");
 
     document.querySelectorAll("svg").forEach((svg) => {
       svg.style.stroke = "white";
     });
   } else {
-    document.documentElement.style.setProperty(
-      "--main-background-color",
-      "white"
-    );
+    document.documentElement.style.setProperty("--main-background-color", "white");
     document.documentElement.style.setProperty("--main-text-color", "black");
 
     document.querySelectorAll("svg").forEach((svg) => {
@@ -581,10 +548,7 @@ function createSVGStar(filled = false) {
   svgStar.setAttribute("stroke-linejoin", "round");
   svgStar.setAttribute("class", "feather feather-star");
 
-  const polygon = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "polygon"
-  );
+  const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
   polygon.setAttribute(
     "points",
     "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"

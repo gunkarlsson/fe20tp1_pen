@@ -326,7 +326,7 @@ li .feather-info {
 
 .editor-toolbar {
   position: fixed !important;
-  bottom: 10%;
+  bottom: 0%;
   z-index: 10;
 }
 .note-stats > * {
