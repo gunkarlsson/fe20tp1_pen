@@ -1,8 +1,6 @@
 // VARIABLES
-
-// @TODO add variable for LSkeys
-
 const textarea = new SimpleMDE({
+  spellChecker: false,
   toolbar: [
     {
       name: "bold",
@@ -73,37 +71,71 @@ const textarea = new SimpleMDE({
       className: "fa fa-arrows-alt no-disable no-mobile",
       title: "Toggle Fullscreen",
     },
-    "|", // Separator
+    "|",
+    {
+      name: "downloadNote",
+      action: function downloadNote() {
+        document.querySelector(".fa-download").addEventListener("click", () => {
+          const link = document.createElement("a");
+          link.download = "data.md";
+          const blob = new Blob([textarea.value()], { type: "text/plain" });
+          link.href = window.URL.createObjectURL(blob);
+          link.click();
+        });
+      },
+      className: "fa fa-download",
+      title: "Download Note",
+    },
+    {
+      name: "print",
+      action: function printNote() {
+        console.log("click");
+        document.querySelector(".CodeMirror").style.border = "none";
+        document.querySelector(".editor-toolbar").style.border = "none";
+
+        document.querySelector(".fa-print").addEventListener("click", () => {
+          const cm = textarea.codemirror;
+          const wrapper = cm.getWrapperElement();
+          const preview = wrapper.lastChild;
+
+          document.querySelector(".ttpo").innerHTML = noteTitle.value;
+          document.querySelector(".ttpo").innerHTML += textarea.options.previewRender(
+            textarea.value(),
+            preview
+          );
+          window.print();
+        });
+      },
+      className: "fa fa-print",
+      title: "Print Note",
+    },
+    {
+      name: "trash",
+      action: function deleteDoc() {
+        document.querySelector(".fa-trash").addEventListener("click", () => {
+          console.log("click");
+          window.localStorage.removeItem(docDataSkeleton.id);
+          editor.style.width = "0%";
+          displayNotesList();
+        });
+      },
+      className: "fa fa-trash",
+      title: "Trash Button",
+    },
     {
       name: "guide",
       action: function redirectToGuide() {
-        document.querySelector("fa fa-question-circle").addEventListener(click, () => {
+        document.querySelector(".fa-question-circle").addEventListener("click", () => {
           window.open("https://simplemde.com/markdown-guide", "_blank");
         });
       },
       className: "fa fa-question-circle",
       title: "Markdown Guide",
     },
-    {
-      name: "custom",
-      action: function customFunction(editor) {
-        // Add your own code
-      },
-      className: "fa fa-star",
-      title: "Custom Button",
-    },
-    {
-      name: "custom",
-      action: function customFunction(editor) {
-        // Add your own code
-      },
-      className: "fa fa-star",
-      title: "Custom Button",
-    },
   ],
 });
 
-// const textarea = new SimpleMDE({spellChecker: false});
+// @TODO add variable for LSkeys
 const noteTitle = document.querySelector(".title-input-field");
 const favorite = document.querySelector(".favorite-tag");
 const tagInputField = document.querySelector(".tag-input-field");
@@ -143,12 +175,6 @@ if (!localStorage.getItem("config")) {
 // EVENTLISTENERS
 newDocButton.addEventListener("click", () => {
   createNewDoc();
-});
-
-document.querySelector(".delete-doc").addEventListener("click", () => {
-  window.localStorage.removeItem(docDataSkeleton.id);
-  editor.style.width = "0%";
-  displayNotesList();
 });
 
 textarea.codemirror.on("inputRead", () => {
@@ -277,11 +303,13 @@ function displayNotesList(searchList) {
     let tempNotesArr = [];
 
     for (key in localStorage) {
-      if (JSON.parse(localStorage.getItem(key)) !== null) {
-        if (JSON.parse(localStorage.getItem(key)).favorite) {
-          notes.push(JSON.parse(localStorage.getItem(key)));
-        } else {
-          tempNotesArr.push(JSON.parse(localStorage.getItem(key)));
+      if (key !== "config") {
+        if (JSON.parse(localStorage.getItem(key)) !== null) {
+          if (JSON.parse(localStorage.getItem(key)).favorite) {
+            notes.push(JSON.parse(localStorage.getItem(key)));
+          } else {
+            tempNotesArr.push(JSON.parse(localStorage.getItem(key)));
+          }
         }
       }
     }
@@ -465,22 +493,6 @@ tagsInSidebar();
 tagsEventListener();
 setDarkMode();
 
-document.querySelector(".CodeMirror").style.border = "none";
-document.querySelector(".editor-toolbar").style.border = "none";
-
-document.querySelector(".print").addEventListener("click", () => {
-  const cm = textarea.codemirror;
-  const wrapper = cm.getWrapperElement();
-  const preview = wrapper.lastChild;
-
-  document.querySelector(".ttpo").innerHTML = noteTitle.value;
-  document.querySelector(".ttpo").innerHTML += textarea.options.previewRender(
-    textarea.value(),
-    preview
-  );
-  window.print();
-});
-
 function setDarkMode(save) {
   if (config.darkMode) {
     document.documentElement.style.setProperty("--main-background-color", "#131921");
@@ -513,14 +525,6 @@ document.querySelector(".search-button").addEventListener("click", (event) => {
   input.classList.toggle("active");
   input.focus();
   input.innerHTML = "";
-});
-
-document.querySelector(".export").addEventListener("click", () => {
-  const link = document.createElement("a");
-  link.download = "data.md";
-  const blob = new Blob([textarea.value()], { type: "text/plain" });
-  link.href = window.URL.createObjectURL(blob);
-  link.click();
 });
 
 function createSVGStar(filled = false) {

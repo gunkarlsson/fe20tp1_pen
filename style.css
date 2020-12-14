@@ -290,13 +290,12 @@ span {
 .search-input {
   visibility: hidden;
   border: none;
-  background-color: var(--main-background-color);;
+  background-color: var(--main-background-color);
 }
 
 .active {
   visibility: visible;
   border-bottom: 2px solid var(--main-text-color);
-
 }
 
 ::-webkit-scrollbar {
@@ -319,6 +318,8 @@ span {
   stroke: black !important;
 }
 
-.feather-shield, .feather-settings, li .feather-info {
+.feather-shield,
+.feather-settings,
+li .feather-info {
   stroke: white !important;
 }
