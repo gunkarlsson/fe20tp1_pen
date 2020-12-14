@@ -323,3 +323,9 @@ span {
 li .feather-info {
   stroke: white !important;
 }
+
+.editor-toolbar {
+  position: fixed !important;
+  bottom: 10%;
+  z-index: 10;
+}
