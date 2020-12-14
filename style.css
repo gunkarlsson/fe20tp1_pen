@@ -329,3 +329,10 @@ li .feather-info {
   bottom: 10%;
   z-index: 10;
 }
+.note-stats > * {
+  color: white;
+}
+
+/* .editor-statusbar {
+  display: none;
+} */
