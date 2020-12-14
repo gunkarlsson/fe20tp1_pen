@@ -176,11 +176,13 @@ function displayNotesList(searchList) {
         let tempNotesArr = [];
 
         for (key in localStorage) {
-            if (JSON.parse(localStorage.getItem(key)) !== null) {
-                if (JSON.parse(localStorage.getItem(key)).favorite) {
-                    notes.push(JSON.parse(localStorage.getItem(key)));
-                } else {
-                    tempNotesArr.push(JSON.parse(localStorage.getItem(key)));
+            if(key !== "config") {
+                if (JSON.parse(localStorage.getItem(key)) !== null) {
+                    if (JSON.parse(localStorage.getItem(key)).favorite) {
+                        notes.push(JSON.parse(localStorage.getItem(key)));
+                    } else {
+                        tempNotesArr.push(JSON.parse(localStorage.getItem(key)));
+                    }
                 }
             }
         }
