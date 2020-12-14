@@ -87,9 +87,6 @@ const textarea = new SimpleMDE({
     {
       name: "print",
       action: function printNote() {
-        document.querySelector(".CodeMirror").style.border = "none";
-        document.querySelector(".editor-toolbar").style.border = "none";
-
         const cm = textarea.codemirror;
         const wrapper = cm.getWrapperElement();
         const preview = wrapper.lastChild;
@@ -557,3 +554,6 @@ function createSVGStar(filled = false) {
 
   return svgStar;
 }
+
+document.querySelector(".CodeMirror").style.border = "none";
+document.querySelector(".editor-toolbar").style.border = "none";

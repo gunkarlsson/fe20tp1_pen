@@ -246,6 +246,7 @@ span {
 .tag-input-field {
   background-color: var(--main-background-color);
   border-radius: 15px;
+  padding: 1em;
   border: 2px solid var(--tags-color);
   outline: none;
 }
@@ -333,6 +334,6 @@ li .feather-info {
   color: white;
 }
 
-/* .editor-statusbar {
-  display: none;
-} */
+.editor-statusbar {
+  visibility: hidden !important;
+}
