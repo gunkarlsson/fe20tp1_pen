@@ -272,11 +272,11 @@ span {
   font-weight: 600;
 }
 
-.left-grey-text {
+/* .left-grey-text {
   opacity: 0.5;
   font-size: 0.7em;
   margin: 1em;
-}
+} */
 
 .print,
 .delete-doc {
