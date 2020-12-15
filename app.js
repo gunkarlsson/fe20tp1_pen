@@ -434,17 +434,19 @@ searchBar.addEventListener("keyup", (text) => {
   let notes = [];
 
   for (key in localStorage) {
-    if (JSON.parse(localStorage.getItem(key)) !== null) {
-      const lsObject = JSON.parse(localStorage.getItem(key));
-      let searchStr = text.target.value.toLowerCase();
+    if (key !== "config") {
+      if (JSON.parse(localStorage.getItem(key)) !== null) {
+        const lsObject = JSON.parse(localStorage.getItem(key));
+        let searchStr = text.target.value.toLowerCase();
 
-      if (
-        lsObject.title.toLowerCase().includes(searchStr) ||
-        lsObject.content.toLowerCase().includes(searchStr)
-      ) {
-        notes.push(lsObject);
+        if (
+          lsObject.title.toLowerCase().includes(searchStr) ||
+          lsObject.content.toLowerCase().includes(searchStr)
+        ) {
+          notes.push(lsObject);
+        }
+        displayNotesList(notes);
       }
-      displayNotesList(notes);
     }
   }
 });
