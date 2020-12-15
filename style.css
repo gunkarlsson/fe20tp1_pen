@@ -5,7 +5,8 @@
   --sidebar-text-color: #fff;
 
   --accent-color: #f58a8a;
-  --tags-color: indianred;
+  --tags-color: rgb(136, 214, 210);
+  /* ROSA: (255, 188, 183) GUL:(255, 224, 123) BLÅ: (106, 189, 238) */
 
   --main-background-color: #fff;
   --main-text-color: #000;
@@ -31,6 +32,8 @@ input:focus {
 
 .editor > * {
   margin: 1em;
+  /* margin: 0 !important;
+  padding: 0 !important; */
 }
 
 h1,
@@ -115,7 +118,7 @@ span {
 /*-----------------SIDEBAR TAGS -----------------*/
 
 .tag-menu {
-  margin: 10px;
+  margin: 1em;
 }
 
 .tag {
@@ -124,7 +127,7 @@ span {
   padding: 2px 30px;
   border-radius: 25px;
   display: inline-block;
-  border: 2px solid var(--tags-color);
+  border: 0.14em solid var(--tags-color);
 }
 
 .active-tag {
@@ -140,7 +143,6 @@ span {
 }
 
 .header {
-  border: 3px solid purple;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -165,8 +167,8 @@ header > * {
 }
 
 /* selecting the hamburger menu */
-header :first-child {
-  border: 3px solid orange;
+header > :first-child {
+  border: 2px solid green;
 }
 
 .header h1 {
@@ -224,14 +226,17 @@ header :first-child {
   height: 100%;
 
   position: fixed;
-  right: 0;
+  /* right: 0; */
 
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
 }
-
+.editor > * {
+  /* .editor:not(.editor-toolbar) { */
+  margin-left: 1.5em;
+}
 .tags-bar {
   display: flex;
   align-items: center;
@@ -262,8 +267,8 @@ header :first-child {
 .tag-input-field {
   background-color: var(--main-background-color);
   border-radius: 15px;
-  padding: 1em;
-  border: 2px solid var(--tags-color);
+  padding: 0.5em;
+  border: 0.15em solid var(--accent-color);
   outline: none;
 }
 
@@ -286,6 +291,7 @@ header :first-child {
   width: 100%;
   font-size: 1.2rem;
   font-weight: 600;
+  margin-left: 0.2em;
 }
 
 /* .left-grey-text {
@@ -312,7 +318,7 @@ header :first-child {
 
 .active {
   visibility: visible;
-  border-bottom: 2px solid var(--main-text-color);
+  border-bottom: 0.13em solid var(--main-text-color);
 }
 
 ::-webkit-scrollbar {
@@ -322,13 +328,16 @@ header :first-child {
 .CodeMirror {
   background-color: var(--main-background-color) !important;
   height: 50vh !important;
+  padding: 0 !important;
 }
+
 .CodeMirror img {
   max-width: 50vw;
 }
 .star-icon {
   max-width: 24px;
-  stroke: var(--tags-color) !important;
+  stroke: var(--accent-color) !important;
+  stroke-width: 0.1em;
 }
 
 .feather-file-plus {
@@ -349,7 +358,7 @@ li .feather-info {
   visibility: hidden !important;
 }
 
-.editor-toolbar {
+/* .editor-toolbar {
   position: fixed !important;
   bottom: 0%;
   z-index: 10;
@@ -363,6 +372,17 @@ li .feather-info {
   width: 100% !important;
   border: 3px solid yellow !important;
   color: #fff !important;
+} */
+
+.editor-toolbar {
+  display: flex;
+  flex: 1;
+  max-width: 100% !important;
+  position: absolute !important;
+  margin: 0px !important;
+  /* transform: translateX(-2.5%); */
+  bottom: 5% !important;
+  flex-wrap: wrap;
 }
 
 .editor-toolbar a {
@@ -370,12 +390,12 @@ li .feather-info {
   align-items: center !important;
   justify-content: center !important;
   flex-wrap: wrap !important;
-  margin: 1em !important;
-  /* border: 3px solid orange !important; */
-  height: 30px !important;
-  min-width: 6% !important;
-  color: #fff !important;
-  background-color: #fff;
+  margin: 0.2em 1em !important;
+}
+
+/* FIXA TILL DARKMODE! */
+.editor-toolbar a::before {
+  color: gray;
 }
 
 
