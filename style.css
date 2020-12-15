@@ -140,8 +140,10 @@ span {
 }
 
 .header {
+  border: 3px solid purple;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   background-color: var(--main-background-color);
 
@@ -154,7 +156,21 @@ span {
   padding: 0px 10px;
 }
 
+header > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* border: 3px solid red; */
+}
+
+/* selecting the hamburger menu */
+header :first-child {
+  border: 3px solid orange;
+}
+
 .header h1 {
+  /* border: 3px solid orange; */
   font-weight: 200;
 }
 
@@ -325,15 +341,39 @@ li .feather-info {
   stroke: white !important;
 }
 
-.editor-toolbar {
-  position: fixed !important;
-  bottom: 0%;
-  z-index: 10;
-}
 .note-stats > * {
   color: white;
 }
 
 .editor-statusbar {
   visibility: hidden !important;
+}
+
+.editor-toolbar {
+  position: fixed !important;
+  bottom: 0%;
+  z-index: 10;
+  display: flex !important;
+  position: fixed !important;
+  align-items: center !important;
+  justify-content: center !important;
+  bottom: 0%;
+  z-index: 10;
+  height: 20%;
+  width: 100% !important;
+  border: 3px solid yellow !important;
+  color: #fff !important;
+}
+
+.editor-toolbar a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  margin: 1em !important;
+  /* border: 3px solid orange !important; */
+  height: 30px !important;
+  min-width: 6% !important;
+  color: #fff !important;
+  background-color: #fff;
 }
