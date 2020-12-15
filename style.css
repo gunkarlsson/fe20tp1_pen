@@ -166,9 +166,9 @@ header > * {
   /* border: 3px solid red; */
 }
 
-/* selecting the hamburger menu */
-header > :first-child {
-  border: 2px solid green;
+header > .hamburger {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .header h1 {
@@ -188,8 +188,19 @@ header > :first-child {
 }
 
 .side-content {
-  min-width: 7vw;
+  min-width: 8vw;
   padding: 0 10px;
+}
+
+@media (max-width: 500px) {
+  .side-content {
+    min-width: 13vw;
+  }
+}
+@media (min-width: 1500px) {
+  .side-content {
+    min-width: 4vw;
+  }
 }
 
 .new-doc {
@@ -358,31 +369,15 @@ li .feather-info {
   visibility: hidden !important;
 }
 
-/* .editor-toolbar {
-  position: fixed !important;
-  bottom: 0%;
-  z-index: 10;
-  display: flex !important;
-  position: fixed !important;
-  align-items: center !important;
-  justify-content: center !important;
-  bottom: 0%;
-  z-index: 10;
-  height: 20%;
-  width: 100% !important;
-  border: 3px solid yellow !important;
-  color: #fff !important;
-} */
-
 .editor-toolbar {
   display: flex;
   flex: 1;
   max-width: 100% !important;
   position: absolute !important;
   margin: 0px !important;
-  /* transform: translateX(-2.5%); */
   bottom: 5% !important;
   flex-wrap: wrap;
+  border: none !important;
 }
 
 .editor-toolbar a {
@@ -393,11 +388,9 @@ li .feather-info {
   margin: 0.2em 1em !important;
 }
 
-/* FIXA TILL DARKMODE! */
 .editor-toolbar a::before {
   color: gray;
 }
-
 
 .dark-mode {
   display: flex;
@@ -413,7 +406,7 @@ li .feather-info {
   align-items: center;
   padding: 2px;
   position: relative;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .koala {
@@ -421,8 +414,9 @@ li .feather-info {
   justify-content: flex-start;
 }
 
-.moon, .sun {
+.moon,
+.sun {
   grid-column-start: 1;
   grid-row-start: 1;
-  transition: .4s;
+  transition: 0.4s;
 }
