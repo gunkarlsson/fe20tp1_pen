@@ -32,6 +32,8 @@ input:focus {
 
 .editor > * {
   margin: 1em;
+  /* margin: 0 !important;
+  padding: 0 !important; */
 }
 
 h1,
@@ -232,6 +234,7 @@ header > :first-child {
   overflow-y: hidden;
 }
 .editor > * {
+  /* .editor:not(.editor-toolbar) { */
   margin-left: 1.5em;
 }
 .tags-bar {
@@ -355,7 +358,7 @@ li .feather-info {
   visibility: hidden !important;
 }
 
-.editor-toolbar {
+/* .editor-toolbar {
   position: fixed !important;
   bottom: 0%;
   z-index: 10;
@@ -369,6 +372,17 @@ li .feather-info {
   width: 100% !important;
   border: 3px solid yellow !important;
   color: #fff !important;
+} */
+
+.editor-toolbar {
+  display: flex;
+  flex: 1;
+  max-width: 100% !important;
+  position: absolute !important;
+  margin: 0px !important;
+  /* transform: translateX(-2.5%); */
+  bottom: 5% !important;
+  flex-wrap: wrap;
 }
 
 .editor-toolbar a {
@@ -376,10 +390,10 @@ li .feather-info {
   align-items: center !important;
   justify-content: center !important;
   flex-wrap: wrap !important;
-  margin: 1em !important;
-  /* border: 3px solid orange !important; */
-  height: 30px !important;
-  min-width: 6% !important;
-  color: #fff !important;
-  background-color: #fff;
+  margin: 0.2em 1em !important;
+}
+
+/* FIXA TILL DARKMODE! */
+.editor-toolbar a::before {
+  color: yellow;
 }
