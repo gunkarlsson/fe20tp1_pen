@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
 
 :root {
-  --sidebar-background-color: #2a3435;
+  --sidebar-background-color: #23293c;
   --sidebar-text-color: #fff;
 
   --accent-color: #f58a8a;
@@ -85,7 +85,7 @@ span {
 
   overflow-x: hidden;
 
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -376,4 +376,33 @@ li .feather-info {
   min-width: 6% !important;
   color: #fff !important;
   background-color: #fff;
+}
+
+
+.dark-mode {
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  width: 70px;
+  background-color: #576566;
+  position: absolute;
+}
+
+.dark-mode span {
+  display: grid;
+  align-items: center;
+  padding: 2px;
+  position: relative;
+  transition: .4s;
+}
+
+.koala {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.moon, .sun {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  transition: .4s;
 }
