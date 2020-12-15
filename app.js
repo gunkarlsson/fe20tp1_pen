@@ -471,8 +471,8 @@ document
 //TODO: Skriv if-sats: om användaren har raderat welcome msg, ska det ej komma tillbaka.
 if (localStorage.getItem(1) === null) {
   docDataSkeleton.content =
-    "Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.";
-  docDataSkeleton.title = "Welcome to Quire, almost as good as Bear";
+    "Quire is a divine new note app. It uses a ground breaking tag system to categorize notes, as well as having a beautiful, elegant star icon to be able to favorite notes. The bold styling of titles in contrast to the lightweight content text makes Quire a sublime user experience. Welcome to the glorious world of Quire.";
+  docDataSkeleton.title = "Make note-taking great again";
   docDataSkeleton.creationDate = new Date();
   docDataSkeleton.id = 1;
   docDataSkeleton.lastSavedDate = Date.now();
