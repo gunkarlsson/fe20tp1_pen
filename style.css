@@ -395,5 +395,5 @@ li .feather-info {
 
 /* FIXA TILL DARKMODE! */
 .editor-toolbar a::before {
-  color: yellow;
+  color: gray;
 }
