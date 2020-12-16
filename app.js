@@ -227,6 +227,7 @@ function createNewDoc() {
   tagInputField.value = "";
   tagsList.innerHTML = "";
   favorite.setAttribute("src", "./icons/star.svg");
+  document.querySelector(".CodeMirror-code").innerHTML = "";
 
   for (element in docDataSkeleton) {
     if (element === "tags") {

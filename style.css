@@ -368,7 +368,7 @@ li .feather-info {
   stroke: white !important;
 }
 
-.note-stats > * {
+.note-stats > *, .note-stats > p * {
   color: white;
 }
 
@@ -393,6 +393,10 @@ li .feather-info {
   justify-content: center !important;
   flex-wrap: wrap !important;
   margin: 0.2em 1em !important;
+}
+
+.editor-preview {
+  background-color: var(--main-background-color) !important;
 }
 
 .editor-toolbar a::before {
