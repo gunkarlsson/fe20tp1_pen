@@ -73,7 +73,6 @@ span {
   flex-direction: row;
   position: sticky;
   background-color: var(--main-background-color);
-
 }
 
 /*------------------- SIDEBARS ----------------*/
@@ -368,7 +367,8 @@ li .feather-info {
   stroke: white !important;
 }
 
-.note-stats > *, .note-stats > p * {
+.note-stats > *,
+.note-stats > p * {
   color: white;
 }
 
@@ -401,6 +401,10 @@ li .feather-info {
 
 .editor-toolbar a::before {
   color: gray;
+}
+
+a.fa.fa-trash::before {
+  color: red !important;
 }
 
 .dark-mode {
