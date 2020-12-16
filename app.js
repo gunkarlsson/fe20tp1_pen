@@ -246,6 +246,14 @@ function loadDoc(docData) {
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
 
+  if(document.querySelector(".editor-preview")) {
+      if(document.querySelector(".editor-preview").classList.contains("editor-preview-active")) {
+          document.querySelector(".editor-preview").classList.remove("editor-preview-active")
+      }
+  }
+
+  //document.querySelector(".editor-preview").value("lolsko");
+
   if (docData.favorite === true) {
     favorite.setAttribute("fill", "#f58a8a");
   } else {
