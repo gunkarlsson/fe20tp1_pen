@@ -70,6 +70,10 @@ const textarea = new SimpleMDE({
     {
       name: "trash",
       action: function deleteDoc() {
+          if(docDataSkeleton.id === 1) {
+              config.welcomeDeleted = true;
+              saveConfig();
+          }
         window.localStorage.removeItem(docDataSkeleton.id);
         editor.style.width = "0%";
         displayNotesList();
@@ -115,7 +119,7 @@ const docDataSkeleton = {
   tags: [],
 };
 
-let config = { darkMode: false };
+let config = { darkMode: false, welcomeDeleted: false };
 
 function saveConfig() {
   localStorage.setItem("config", JSON.stringify(config));
@@ -420,7 +424,7 @@ document.querySelector(".right-sidebar-close-button").addEventListener("click", 
 });
 
 //TODO: Skriv if-sats: om användaren har raderat welcome msg, ska det ej komma tillbaka.
-if (localStorage.getItem(1) === null) {
+if (localStorage.getItem(1) === null && !config.welcomeDeleted) {
   docDataSkeleton.content =
     "Quire is a divine new note app. It uses a ground breaking tag system to categorize notes, as well as having a beautiful, elegant star icon to be able to favorite notes. The bold styling of titles in contrast to the lightweight content text makes Quire a sublime user experience. Welcome to the glorious world of Quire.";
   docDataSkeleton.title = "Make note-taking great again";
@@ -493,14 +497,18 @@ function setDarkMode(save) {
       svg.style.stroke = "black";
     });
   }
-  config.darkMode = !config.darkMode;
+
+    console.log("?")
+
 
   if (save) {
+
     save();
   }
 }
 
 document.querySelector(".dark-mode").addEventListener("click", () => {
+    config.darkMode = !config.darkMode;
   setDarkMode(saveConfig());
 });
 
