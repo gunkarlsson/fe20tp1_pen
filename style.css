@@ -68,11 +68,10 @@ span {
   }
 }
 
-.main {
+/* .main {
   width: 90%;
-  border: 3px solid yellow;
   margin: 0 auto;
-}
+} */
 
 .container {
   display: flex;
@@ -145,6 +144,7 @@ span {
 .main {
   overflow-y: auto;
   height: 100vh;
+  /* -------------------- ÄNDRAD PÅ TEST ------------------------- */
   width: 90%;
   margin: 0 auto;
   background-color: var(--main-background-color);
@@ -199,8 +199,6 @@ header > .hamburger {
 }
 
 .note-content {
-  border: 3px solid purple;
-
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
