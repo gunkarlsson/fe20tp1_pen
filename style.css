@@ -73,7 +73,7 @@ span {
   flex-direction: row;
   position: sticky;
   background-color: var(--main-background-color);
-  transition: .4s;
+
 }
 
 /*------------------- SIDEBARS ----------------*/
@@ -141,7 +141,6 @@ span {
   overflow-y: auto;
   height: 100vh;
   background-color: var(--main-background-color);
-  transition: .4s;
 }
 
 .header {
@@ -150,7 +149,6 @@ span {
   align-items: center;
 
   background-color: var(--main-background-color);
-  transition: .4s;
 
   position: fixed;
   width: 100%;
@@ -234,7 +232,6 @@ header > .hamburger {
 
 .editor {
   background: var(--main-background-color);
-  transition: .4s;
 
   width: 0;
   max-width: 100%;
@@ -286,7 +283,6 @@ header > .hamburger {
 
 .tag-input-field {
   background-color: var(--main-background-color);
-  transition: .4s;
   border-radius: 15px;
   padding: 0.5em;
   border: 0.15em solid var(--accent-color);
@@ -308,7 +304,6 @@ header > .hamburger {
 
 .title-input-field {
   background-color: var(--main-background-color);
-  transition: .4s;
   border: none;
   width: 100%;
   font-size: 1.2rem;
@@ -336,7 +331,6 @@ header > .hamburger {
   visibility: hidden;
   border: none;
   background-color: var(--main-background-color);
-  transition: .4s;
 }
 
 .active {
@@ -350,7 +344,6 @@ header > .hamburger {
 }
 .CodeMirror {
   background-color: var(--main-background-color) !important;
-  transition: .4s;
   height: 50vh !important;
   padding: 0 !important;
 }
