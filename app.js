@@ -48,7 +48,7 @@ const textarea = new SimpleMDE({
         link.click();
       },
       className: "fa fa-download",
-      title: "Download Note",
+      title: "Export as Markdown",
     },
     {
       name: "print",
@@ -68,20 +68,6 @@ const textarea = new SimpleMDE({
       title: "Print Note",
     },
     {
-      name: "trash",
-      action: function deleteDoc() {
-          if(docDataSkeleton.id === 1) {
-              config.welcomeDeleted = true;
-              saveConfig();
-          }
-        window.localStorage.removeItem(docDataSkeleton.id);
-        editor.style.width = "0%";
-        displayNotesList();
-      },
-      className: "fa fa-trash",
-      title: "Trash Button",
-    },
-    {
       name: "guide",
       action: function redirectToGuide() {
         document.querySelector(".fa-question-circle").addEventListener("click", () => {
@@ -90,6 +76,20 @@ const textarea = new SimpleMDE({
       },
       className: "fa fa-question-circle",
       title: "Markdown Guide",
+    },
+    {
+      name: "trash",
+      action: function deleteDoc() {
+        if (docDataSkeleton.id === 1) {
+          config.welcomeDeleted = true;
+          saveConfig();
+        }
+        window.localStorage.removeItem(docDataSkeleton.id);
+        editor.style.width = "0%";
+        displayNotesList();
+      },
+      className: "fa fa-trash",
+      title: "Delete Note",
     },
   ],
 });
@@ -247,10 +247,10 @@ function loadDoc(docData) {
   docDataSkeleton.id = docData.id;
   docDataSkeleton.tags = docData.tags;
 
-  if(document.querySelector(".editor-preview")) {
-      if(document.querySelector(".editor-preview").classList.contains("editor-preview-active")) {
-          document.querySelector(".editor-preview").classList.remove("editor-preview-active")
-      }
+  if (document.querySelector(".editor-preview")) {
+    if (document.querySelector(".editor-preview").classList.contains("editor-preview-active")) {
+      document.querySelector(".editor-preview").classList.remove("editor-preview-active");
+    }
   }
 
   //document.querySelector(".editor-preview").value("lolsko");
@@ -507,17 +507,13 @@ function setDarkMode(save) {
     });
   }
 
-    console.log("?")
-
-
   if (save) {
-
     save();
   }
 }
 
 document.querySelector(".dark-mode").addEventListener("click", () => {
-    config.darkMode = !config.darkMode;
+  config.darkMode = !config.darkMode;
   setDarkMode(saveConfig());
 });
 

@@ -68,12 +68,16 @@ span {
   }
 }
 
+/* .main {
+  width: 90%;
+  margin: 0 auto;
+} */
+
 .container {
   display: flex;
   flex-direction: row;
   position: sticky;
   background-color: var(--main-background-color);
-
 }
 
 /*------------------- SIDEBARS ----------------*/
@@ -140,7 +144,9 @@ span {
 .main {
   overflow-y: auto;
   height: 100vh;
-  width: 100vw;
+  /* -------------------- ÄNDRAD PÅ TEST ------------------------- */
+  width: 90%;
+  margin: 0 auto;
   background-color: var(--main-background-color);
 }
 
@@ -187,6 +193,15 @@ header > .hamburger {
 .note-container {
   display: flex;
   align-items: center;
+  overflow: hidden;
+  /* margin måste vara här för att inte crasha */
+  margin: 1em;
+}
+
+.note-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .side-content {
@@ -368,7 +383,8 @@ li .feather-info {
   stroke: white !important;
 }
 
-.note-stats > *, .note-stats > p * {
+.note-stats > *,
+.note-stats > p * {
   color: white;
 }
 
@@ -401,6 +417,10 @@ li .feather-info {
 
 .editor-toolbar a::before {
   color: gray;
+}
+
+a.fa.fa-trash::before {
+  color: red !important;
 }
 
 .dark-mode {
