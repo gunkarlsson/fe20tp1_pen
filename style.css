@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
 
 :root {
   --sidebar-background-color: #23293c;
@@ -23,7 +23,7 @@
 }
 
 *:not(i) {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 input:focus {
@@ -145,7 +145,7 @@ span {
   overflow-y: auto;
   height: 100vh;
   /* -------------------- ÄNDRAD PÅ TEST ------------------------- */
-  width: 90%;
+  width: 100vw;
   margin: 0 auto;
   background-color: var(--main-background-color);
 }
@@ -206,7 +206,7 @@ header > .hamburger {
 
 .side-content {
   min-width: 8vw;
-  padding: 0 10px;
+  padding: 0 0px;
 }
 
 @media (max-width: 500px) {
@@ -349,6 +349,27 @@ header > .hamburger {
   background-color: var(--main-background-color);
 }
 
+@media (max-width: 450px) {
+  .search-input {
+    max-width: 60px;
+  }
+  .search-button {
+    position: fixed;
+    right: 10px;
+  }
+  .note-title {
+    font-size: 1rem;
+  }
+
+  p.note-content {
+    font-size: 0.875rem;
+  }
+
+  .since-edited {
+    font-size: 0.875rem;
+  }
+}
+
 .active {
   visibility: visible;
   border-bottom: 0.13em solid var(--main-text-color);
@@ -401,6 +422,7 @@ li .feather-info {
   bottom: 5% !important;
   flex-wrap: wrap;
   border: none !important;
+  z-index: 100 !important;
 }
 
 .editor-toolbar a {
