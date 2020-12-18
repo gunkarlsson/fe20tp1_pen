@@ -2,10 +2,10 @@
 
 ## :information_desk_person: A Project by:
 
-- Patrik Fredlund
-- Jesper Sjöström
-- Gun Karlsson
-- Max Rautenberg
+- [Patrik Fredlund](https://github.com/patrik-fredlund)
+- [Jesper Sjöström](https://github.com/SjostromJesper)
+- [Gun Karlsson](https://github.com/gunkarlsson)
+- [Max Rautenberg](https://github.com/mrautenberg)
 
 ## :crown: Make note-taking great again :crown:
 
@@ -16,4 +16,4 @@ The bold styling of titles in contrast to the lightweight content text makes Qui
 Welcome to the glorious world of Quire.
 
 
-## :party: Key Features
+## :tada: Key Features
