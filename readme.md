@@ -9,13 +9,7 @@
   <br>
   <br>
   We decided to add a markdown editor, search function and categorization system by hashtags, as well as darkmode, customized editor toolbar and simpler statistics. Here is a live working [beta](https://penapp.netlify.app/).
-  
-  ## :information_desk_person: A Project by
 
-- [Patrik Fredlund](https://github.com/patrik-fredlund)
-- [Jesper Sjöström](https://github.com/SjostromJesper)
-- [Gun Karlsson](https://github.com/gunkarlsson)
-- [Max Rautenberg](https://github.com/mrautenberg)
 ## :crown: Make note-taking great again
 
 Pen is a divine new note app. 
